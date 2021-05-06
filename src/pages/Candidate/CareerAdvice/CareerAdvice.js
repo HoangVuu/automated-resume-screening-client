@@ -18,6 +18,7 @@ import isEmpty from "lodash/isEmpty";
 import { GET_JOB_DOMAIN, GET_JOB_SKILL } from "state/reducers/jobDomainReducer";
 import Select from "react-select";
 import { SearchOutlined } from "@ant-design/icons";
+import SearchSuggest from "components/SearchSuggest/SearchSuggest";
 
 function CandidateCareerAdvice({ history }) {
   const dispatch = useDispatch();
@@ -41,6 +42,10 @@ function CandidateCareerAdvice({ history }) {
   const selectFind = (key) => setState(key);
 
   const subitSearch = () => {};
+
+  const submit = (value)=>{
+    console.log('submit', value)
+  }
 
   useEffect(() => {
     setState("explore");
@@ -170,6 +175,7 @@ function CandidateCareerAdvice({ history }) {
                       </div>
                     </form>
 
+              
                     {/* <form>
                       <div className="row">
                         <div className="col-md-8 explore-look__input">
@@ -202,6 +208,8 @@ function CandidateCareerAdvice({ history }) {
                   </div>
                   <div style={{ height: "80px" }}></div>
                   {/* <Explore handleSubmit={submit1} history={history} /> */}
+                <SearchSuggest handleSubmit={submit}/>
+
                 </div>
               </div>
             ))}

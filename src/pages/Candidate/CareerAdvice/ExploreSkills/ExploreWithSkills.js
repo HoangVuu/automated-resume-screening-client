@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./ExploreWithSkills.scss";
-import "components/Explore/Explore.scss";
+import "components/SearchSuggest/SearchSuggest.scss";
 
 import MatchSkill from "components/MatchSkill/MatchSkill";
 import { getIndexArray } from "utils/index";
@@ -20,7 +20,8 @@ import { GET_JOB_DOMAIN, GET_JOB_SKILL } from "state/reducers/jobDomainReducer";
 import history from "state/history";
 import { exploreSkillsProAction } from "state/actions/candidateJobAction";
 import ContentLoader from "react-content-loader";
-import Explore from "components/Explore/Explore";
+import SearchSuggest from "components/SearchSuggest/SearchSuggest";
+import AddSkillSuggest from "components/AddSkillSuggest/AddSkillSuggest";
 
 const ExploreWithSkills = ({ profile }) => {
   const dispatch = useDispatch();
@@ -35,7 +36,6 @@ const ExploreWithSkills = ({ profile }) => {
   const [loadContent, setLoadContent] = useState(true);
 
   const [value, setValue] = useState("");
-  const [isChange, setIsChange] = useState(false);
 
   const [role, setRole] = useState(null);
   const [skill, setSkill] = useState(null);
@@ -69,13 +69,16 @@ const ExploreWithSkills = ({ profile }) => {
     newSkills.sort((a, b) => a.key - b.key);
 
     setSkills(newSkills);
-    setIsChange(true);
   };
 
   const onDelete = (key) => {
     const newSkills = skills.filter((ele) => ele.key !== key);
     setSkills(newSkills);
-    setIsChange(true);
+  };
+
+  const getNewSkill = (value) => {
+    console.log("new skill", value);
+    setValue(value);
   };
 
   const onAddSkill = () => {
@@ -83,7 +86,10 @@ const ExploreWithSkills = ({ profile }) => {
     const newSkills = [...skills, { key, value }];
     setSkills(newSkills);
     setValue("");
-    setIsChange(true);
+  };
+
+  const submitSearchSkill = (value) => {
+    console.log("submit", value);
   };
 
   const handleMatch = () => {
@@ -108,8 +114,6 @@ const ExploreWithSkills = ({ profile }) => {
     win.focus();
     // history.push(`/career-advice/direction?${query}`);
   };
-
-  const handleFocusSkill = () => {};
 
   useEffect(() => {
     history.push("/career-advice");
@@ -243,6 +247,7 @@ const ExploreWithSkills = ({ profile }) => {
                 </Button>
               </div>
             </div>
+            <AddSkillSuggest handleAdd={getNewSkill} />
 
             <div className="explore__content__skills__match">
               <button
@@ -268,7 +273,13 @@ const ExploreWithSkills = ({ profile }) => {
                       exploreSkillsData.length &&
                       exploreSkillsData.map(
                         (
-                          { domain, matchedSkills, salary, totalCount, mainSkills },
+                          {
+                            domain,
+                            matchedSkills,
+                            salary,
+                            totalCount,
+                            mainSkills
+                          },
                           index
                         ) => (
                           <MatchSkill
@@ -341,44 +352,9 @@ const ExploreWithSkills = ({ profile }) => {
 
         <div style={{ height: "80px" }}></div>
 
-        <div className="explore-look">
-          <h2 className="explore-look__title">
-            What skill do you want to focus on?
-          </h2>
-          <form>
-            <div className="row">
-              <div className="col-md-8 explore-look__input">
-                <div className="dropdown pr-10" style={{ zIndex: 2 }}>
-                  <Select
-                    value={skill}
-                    onChange={(value) => setSkill(value)}
-                    options={jobSkills}
-                    filterOptions= {false}
-                    placeholder="Enter a skill..."
-                    menuPosition="fixed"
-                    isClearable={true}
-                  />
-                  <div className="input-icon">
-                    <SearchOutlined style={{ color: "#555" }} />
-                  </div>
-                </div>
-              </div>
-              <div className="col-6 col-md-4">
-                <button
-                  type="submit"
-                  className="btn btn-full-width explore-look__btn"
-                  style={{ fontWeight: 700 }}
-                  onClick={handleFocusSkill}
-                >
-                  Explore
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-        {/* <Explore handleSubmit={submit1} history={history} /> */}
+        <SearchSuggest handleSubmit={submitSearchSkill} />
 
-        <Explore/>
+        {/* <SearchSuggest/> */}
       </div>
     </div>
   );
