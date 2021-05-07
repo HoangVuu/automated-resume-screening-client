@@ -38,7 +38,8 @@ const ExploreWithSkills = ({ profile }) => {
   const [value, setValue] = useState("");
 
   const [role, setRole] = useState(null);
-  const [skill, setSkill] = useState(null);
+  const [isAdd, setIsAdd] = useState(false);
+
 
   const [resume, setResume] = useState(profile);
 
@@ -79,13 +80,17 @@ const ExploreWithSkills = ({ profile }) => {
   const getNewSkill = (value) => {
     console.log("new skill", value);
     setValue(value);
+    setIsAdd(false);
   };
 
   const onAddSkill = () => {
+    console.log("new skill", value);
+
     const key = skills.length && skills[skills.length - 1].key + 1;
     const newSkills = [...skills, { key, value }];
     setSkills(newSkills);
     setValue("");
+    setIsAdd(true);
   };
 
   const submitSearchSkill = (value) => {
@@ -152,7 +157,6 @@ const ExploreWithSkills = ({ profile }) => {
         }))
       }));
     }
-    console.log(`jobSkills useEff`, jobSkills);
   }, []);
 
   if (!fetch) {
@@ -179,7 +183,6 @@ const ExploreWithSkills = ({ profile }) => {
       }));
     }
   }
-  console.log(`jobSkills`, jobSkills);
 
   return (
     <div className="explore">
@@ -225,13 +228,14 @@ const ExploreWithSkills = ({ profile }) => {
             <div className="inline-skill-container is-compact explore__content__skills__add">
               <div className="inline-skill-input">
                 <div className="TextInput-wrapper">
-                  <Input
+                  {/* <Input
                     className="explore__content__skills__add__input"
                     placeholder="Add skill"
                     size="large"
                     value={value}
                     onChange={(evt) => setValue(evt.target.value)}
-                  />
+                  /> */}
+                  <AddSkillSuggest handleAdd={getNewSkill} isAdd={isAdd} />
                 </div>
               </div>
               <div className="inline-skill-button">
@@ -247,7 +251,6 @@ const ExploreWithSkills = ({ profile }) => {
                 </Button>
               </div>
             </div>
-            <AddSkillSuggest handleAdd={getNewSkill} />
 
             <div className="explore__content__skills__match">
               <button

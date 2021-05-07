@@ -4,68 +4,16 @@ import { SearchOutlined, CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import qs from "query-string";
 import AutoSuggest from "react-autosuggest";
 
-import { connect, useDispatch, useSelector } from "react-redux";
-import { getJobDomain, getJobSkill } from "services/hrJobServices";
+import {  useDispatch, useSelector } from "react-redux";
+import {  getJobSkill } from "services/hrJobServices";
 import { GET_JOB_SKILL } from "state/reducers/jobDomainReducer";
 import { toastErr, toast } from "utils/index";
-import ContentLoader from "react-content-loader";
 import Loading from "components/Loading/Loading";
 import { Button } from "antd";
 
 import "./AddSkillSuggest.scss";
 
-const a = [
-  {
-    id: 7806,
-    name: "2d artist"
-  },
-  {
-    id: 7807,
-    name: "2d characters"
-  },
-  {
-    id: 7808,
-    name: "2d textures"
-  },
-  {
-    id: 7809,
-    name: "3 layers"
-  },
-  {
-    id: 7810,
-    name: "3d characters"
-  },
-  {
-    id: 7811,
-    name: "3d environmental objects"
-  },
-  {
-    id: 7812,
-    name: "3d hard surface modeling"
-  },
-  {
-    id: 7813,
-    name: "3g"
-  },
-  {
-    id: 7814,
-    name: "8base"
-  },
-  {
-    id: 7815,
-    name: "k-nearest neighbour"
-  },
-  {
-    id: 7816,
-    name: ".net"
-  },
-  {
-    id: 7817,
-    name: "a-frame"
-  }
-];
-
-function AddSkillSuggest({ handleAdd }) {
+function AddSkillSuggest({ handleAdd, isAdd }) {
   const dispatch = useDispatch();
 
   const skillsData = useSelector((state) => state.jobDomain.skills);
@@ -100,7 +48,6 @@ function AddSkillSuggest({ handleAdd }) {
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   const onSuggestionsFetchRequested = ({ value }) => {
-    console.log(value);
     setValue(value);
     setSuggestions(getSuggestions(value));
   };
@@ -137,6 +84,11 @@ function AddSkillSuggest({ handleAdd }) {
     );
   }
 
+  console.log('isAdd',isAdd)
+  if(isAdd){
+    value && setValue("");
+  }
+
   useEffect(() => {
     if (!skillsData.length) {
       dispatch({ type: GET_JOB_SKILL });
@@ -167,9 +119,9 @@ function AddSkillSuggest({ handleAdd }) {
     >
       <Loading loading={loading} />
 
-      <div className="col-md-8 explore-look__input row">
+      <div className="col-lg add-suggest__input row">
         <div className="input-icon">
-          <SearchOutlined className="explore-look__search" />
+          <SearchOutlined className="add-suggest__search" />
         </div>
         <AutoSuggest
           suggestions={suggestions}
@@ -183,18 +135,17 @@ function AddSkillSuggest({ handleAdd }) {
         />
         <div className="close-icon-container">{clearButton}</div>
       </div>
-      <div className="col-6 col-md-4">
-        <button
-          className="explore__content__skills__add__btn"
-          type="primary"
-          size="large"
-          // disabled={!value}
-          icon={<PlusOutlined />}
-          onClick={handleAdd(value)}
-        >
-          Add skill
-        </button>
-      </div>
+
+      <button
+        className="add-suggest__btn"
+        type="primary"
+        size="large"
+        // disabled={!value}
+        icon={<PlusOutlined />}
+        onClick={handleAdd(value)}
+      >
+        Add skill
+      </button>
     </div>
   );
 }
