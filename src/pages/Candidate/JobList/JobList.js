@@ -141,6 +141,8 @@ function CandidateJobList({ history }) {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
     const searchHistory = JSON.parse(localStorage.getItem("search-history"));
     setSearchHistory(searchHistory);
 
