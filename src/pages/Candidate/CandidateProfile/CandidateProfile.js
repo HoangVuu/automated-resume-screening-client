@@ -132,7 +132,7 @@ function MyProfile() {
     }))
   );
 
-  const provinceList = useSelector((state) => state.cv.provinces)
+  const provinceList = useSelector((state) => state.cv.provinces);
 
   const defaultProvince = (id) =>
     provinces.length && provinces.find((item) => item.value === id);
@@ -1094,12 +1094,15 @@ function MyProfile() {
                       <span
                         style={{
                           fontSize: "15px",
-                          maxWidth:"80%"
+                          maxWidth: "80%"
                         }}
                       >
                         <span
                           className="my-profile__resume__right-info__weight"
-                          style={{ fontSize: "15px", textTransform: 'capitalize' }}
+                          style={{
+                            fontSize: "15px",
+                            textTransform: "capitalize"
+                          }}
                         >
                           {subcribe.topic}
                         </span>{" "}
@@ -1110,7 +1113,12 @@ function MyProfile() {
                               className="my-profile__resume__right-info__weight"
                               style={{ fontSize: "15px" }}
                             >
-                              {formatProvinceName(formatProvince(provinceList, subcribe.province_id))}
+                              {formatProvinceName(
+                                formatProvince(
+                                  provinceList,
+                                  subcribe.province_id
+                                )
+                              )}
                             </span>
                           </>
                         )}
@@ -1159,6 +1167,13 @@ function MyProfile() {
                       </Form.Item>
                     </Form>
                     <div className="my-profile__resume__right-info__bottom__edit">
+                      <Link
+                        to="/find-jobs"
+                        className="job-list-receiving__link"
+                        style={{ color: "#1890FF" }}
+                      >
+                        Get another topic
+                      </Link>
                       <div
                         style={{ color: "#DB183F", cursor: "pointer" }}
                         onClick={onDeleteSubcribe}
