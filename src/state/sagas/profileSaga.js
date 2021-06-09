@@ -3,7 +3,6 @@ import {
   getCandidateProfile,
   updateCandidateProfile
 } from "services/candidateProfileServices";
-import { UPDATE_CAND_PROFILE } from "state/actions/index";
 import {
   GET_CANDIDATE_PROFILE,
   GET_CANDIDATE_PROFILE_SUCCESS

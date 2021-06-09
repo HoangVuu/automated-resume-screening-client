@@ -6,6 +6,10 @@ export const candidateProfileAction = (token) => ({
   payload: token
 });
 
+export const resetProfile = () => ({
+  type: types.RESET_CANDIDATE_PROFILE
+});
+
 export const candidateProfileProAction = createPromiseAction(
   "GET_CANDIDATE_PROFILE"
 );
@@ -19,3 +23,4 @@ export const updateProfileProAction = createPromiseAction(
   "UPDATE_CAND_PROFILE"
 );
 
+export const getSubcribeInfo = () => ({type: types.GET_SUBCRIBE_INFO});

@@ -4,7 +4,15 @@ import FormData from "form-data";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadCVAction } from "state/actions/index";
 import Loading from "components/Loading/Loading";
-import { Button, Input, InputNumber, Form, DatePicker, Radio } from "antd";
+import {
+  Button,
+  Input,
+  InputNumber,
+  Form,
+  DatePicker,
+  Radio,
+  Switch
+} from "antd";
 import Select from "react-select";
 import moment from "moment";
 import {
@@ -15,22 +23,38 @@ import {
   EyeOutlined,
   DeleteOutlined,
   ProfileTwoTone,
-  ProfileOutlined
+  ProfileOutlined,
+  RobotOutlined,
+  CheckOutlined,
+  DeleteTwoTone
 } from "@ant-design/icons";
 
+import swal from "sweetalert";
+
 import isEmpty from "lodash/isEmpty";
-import { toastErr, toast } from "utils/index";
+import {
+  toastErr,
+  toast,
+  formatProvince,
+  formatProvinceName
+} from "utils/index";
 import ContentEditable from "react-contenteditable";
 
-import { GET_JOB_DOMAIN } from "state/reducers/jobDomainReducer";
 import { getIndexArray } from "utils/index";
 import AddSkillSuggest from "components/AddSkillSuggest/AddSkillSuggest";
 import AddSoftSkillSuggest from "components/AddSoftSkillSuggest/AddSoftSkillSuggest";
 
 import { getCandidateProfile } from "services/candidateProfileServices";
+import {
+  getSubcribe,
+  updateSubcribe,
+  deleteSubcribe
+} from "services/jobServices";
+
 import { candidateProfileAction } from "state/actions/profileAction";
 import { updateProfileProAction } from "state/actions/profileAction";
 import { updateCVProfileAction } from "state/actions/index";
+import { Link } from "react-router-dom";
 
 const ACCEPTS = [
   "application/msword",
@@ -73,6 +97,9 @@ function MyProfile() {
 
   // state
   const [loading, setLoading] = useState(false);
+  const [active, setActive] = useState();
+  const [subcribe, setSubcribe] = useState(false);
+  const [frequency, setFrequency] = useState();
 
   const [resume, setResume] = useState();
   const [resumeDefault, setResumeDefault] = useState();
@@ -105,6 +132,8 @@ function MyProfile() {
     }))
   );
 
+  const provinceList = useSelector((state) => state.cv.provinces)
+
   const defaultProvince = (id) =>
     provinces.length && provinces.find((item) => item.value === id);
 
@@ -118,8 +147,6 @@ function MyProfile() {
     };
 
     delete values.province_id;
-
-    console.log(values);
 
     dispatch(updateProfileProAction(values))
       .then(() => {
@@ -290,6 +317,77 @@ function MyProfile() {
       });
   };
 
+  const onFinishRadio = (fieldsValue) => {
+    console.log("values", fieldsValue);
+  };
+
+  //Handle email notification
+  const setValueRadio = async (value) => {
+    setFrequency(value);
+    const status = subcribe.status ? 1 : 0;
+
+    await updateSubcribe(
+      subcribe.topic,
+      subcribe.province_id,
+      value,
+      status,
+      token
+    )
+      .then((res) => {
+        toast({ type: "success", message: "Update frequency successful" });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const onSelect = async (value) => {
+    console.log("select", value);
+    setActive(!active);
+
+    const status = value ? 1 : 0;
+
+    await updateSubcribe(
+      subcribe.topic,
+      subcribe.province_id,
+      frequency,
+      status,
+      token
+    )
+      .then((res) => {
+        toast({ type: "success", message: "Update status successful" });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const onDeleteSubcribe = () => {
+    swal({
+      title: "Are you sure to delete jobs alert?",
+      text: "You'll not receive from us in the future!",
+      icon: "warning",
+      buttons: ["Cancel", "Delete"],
+      dangerMode: true
+    })
+      .then(async (willDelete) => {
+        if (willDelete) {
+          await deleteSubcribe(token)
+            .then((res) => {
+              setSubcribe(null);
+              toast({
+                type: "success",
+                message: "Delete your jobs alert successful"
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          swal("Jobs alert is working!");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const fetchProfile = async () => {
     setLoading(true);
 
@@ -318,6 +416,15 @@ function MyProfile() {
       .finally(() => {
         setLoading(false);
       });
+
+    await getSubcribe(token)
+      .then(async (res) => {
+        console.log(res.data.data);
+        setSubcribe(res.data.data);
+        setActive(res.data.data.status === 1);
+        setFrequency(res.data.data.type);
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -327,10 +434,7 @@ function MyProfile() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   dispatch(candidateProfileAction(token));
-  // }, []);
-
+  console.log("active", active);
   return (
     <div className="my-profile">
       <Loading loading={loading} />
@@ -939,28 +1043,149 @@ function MyProfile() {
             </div>
           </div>
           <div className="col-sm-4">
-            <div className="my-profile__resume__strength">
-              <div className="row my-profile__resume__strength__group">
-                <h3 className="profile-title">Profile visibility</h3>
-                <ProfileTwoTone
-                  style={{
-                    fontSize: "32px",
-                    marginLeft: "20px",
-                    paddingBottom: "7px"
-                  }}
-                />
+            <div className="my-profile__resume__right-info">
+              <div className="my-profile__resume__right-info__top">
+                <div className="row my-profile__resume__right-info__group">
+                  <h3 className="profile-title" style={{ fontSize: "20px" }}>
+                    Profile visibility
+                  </h3>
+                  <ProfileTwoTone
+                    style={{
+                      fontSize: "32px",
+                      marginLeft: "20px",
+                      paddingBottom: "7px"
+                    }}
+                  />
+                </div>
+
+                <p className="my-profile__resume__right-info__subtitle">
+                  Your profile is the only one in the system, employers can
+                  approach you with job opportunities.
+                </p>
+                <p className="my-profile__resume__right-info__weight">
+                  Standard
+                </p>
+                <span className="my-profile__resume__right-info__last">
+                  For all information you provided, your Profile including any
+                  verified credentials will be sent to the employer with your
+                  applications.
+                </span>
               </div>
 
-              <p className="my-profile__resume__strength__subtitle">
-                Your profile is the only one in the system, employers can
-                approach you with job opportunities.
-              </p>
-              <p className="my-profile__resume__strength__weight">Standard</p>
-              <p className="my-profile__resume__strength__last">
-                For all information you provided, your Profile including any
-                verified credentials will be sent to the employer with your
-                applications.
-              </p>
+              <div className="my-profile__resume__right-info__bottom">
+                <div className="row my-profile__resume__right-info__group">
+                  <h3 className="profile-title" style={{ fontSize: "20px" }}>
+                    Receive Job Invitationy
+                  </h3>
+                </div>
+
+                <p className="my-profile__resume__right-info__subtitle">
+                  Job Alert Email{" "}
+                  <RobotOutlined
+                    style={{
+                      fontSize: "20px",
+                      marginLeft: "7px"
+                    }}
+                  />
+                </p>
+                {!isEmpty(subcribe) ? (
+                  <>
+                    <div className="my-profile__resume__right-info__res">
+                      <span
+                        style={{
+                          fontSize: "15px",
+                          maxWidth:"80%"
+                        }}
+                      >
+                        <span
+                          className="my-profile__resume__right-info__weight"
+                          style={{ fontSize: "15px", textTransform: 'capitalize' }}
+                        >
+                          {subcribe.topic}
+                        </span>{" "}
+                        {subcribe.province_id && (
+                          <>
+                            <span> in </span>
+                            <span
+                              className="my-profile__resume__right-info__weight"
+                              style={{ fontSize: "15px" }}
+                            >
+                              {formatProvinceName(formatProvince(provinceList, subcribe.province_id))}
+                            </span>
+                          </>
+                        )}
+                      </span>
+
+                      <Switch
+                        checkedChildren={<CheckOutlined />}
+                        unCheckedChildren={<CloseOutlined />}
+                        defaultChecked={subcribe.status === 1}
+                        onChange={(checked) => onSelect(checked)}
+                      />
+                    </div>
+
+                    <p
+                      className="my-profile__resume__right-info__last"
+                      style={{ color: " #6f6f6f" }}
+                    >
+                      {active ? "Active" : "Paused"}
+                    </p>
+
+                    <span
+                      className="my-profile__resume__right-info__last"
+                      style={{ marginRight: "15px" }}
+                    >
+                      Frequency:
+                    </span>
+                    <Form
+                      layout="vertical"
+                      name="nest-messages"
+                      onFinish={onFinishRadio}
+                      fields={[
+                        {
+                          name: ["frequency"],
+                          value: frequency
+                        }
+                      ]}
+                    >
+                      <Form.Item className="col-sm" name="frequency">
+                        <Radio.Group
+                          defaultValue={subcribe?.frequency}
+                          onChange={(e) => setValueRadio(e.target.value)}
+                        >
+                          <Radio value={0}>Daily</Radio>
+                          <Radio value={1}>Weekly</Radio>
+                        </Radio.Group>
+                      </Form.Item>
+                    </Form>
+                    <div className="my-profile__resume__right-info__bottom__edit">
+                      <div
+                        style={{ color: "#DB183F", cursor: "pointer" }}
+                        onClick={onDeleteSubcribe}
+                      >
+                        <DeleteTwoTone
+                          twoToneColor="#DB183F"
+                          style={{ marginRight: "3px" }}
+                        />{" "}
+                        Delete this alert
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div
+                    style={{ marginTop: "15px" }}
+                    className="job-list-receiving"
+                  >
+                    <Link
+                      to="/find-jobs"
+                      className="job-list-receiving__link"
+                      style={{ color: "#1890FF" }}
+                    >
+                      Active email to receive more jobs from us
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -974,7 +1199,10 @@ export default MyProfile;
 const Skill = ({ id, skill, onDelete, isAction }) => {
   return (
     <div className="chip-skill__item">
-      <div className="container-fluid">
+      <div
+        className="container-fluid"
+        // style={{ paddingLeft: "0", paddingRight: "0" }}
+      >
         <div className="row">
           <div className="skill-editable">
             <ContentEditable

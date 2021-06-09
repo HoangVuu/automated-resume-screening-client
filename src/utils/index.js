@@ -67,32 +67,34 @@ export const formatProvinceName = (province) => {
 
 export const formatProvinceNameBrief = (province) => {
   let provinceName = formatProvinceName(province);
-  
-  return (
-    provinceName ?
-    provinceName
-      .split(/\s/)
-      .reduce((response, word) => (response += word.slice(0, 1)), "") : "All"
-  );
+
+  return provinceName
+    ? provinceName
+        .split(/\s/)
+        .reduce((response, word) => (response += word.slice(0, 1)), "")
+    : "All";
 };
 
 export const formatSearchHistory = (title, provinces, provinceId) => {
   let province = {};
   if (provinceId) {
-    province = provinces.find((p) => p.province_id === provinceId);
+    province =
+      provinces?.length && provinces.find((p) => p.province_id === provinceId);
   }
+
+  let provinceName = province?.province_name;
 
   let result = "";
 
   if (title) {
-    result += title;
+    result += title.trim();
 
-    if (provinceId) {
-      result += " - " + province && province?.province_name;
+    if (provinceId && provinceName) {
+      result += " - " + provinceName;
     }
   } else {
-    if (provinceId) {
-      result += province && province?.province_name;
+    if (provinceId && provinceName) {
+      result += provinceName;
     }
   }
 

@@ -258,12 +258,37 @@
       }
     }
 
-    &__strength {
+    &__right-info {
       margin-top: 25px;
-      background-color: #fff;
       position: sticky;
       top: 20px;
-      padding: 32px;
+
+      &__res{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #ececec;
+        padding-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      &__top{
+        padding: 25px;
+        background-color: #fff;
+      }
+
+      &__bottom{
+        margin-top: 20px;
+        padding: 25px;
+        background-color: #fff;
+
+        &__edit{
+          display: flex;
+          justify-content: flex-end;
+          margin-top: 30px;
+
+        }
+      }
 
       &__group {
         margin: 0;

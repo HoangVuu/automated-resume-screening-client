@@ -19,7 +19,6 @@ function CandidateSignIn() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  // const isLogin = useSelector((state) => state.login.isLogin);
   // const accessToken = useSelector((state) => state.login.token);
 
   //Handle submit Login
@@ -59,9 +58,9 @@ function CandidateSignIn() {
             </Link>
           </div>
 
-          <div className="candidate-login__container__left__employer">
+          <Link to="/recruiter/sign-in" className="candidate-login__container__left__employer">
             <span>Are you an employer?</span>
-          </div>
+          </Link>
 
           <span className="candidate-login__container__left__title">
             Sign&nbsp;in

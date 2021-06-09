@@ -18,7 +18,7 @@ import { logoutUserAction } from "state/actions/authenticationActions";
 import history from "state/history";
 import { checkCookie, setCookie } from "utils/cookies";
 import "./NavBar.scss";
-import { candidateProfileAction } from "state/actions/profileAction";
+import { candidateProfileAction, resetProfile } from "state/actions/profileAction";
 import isEmpty from "lodash/isEmpty";
 
 function NavBar() {
@@ -33,6 +33,7 @@ function NavBar() {
   const logOut = () => {
     setCookie("candidate_token", accessToken, 0);
     dispatch(logoutUserAction("candidate"));
+    dispatch(resetProfile());
   };
 
   const toggleInfo = () => {
@@ -62,7 +63,7 @@ function NavBar() {
     pathname.startsWith("/profile") && setClickItem(1);
     pathname.startsWith("/career-advice") && setClickItem(2);
     pathname.startsWith("") && setClickItem(null);
-  }, [profile.fullName]);
+  }, [profile.fullName, accessToken]);
 
   return (
     <div

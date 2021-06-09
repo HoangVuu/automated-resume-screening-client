@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useWindowSize } from "utils/window";
 import "./JobDetail.scss";
 import { HeartOutlined, HeartFilled, LoadingOutlined } from "@ant-design/icons";
 import { Close } from "constants/svg";

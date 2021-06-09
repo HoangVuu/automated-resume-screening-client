@@ -97,7 +97,6 @@ function AddSkillSuggest({ handleAdd, isAdd, isCorner = false }) {
         await getJobSkill()
           .then((res) => {
             setSkills(res.data.data);
-            console.log("data", res);
           })
           .catch((err) => {
             toastErr(err);

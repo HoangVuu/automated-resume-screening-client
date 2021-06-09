@@ -37,7 +37,7 @@ function CandidateSignUp() {
   const onFinish = (fieldsValue) => {
     const values = {
       ...fieldsValue,
-      province_id: parseInt(fieldsValue.province_id)
+      province_id: fieldsValue.province_id
     };
 
     delete values.confirm;

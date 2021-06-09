@@ -6,7 +6,7 @@ import { CONTACTS, PAGE_SIZES, DATES } from "constants/index";
 import React, { useEffect, useState } from "react";
 import "./JobList.scss";
 import { Pagination, Select } from "antd";
-import { findJobs } from "services/jobServices";
+import { findJobs, subcribe } from "services/jobServices";
 import { formatSearchHistory, toastErr } from "utils/index";
 import { getFormValues } from "redux-form";
 import { FORM_KEY_JOB_SEARCH } from "state/reducers/formReducer";
@@ -14,6 +14,10 @@ import { useSelector } from "react-redux";
 import ContentLoader from "react-content-loader";
 import qs from "query-string";
 import { Link, useLocation } from "react-router-dom";
+import { Input } from "antd";
+import { toast } from "utils/index";
+import isEmpty from "lodash/isEmpty";
+import { getSubcribe } from "services/jobServices";
 
 const MyLoader = (props) => (
   <ContentLoader
@@ -56,6 +60,9 @@ function CandidateJobList({ history }) {
     total: 0
   });
 
+  // const [email, setSubcribe] = useState();
+  const [isActive, setIsActive] = useState();
+
   const [filter, setFilter] = useState({
     posted_date: undefined,
     contract_type: undefined,
@@ -63,6 +70,9 @@ function CandidateJobList({ history }) {
     max_salary: undefined,
     "job-domain": undefined
   });
+
+  const token = useSelector((state) => state.auth.candidate.token);
+  const profile = useSelector((state) => state.profile.candidateProfile);
 
   const params = useLocation().search;
 
@@ -96,6 +106,38 @@ function CandidateJobList({ history }) {
         postedIn: posted_in
       })
     );
+  };
+
+  const handleSubcribe = async () => {
+    if (!token) {
+      toast({ type: "info", message: "Please login to receive jobs alert" });
+    } else {
+      // setLoadingSave(true);
+
+      // const status = save ? 0 : 1;
+      let filter = qs.parse(params);
+      let { q, location } = filter;
+      console.log(q);
+
+      if (q) {
+        await subcribe(q, location, token)
+          .then((res) => {
+            console.log(res);
+            setIsActive(true);
+            toast({
+              type: "success",
+              message: "Send jobs alert successful"
+            });
+          })
+          .catch((err) => toastErr(err));
+        // .finally(() => setLoadingSave(false));
+      } else {
+        toast({
+          type: "info",
+          message: "Job title is required to receive jobs alert"
+        });
+      }
+    }
   };
 
   useEffect(() => {
@@ -178,11 +220,17 @@ function CandidateJobList({ history }) {
         .finally(() => {
           setLoading(false);
         });
+
+      await getSubcribe(token)
+        .then(async (res) => {
+          console.log(res.data.data.length);
+          res.data.data.length !==0 ? setIsActive(true) : setIsActive(false)
+        })
+        .catch((err) => console.log(err));
     };
 
     fetchJobs();
-
-  }, [params]);
+  }, [params, token]);
 
   const handleSubmit = async () => {
     const job_title = formValues
@@ -269,8 +317,7 @@ function CandidateJobList({ history }) {
             </div>
           </div>
         </div>
-        <div
-        >
+        <div>
           <div className="container">
             <table id="searchContent" className="serpContainerMinHeight">
               <tbody>
@@ -294,9 +341,7 @@ function CandidateJobList({ history }) {
                             </span>
                           </div>
                           <div className="searchCountContainer">
-                            <div id="searchCountPages">
-                             Total {total} jobs
-                            </div>
+                            <div id="searchCountPages">Total {total} jobs</div>
                           </div>
                         </div>
                       </div>
@@ -335,7 +380,62 @@ function CandidateJobList({ history }) {
                   </td>
                   {curSelect === null && (
                     <td role="region" id="auxCol">
-                      <JobAlert />
+                      <div id="jobalertswrapper">
+                        <div id="jobalerts" className="open jaui">
+                          <div className="jobalertlabel">
+                            <div id="jobalertlabel" className="jobalerts_title">
+                              <div>Be the first to see new jobs via email</div>
+                            </div>
+                          </div>
+                          <div id="jobalertform" className="jaform">
+                            <span id="jobalertsending"></span>
+                            <div id="jobalertmessage">
+                              <label className="jobAlertFormLabel-contrast-color">
+                                Email address
+                              </label>
+                              <Input
+                                id="alertmail"
+                                disabled={isEmpty(profile)}
+                                value={profile?.email}
+                              />
+                              <span className="serp-button">
+                                <span className="serp-button-inner">
+                                  {isActive ? (
+                                    <div
+                                      style={{ marginTop: "15px" }}
+                                      className="job-list-receiving"
+                                    >
+                                      <Link
+                                        to="/profile"
+                                        className="job-list-receiving__link"
+                                      >
+                                        You actived email to receive jobs alert from us via
+                                        email
+                                      </Link>
+                                    </div>
+                                  ) : (
+                                    <button
+                                      id="alertsubmit"
+                                      className="serp-button-label"
+                                      onClick={handleSubcribe}
+                                    >
+                                      Active
+                                    </button>
+                                  )}
+                                </span>
+                              </span>
+                              <div style={{ marginTop: "12px" }}>
+                                <span>
+                                  By creating a job alert, you agree to our
+                                  Terms. You can change your consent settings at
+                                  any time by unsubscribing or as detailed in
+                                  our terms.
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       {searchHistory && searchHistory.length && (
                         <div id="recentsearches" className="no-left-rail">
                           <div className="rsh">My recent searches</div>
@@ -376,47 +476,6 @@ function CandidateJobList({ history }) {
 }
 
 export default CandidateJobList;
-
-const JobAlert = () => (
-  <div id="jobalertswrapper">
-    <div id="jobalerts" className="open jaui">
-      <div className="jobalertlabel">
-        <div id="jobalertlabel" className="jobalerts_title">
-          <div>Be the first to see new jobs via email</div>
-        </div>
-      </div>
-      <div id="jobalertform" className="jaform">
-        <span id="jobalertsending"></span>
-        <div id="jobalertmessage">
-          <label className="jobAlertFormLabel-contrast-color">
-            Email address
-          </label>
-          <input
-            type="email"
-            name="email"
-            size={25}
-            maxLength={100}
-            id="alertmail"
-          />
-          <span className="serp-button">
-            <span className="serp-button-inner">
-              <button id="alertsubmit" className="serp-button-label">
-                Active
-              </button>
-            </span>
-          </span>
-          <div style={{ marginTop: "12px" }}>
-            <span>
-              By creating a job alert, you agree to our Terms. You can change
-              your consent settings at any time by unsubscribing or as detailed
-              in our terms.
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
 
 const EmptyJob = () => (
   <div style={{ backgroundColor: "white", marginTop: "1rem" }}>

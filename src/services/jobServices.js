@@ -73,3 +73,44 @@ export const getSuggestJob = async (domain_id, province_id, page, token) =>
       headers: { Authorization: `Bearer ${token}` }
     }
   );
+
+// Subcribe email
+export const subcribe = async (topic, province_id, token) => {
+  await API.post(
+    "/subcribe",
+    {
+      topic,
+      province_id
+    },
+    {
+      headers: { Authorization: `Bearer ${token}` }
+    }
+  );
+};
+
+export const getSubcribe = async (token) =>
+  await API.get("/subcribe", { headers: { Authorization: `Bearer ${token}` } });
+
+export const updateSubcribe = async (
+  topic,
+  province_id,
+  type,
+  status,
+  token
+) => {
+  await API.post(
+    "/subcribe/update",
+    {
+      topic,
+      province_id,
+      type,
+      status
+    },
+    {
+      headers: { Authorization: `Bearer ${token}` }
+    }
+  );
+};
+
+export const deleteSubcribe = async (token) =>
+await API.delete("/subcribe", { headers: { Authorization: `Bearer ${token}` } });

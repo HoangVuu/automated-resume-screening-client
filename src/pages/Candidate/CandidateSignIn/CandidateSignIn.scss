@@ -79,13 +79,17 @@
         padding: 24px;
         padding-bottom: 15px;
 
+        label::before {
+          display: none !important;
+        }
+
         .ant-form-item-label {
           color: #1e222b;
           font-weight: 700;
           line-height: 24px;
           padding-bottom: 5px;
 
-          .ant-form-item-required { 
+          .ant-form-item-required {
             font-size: 16px;
           }
         }
@@ -108,11 +112,11 @@
           padding: 12px 0;
           border-radius: 4px;
           color: $c-white;
-          background-image: linear-gradient(to right, #FD0585, #ec1685 22%, #df75e3 50%, #ec1685 78%, #FD0585 100%);
+          background-image: linear-gradient(to right, #fd0585, #ec1685 22%, #df75e3 50%, #ec1685 78%, #fd0585 100%);
           transition: all 0.3s ease;
           background-size: 200% auto;
           width: 30%;
-          
+
           &:hover {
             background-position: right center;
           }
