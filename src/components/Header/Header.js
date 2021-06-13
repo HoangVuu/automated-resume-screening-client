@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-function Header() {
+function Header({hasNavbar = true}) {
   const { t, i18n } = useTranslation();
 
   const [currEn, setCurrEn] = useState(localStorage.getItem("lang") === "en");
@@ -59,7 +59,7 @@ function Header() {
     <header id="header" className="header">
       <div className="header__section">
         <div className="container">
-          <nav className="navbar navbar-expand-lg header__navbar">
+          <nav className="navbar navbar-expand-lg header__navbar" style={{justifyContent: !hasNavbar ? 'space-between': ''}}>
             {/* Header section */}
             <div
               className="header__navbar-brand-wrapper"
@@ -74,7 +74,7 @@ function Header() {
             </div>
 
             {/* Navbar section */}
-            {recruiter ? <RecruiterNavBar /> : <NavBar />}
+            {hasNavbar  && (recruiter ? <RecruiterNavBar /> : <NavBar />)}
 
             <div className="lang">
               <a className="lang__toggle" onClick={toggleDropdown}>

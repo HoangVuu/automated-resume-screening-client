@@ -16,8 +16,7 @@
             "email": "Email address",
             "enterEmail": "Enter email...",
             "password": "Password",
-            "enterPassword": "Enter password...",
-            "signIn": "Sign in"
+            "enterPassword": "Enter password..."
         },
         "doNot": "Don't have an account?",
         "register": "Register"
@@ -126,6 +125,54 @@
         "saveJob": "Save Job",
         "deadline": "The deadline for submission",
         "workType": "Work type",
-        "amount": "Amount"
+        "amount": "Amount",
+        "noLimit": "Unlimited",
+        "jobDetail": "Job details",
+        "fullJob": "Full Job Description",
+        "des": "Description",
+        "roleReq": "Role Requirements",
+        "benefit": "Perks and Benefits",
+        "candidate": "candidate",
+        "candidates": "candidates"
+    },
+    "explore": {
+        "smallTitle": "Using skills listed in your Profile, we’ll help you discover career options.",
+        "addSkill": "Add skill",
+        "Save": "Save and Match now",
+        "matchedTitle": "Your matched opportunities",
+        "mostMatches": "Most skill matches",
+        "goodSkill": "what you're good at",
+        "enjoy": "What you like",
+        "lookingBigTitle": "Looking for a specific role or skill?",
+        "lookingSmallTitle": "Find out more about a role or skill you’re interested in.",
+        "lookingByRole": "What role would you like to get into?",
+        "lookingBySkill": "What skill do you want to focus on?",
+        "explore": "Explore"
+    },
+    "matchedJob":{
+        "match skills":"Your skills match.",
+        "numberSkillMatch":"See how you match"
+    },
+    "matchedJobDetail":{
+        "header":"Skill overlaps with your previous roles and Fullstack Developer",
+        "bigTitle":"Key skills and experience",
+        "numberOfSkillMatch":"Your previous roles have {0} overlapping key skills and experience.",
+        "moreAboutCareer":"Learn more about this career"
+    },
+    "findJobSignIn":{
+        "hi":"Hi there,",
+        "ready":"ready to explore advice and career options tailored to you?",
+        "role":"Find you're interested in applying for",
+        "findLocation":"Preferred location",
+        "bigTitle":"Learn what you need to know about a role, from salary to job satisfaction.",
+        "smallTitle":"Get a role  you're interested in to see more.",
+        "great":"Great, you're interested in {0} role.",
+        "location":"Find out the facts about this role and others like it in {0} .",
+        "detail":{
+            "numberOfJob":"Jobs on website right now",
+            "minSalary":"Minimum common salary",
+            "maxSalray":"Maximum common salary",
+            "satisfaction":"Job satisfaction"
+        }
     }
 }

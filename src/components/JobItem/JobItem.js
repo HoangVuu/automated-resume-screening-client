@@ -7,7 +7,6 @@ import JobDetail from "components/JobItem/JobDetail";
 import { getDiffTime, formatProvince, formatProvinceEn } from "utils/index";
 import history from "state/history";
 import { useTranslation } from "react-i18next";
-import { getDate } from "date-fns";
 
 const JobItem = ({
   jobId,
@@ -46,6 +45,7 @@ const JobItem = ({
   };
 
   const getLangSalary = (salary) => {
+   if(salary){
     if (salary === "Thoả thuận") {
       salary = i18n.language === "vi" ? "Thoả thuận" : "Wage agreement";
     } else if (salary.includes("Lên đến")) {
@@ -57,17 +57,20 @@ const JobItem = ({
       salary =
         i18n.language === "vi" ? salary : salary.replaceAll("Từ", "From ");
     }
+   }
 
     return salary;
   };
 
   const getLangContractType = (type) => {
-    if (type === "Toàn thời gian") {
-      type = i18n.language === "vi" ? "Toàn thời gian" : "Fulltime";
-    } else if (type === "Bán thời gian") {
-      type = i18n.language === "vi" ? "Bán thời gian" : "Parttime";
-    } else if (type === "Thực tập") {
-      type = i18n.language === "vi" ? "Thực tập" : "Internship";
+    if(type){
+      if (type === "Toàn thời gian") {
+        type = i18n.language === "vi" ? "Toàn thời gian" : "Fulltime";
+      } else if (type === "Bán thời gian") {
+        type = i18n.language === "vi" ? "Bán thời gian" : "Parttime";
+      } else if (type === "Thực tập") {
+        type = i18n.language === "vi" ? "Thực tập" : "Internship";
+      }
     }
 
     return type;

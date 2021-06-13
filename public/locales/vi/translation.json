@@ -16,8 +16,7 @@
             "email": "Địa chỉ email",
             "enterEmail": "Nhập email...",
             "password": "Mật khẩu",
-            "enterPassword": "Nhập mật khẩu...",
-            "signIn": "Đăng nhập"
+            "enterPassword": "Nhập mật khẩu..."
         },
         "doNot": "Không có tài khoản?",
         "register": "Đăng ký"
@@ -118,7 +117,7 @@
             "check": "Thử những từ khóa thông thường hơn",
             "replace": "Thay những từ viết tắt bằng những từ gốc"
         },
-        "salary": "Lương",
+        "salary": "Mức lương",
         "day": " ngày trước",
         "days": " ngày trước",
         "justAdd": "Vừa mới đăng",
@@ -126,6 +125,54 @@
         "saveJob": "Lưu tin",
         "deadline": "Hạn nộp hồ sơ",
         "workType": "Hình thức làm việc",
-        "amount": "Số lượng cần tuyển"
+        "amount": "Số lượng cần tuyển",
+        "noLimit": "Không giới hạn ứng viên",
+        "jobDetail": "Chi tiết công việc",
+        "fullJob": "Mô tả đầy đủ chi tiết công việc",
+        "des": "Mô tả công việc",
+        "roleReq": "Yêu cầu ứng viên",
+        "benefit": "Quyền lợi ứng viên",
+        "candidate": "ứng viên",
+        "candidates": "ứng viên"
+    },
+    "explore": {
+        "smallTitle": "Sử dụng các kỹ năng đã được liệt kê trong hồ sơ, chúng tôi sẽ giúp bạn khám phá các cơ hội nghề nghiệp.",
+        "addSkill": "Thêm kĩ năng",
+        "Save": "Lưu và tìm kiếm ngay.",
+        "matchedTitle": "Các cơ hội việc làm phù hợp.",
+        "mostMatches": "Phù hợp hầu hết các kĩ năng.",
+        "goodSkill": "Những cơ hội tốt với bạn",
+        "enjoy": "Những cơ hội bạn thích",
+        "lookingBigTitle": "Bạn đang tìm kiếm một vai trò hoặc kỹ năng cụ thể?",
+        "lookingSmallTitle": "Tìm hiểu thêm về vai trò hoặc kỹ năng mà bạn quan tâm.",
+        "lookingByRole": "Bạn muốn tham gia với vai trò nào?",
+        "lookingBySkill": "Kĩ năng nào mà bạn muốn tập trung tới?",
+        "explore": "Khám phá"
+    },
+    "matchedJob": {
+        "match skills": "Những kĩ năng phù hợp với bạn.",
+        "numberSkillMatch": "Tìm hiểu xem bạn phù hợp ra sao"
+    },
+    "matchedJobDetail": {
+        "header": "Các kỹ năng phù hợp với vai trò trước đây và của một Developer FullStack.",
+        "bigTitle": "Các từ khoá kỹ năng và kinh nghiệm",
+        "numberOfSkillMatch": "Các vai trò trước của bạn có {0} khoá kỹ năng và kinh nghiệm phù hợp.",
+        "moreAboutCareer": "Tìm hiểu thêm về cơ hội nghề nghiệp này"
+    },
+    "findJobSignIn":{
+        "hi":"Chào bạn,",
+        "ready":"bạn đã sẵn sàng khám phá những lời giới thiệu và cơ hội nghề nghiệp phù hợp với bạn chưa?",
+        "role":"Tìm kiếm những những điều mà bạn đang quan tâm",
+        "findLocation":"Vị trí ưu tiên",
+        "bigTitle":"Tìm hiểu những điều bạn cần biết về một vai trò, từ mức lương cho đến mức độ hài lòng trong công việc.",
+        "smallTitle":"Nhận một vai trò mà bạn quan tâm để xem thêm.",
+        "great":"Tuyệt vời, bạn đang quan tâm tới vị trí {0} .",
+        "location":"Tìm hiểu thêm về vị trí này và những vị trí khác tương tự trong {0} .",
+        "detail":{
+            "numberOfJob":"Số lượng công việc hiện có trên website",
+            "minSalary":"Thu nhập bình quân tối thiểu",
+            "maxSalray":"Thu nhập bình quân tối đa",
+            "satisfaction":"Mức độ hài lòng với công việc"
+        }
     }
 }

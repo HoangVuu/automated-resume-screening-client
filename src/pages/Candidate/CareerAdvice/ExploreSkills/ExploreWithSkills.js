@@ -1,7 +1,7 @@
 import { Tabs, Tab } from "react-bootstrap";
 import ContentEditable from "react-contenteditable";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Input } from "antd";
+import { Button } from "antd";
 
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,7 +13,6 @@ import MatchSkill from "components/MatchSkill/MatchSkill";
 import { getIndexArray } from "utils/index";
 import Loading from "components/Loading/Loading";
 
-import { GET_JOB_DOMAIN, GET_JOB_SKILL } from "state/reducers/jobDomainReducer";
 import history from "state/history";
 import { exploreSkillsProAction } from "state/actions/candidateJobAction";
 import ContentLoader from "react-content-loader";
