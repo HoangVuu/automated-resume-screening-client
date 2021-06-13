@@ -94,6 +94,11 @@
     background-color: rgb(247, 248, 250);
     border-radius: var(--border);
     text-transform: capitalize;
+
+    &::placeholder{
+      font-size: 14px;
+      text-transform: none;
+    }
   }
 
   .react-autosuggest__input--focused {

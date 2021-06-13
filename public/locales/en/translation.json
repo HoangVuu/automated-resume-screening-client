@@ -138,16 +138,19 @@
     "explore": {
         "smallTitle": "Using skills listed in your Profile, we’ll help you discover career options.",
         "addSkill": "Add skill",
+        "addASkill": "Add a skill....",
         "Save": "Save and Match now",
         "matchedTitle": "Your matched opportunities",
         "mostMatches": "Most skill matches",
         "goodSkill": "what you're good at",
         "enjoy": "What you like",
         "lookingBigTitle": "Looking for a specific role or skill?",
-        "lookingSmallTitle": "Find out more about a role or skill you’re interested in.",
+        "lookingSmallTitle": "Find out more about a role or skill you’re interested in",
         "lookingByRole": "What role would you like to get into?",
         "lookingBySkill": "What skill do you want to focus on?",
-        "explore": "Explore"
+        "explore": "Explore",
+        "sorry": "Sorry, we’re unable to match you with suggestions",
+        "self": "Self evaluate skills of your previous roles to see matching opportunities"
     },
     "matchedJob":{
         "match skills":"Your skills match.",

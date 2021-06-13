@@ -127,10 +127,10 @@ function CandidateCareerAdvice({ history }) {
                 <div className="container">
                   <div className="explore__content">
                     <h2 className="explore__content__title">
-                      Your career so far
+                    {t("careerAdvice.contentTitle")}
                     </h2>
                     <div className="explore__content__key">
-                      <p>Key skills</p>
+                      <p>{t("careerAdvice.contentKey")}</p>
                     </div>
                     <SignInDirect isNeedCV={true} />
                   </div>

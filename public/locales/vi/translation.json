@@ -138,19 +138,22 @@
     "explore": {
         "smallTitle": "Sử dụng các kỹ năng đã được liệt kê trong hồ sơ, chúng tôi sẽ giúp bạn khám phá các cơ hội nghề nghiệp.",
         "addSkill": "Thêm kĩ năng",
-        "Save": "Lưu và tìm kiếm ngay.",
-        "matchedTitle": "Các cơ hội việc làm phù hợp.",
-        "mostMatches": "Phù hợp hầu hết các kĩ năng.",
+        "addASkill": "Thêm một kĩ năng...",
+        "Save": "Tìm kiếm phù hợp",
+        "matchedTitle": "Các cơ hội việc làm phù hợp",
+        "mostMatches": "Phù hợp hầu hết các kĩ năng",
         "goodSkill": "Những cơ hội tốt với bạn",
         "enjoy": "Những cơ hội bạn thích",
         "lookingBigTitle": "Bạn đang tìm kiếm một vai trò hoặc kỹ năng cụ thể?",
-        "lookingSmallTitle": "Tìm hiểu thêm về vai trò hoặc kỹ năng mà bạn quan tâm.",
+        "lookingSmallTitle": "Tìm hiểu thêm về vai trò hoặc kỹ năng mà bạn quan tâm",
         "lookingByRole": "Bạn muốn tham gia với vai trò nào?",
         "lookingBySkill": "Kĩ năng nào mà bạn muốn tập trung tới?",
-        "explore": "Khám phá"
+        "explore": "Khám phá",
+        "sorry": "Xin lỗi, chúng tôi không thể tìm kiếm phù hợp với đề xuất",
+        "self": "Tự đánh giá các kỹ năng của các vai trò trước đây của bạn để xem các cơ hội phù hợp"
     },
     "matchedJob": {
-        "match skills": "Những kĩ năng phù hợp với bạn.",
+        "match skills": "Những kĩ năng phù hợp với bạn",
         "numberSkillMatch": "Tìm hiểu xem bạn phù hợp ra sao"
     },
     "matchedJobDetail": {
