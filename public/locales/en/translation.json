@@ -1,8 +1,131 @@
 {
-  "Thanks": {
-    "a": "Thanks"
-  },
-  "Why": {
-    "a": "for watching"
-  }
+    "header": {
+        "jobSearch": "Job Search",
+        "profile": "Profile",
+        "careerAdvice": "Career Advice",
+        "savedJob": "Saved Jobs",
+        "appliedJob": "Applied Jobs",
+        "logOut": "Logout",
+        "logIn": "Login",
+        "employer": "Employer"
+    },
+    "candidateSignIn": {
+        "areYou": "Are you an employer?",
+        "signIn": "Sign in",
+        "form": {
+            "email": "Email address",
+            "enterEmail": "Enter email...",
+            "password": "Password",
+            "enterPassword": "Enter password...",
+            "signIn": "Sign in"
+        },
+        "doNot": "Don't have an account?",
+        "register": "Register"
+    },
+    "home": {
+        "Just": "Just explore then apply",
+        "Find": "Find your dream job in a quick way",
+        "Popular": "Popular position",
+        "jobSearch": {
+            "Please": "Please choose your role you want to apply...",
+            "location": "Location",
+            "full": "Full time",
+            "part": "Part time",
+            "internship": "Internship"
+        },
+        "location": "Work location..."
+    },
+    "careerAdvice": {
+        "tab1": "Explore what I can do with my skills",
+        "tab2": "Find the right job for me",
+        "titleBig": "How can you put your skills to work?",
+        "titleSmall": "Explore roles that could suit you based on your skills and experience",
+        "contentTitle": "Your career so far",
+        "contentKey": "Key skills",
+        "lookingFor": "Looking for a specific role or skill?",
+        "findOut": "Find out more about a role or skill you’re interested in.",
+        "whatRole": "What role would you like to get into?",
+        "form": {
+            "enterRole": "Enter a role...",
+            "explore": "Explore"
+        },
+        "searchSuggest": {
+            "enter": "Enter a skill...",
+            "what": "What skill do you want to focus on?"
+        }
+    },
+    "findJob": {
+        "hi": "Hi there",
+        "ready": "ready to explore advice and career options tailored to you?",
+        "find": "Find the right job for me",
+        "noToken": {
+            "signIn": "Sign in or register a Profile to find the right job for you",
+            "signInBtn": "Sign In",
+            "or": "or",
+            "register": "Register"
+        }
+    },
+    "signInDirect": {
+        "isNeedCV": {
+            "create": "Create a Profile to see tailored matches",
+            "signIn": "Sign in or register a Profile to see tailored matches"
+        },
+        "identify": "Identify the skills you already have, based on your experience so far",
+        "see": "See how your skill set could make you a match for different roles or industries",
+        "rate": "Rate your skills levels and what you enjoy to refine your options",
+        "discover": "Discover ways to make a change or expand your horizons with new skills",
+        "upload": "Upload your resume",
+        "signIn": "Sign In",
+        "or": "or",
+        "register": "Register"
+    },
+    "jobList": {
+        "jobSearchAdvance": {
+            "job": "Job title, role, keywords,...",
+            "location": "Location",
+            "find": "Find Jobs"
+        },
+        "date": "Date posted",
+        "job": "Job types",
+        "minimum": "Minimum salary",
+        "maximum": "Maximum salary",
+        "domains": "Job domains",
+        "last24": "Last 24 hours",
+        "last3": "Last 3 days",
+        "last7": "Last 7 days",
+        "desired": "you desired per month",
+        "update": "Update",
+        "million": "million",
+        "total": "Total",
+        "jobs": "jobs",
+        "show": "Show",
+        "10page": "10 jobs/ page",
+        "20page": "20 jobs/ page",
+        "50page": "50 jobs/ page",
+        "jobAlert": {
+            "title": "Be the first to see new jobs via email",
+            "email": "Email address",
+            "noti": "You actived email to receive jobs alert from us via email",
+            "active": "Active",
+            "by": "By creating a job alert, you agree to our Terms. You can change your consent settings at any time by unsubscribing in Profile."
+        },
+        "mySearch": "My recent searches",
+        "clear": "» Clear searches",
+        "emptyJob": {
+            "no": "No job vacancies!",
+            "search": "Search suggestions:",
+            "try": "Try more general keywords",
+            "check": "Check your spelling",
+            "replace": "Replace abbreviations with the entire word"
+        },
+        "salary": "Salary",
+        "day": " day ago",
+        "days": " days ago",
+        "justAdd": "Just added",
+        "apply": "Apply Now",
+        "saveJob": "Save Job",
+        "deadline": "The deadline for submission",
+        "workType": "Work type",
+        "amount": "Amount"
+    }
 }

@@ -54,6 +54,12 @@ export const formatProvince = (provinces, provinceId) => {
   return province && province.province_name;
 };
 
+export const formatProvinceEn = (provinces, provinceId) => {
+  const province = provinces.find((p) => p.province_id === provinceId);
+
+  return province && province.province_name_en;
+};
+
 export const formatProvinceName = (province) => {
   let name;
   if (province && province.includes("Thành phố ")) {

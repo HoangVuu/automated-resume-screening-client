@@ -576,7 +576,7 @@ function MyProfile() {
         <div className="my-profile__resume__upload row">
           <div className="my-profile__resume__upload__left">
             <h4 className="profile-title">
-              Create a new resume from your FASTJOB Profile
+              Create a new resume from your FASTJOB Profile by
             </h4>
             <div className="my-profile__resume__upload__left__btn-gr row">
               <button
@@ -1139,12 +1139,6 @@ function MyProfile() {
                       {active ? "Active" : "Paused"}
                     </p>
 
-                    <span
-                      className="my-profile__resume__right-info__last"
-                      style={{ marginRight: "15px" }}
-                    >
-                      Frequency:
-                    </span>
                     <Form
                       layout="vertical"
                       name="nest-messages"
@@ -1155,8 +1149,15 @@ function MyProfile() {
                           value: frequency
                         }
                       ]}
+                      style={{display: 'flex', alignItems: 'center'}}
                     >
-                      <Form.Item className="col-sm" name="frequency">
+                    <span
+                      className="my-profile__resume__right-info__last"
+                      style={{ marginRight: "15px" }}
+                    >
+                      Frequency:
+                    </span>
+                      <Form.Item className="col-sm" name="frequency" style={{width: 'fit-content', marginBottom: '0'}}>
                         <Radio.Group
                           defaultValue={subcribe?.frequency}
                           onChange={(e) => setValueRadio(e.target.value)}

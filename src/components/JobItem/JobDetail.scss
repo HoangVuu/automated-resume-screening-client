@@ -2,13 +2,13 @@
   display: flex;
   flex-direction: column;
   flex: 0 1 684px;
-  width: 684px;
+  max-width: 684px;
   box-shadow: none;
   border-radius: 0.5rem;
   margin: 1rem 0 0 -0.5rem;
   transition: opacity 150ms ease-in-out;
   z-index: 1;
-
+  width: calc(100vw - 525px);
   position: absolute;
   top: 12px;
   height: calc(100% - 125px);
@@ -120,7 +120,7 @@
 }
 
 #vjs-jobinfo {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.25rem;
 }
 
@@ -128,7 +128,7 @@
   line-height: 1.25rem;
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 3px;
+  margin-bottom: 8px;
   margin-right: 30px;
 }
 

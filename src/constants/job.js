@@ -27,12 +27,6 @@ export const DATES = [
   { value: 7, label: "Last 7 days" }
 ];
 
-export const CONTACTS = [
-  { value: 0, label: "Full-time" },
-  { value: 1, label: "Part-time" },
-  { value: 2, label: "Intership" }
-];
-
 export const SORTS = [
   { value: 0, label: "Điểm trung bình" },
   { value: 1, label: "Điểm kỹ năng" },

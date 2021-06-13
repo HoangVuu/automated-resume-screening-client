@@ -1,29 +1,27 @@
 import React from "react";
 import "./SignInDirect.scss";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const SignInDirect = ({ isNeedCV = false }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="sign-direct">
       <h2 className="sign-direct__title">
         {isNeedCV
-          ? "Create a Profile to see tailored matches"
-          : " Sign in or register a Profile to see tailored matches"}
+          ? t("signInDirect.isNeedCV.create")
+          : t("signInDirect.isNeedCV.signIn")}
       </h2>
 
       <ul className="sign-direct__list">
         <li className="sign-direct__list__item">
-          Identify the skills you already have, based on your experience so far
+          {t("signInDirect.identify")}
         </li>
+        <li className="sign-direct__list__item">{t("signInDirect.see")}</li>
+        <li className="sign-direct__list__item">{t("signInDirect.rate")}</li>
         <li className="sign-direct__list__item">
-          See how your skill set could make you a match for different roles or
-          industries
-        </li>
-        <li className="sign-direct__list__item">
-          Rate your skills levels and what you enjoy to refine your options
-        </li>
-        <li className="sign-direct__list__item">
-          Discover ways to make a change or expand your horizons with new skills
+          {t("signInDirect.discover")}
         </li>
       </ul>
 
@@ -32,22 +30,18 @@ const SignInDirect = ({ isNeedCV = false }) => {
           <>
             {" "}
             <Link to="/profile" className="sign-direct__button__sign-in">
-              Upload your resume
+              {t("signInDirect.upload")}
             </Link>
-            {/* <p>or</p>
-            <Link to="/profile" className="sign-direct__button__register">
-             
-            </Link>{" "} */}
           </>
         ) : (
           <>
             {" "}
             <Link to="/sign-in" className="sign-direct__button__sign-in">
-              Sign In
+              {t("signInDirect.signIn")}
             </Link>
-            <p>or</p>
+            <p> {t("signInDirect.or")}</p>
             <Link to="/sign-up" className="sign-direct__button__register">
-              Register
+              {t("signInDirect.register")}
             </Link>{" "}
           </>
         )}

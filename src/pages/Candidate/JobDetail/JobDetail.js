@@ -18,6 +18,7 @@ import { Link, useLocation } from "react-router-dom";
 import JobSearchClick from "components/Forms/JobSearchClick/JobSearchClick";
 import { getJobDetail, saveJob } from "services/jobServices";
 import MissingSkill from "./MissingSkill";
+import { useTranslation } from "react-i18next";
 
 const DEFAULT = {
   apply: false,
@@ -25,6 +26,8 @@ const DEFAULT = {
 };
 
 const CandidateJobDetail = ({ history }) => {
+  const { t, i18n } = useTranslation();
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -110,6 +113,19 @@ const CandidateJobDetail = ({ history }) => {
     );
   };
 
+  const getDateDiff = (post) => {
+    let date =
+      getDiffTime(post) > 1
+        ? getDiffTime(post).toString() + t("jobList.days")
+        : getDiffTime(post).toString() + t("jobList.day");
+
+    if (getDiffTime(post) === 0) {
+      date = t("jobList.justAdd");
+    }
+
+    return date;
+  };
+
   useEffect(() => {
     setLoading(true);
 
@@ -184,12 +200,13 @@ const CandidateJobDetail = ({ history }) => {
                         {company_name}
                       </div>
                       <div className="text detail-page__province">
-                        {" "}
                         {getProvince()}
                       </div>
                     </div>
                     <div className="box">
-                      <a onClick={toggleModal}>Apply Now</a>
+                      <a style={{ fontSize: "17px" }} onClick={toggleModal}>
+                        Apply Now
+                      </a>
                       <span>
                         <button
                           className="state-picker-button"
@@ -231,7 +248,47 @@ const CandidateJobDetail = ({ history }) => {
                   </div>
 
                   <div className="JobDetail">
-                    {(diffTechSkills?.length || diffSoftSkills?.length) && (
+                    <div
+                      id="jobDetailsSection"
+                      className="job-detail-section-container"
+                      style={{
+                        paddingTop: "23px",
+                        marginLeft: "0",
+                        marginRight: "0"
+                      }}
+                    >
+                       
+                       <div className="job-detail-section-item">
+                        <div className="job-detail-section-itemKey text-bold">
+                        {t("jobList.deadline")}: 
+                        </div>
+                        <span>{format_date(deadline)}</span>
+                      </div>
+                      <div className="job-detail-section-item">
+                        <div className="job-detail-section-itemKey text-bold">
+                        {t("jobList.salary")}:
+                        </div>
+                        <span>{salary}</span>
+                      </div>
+                      <div className="job-detail-section-item">
+                        <div className="job-detail-section-itemKey text-bold">
+                        {t("jobList.workType")}:
+                        </div>
+                        <span>{contract_type}</span>
+                      </div>
+                      <div className="job-detail-section-item">
+                        <div className="job-detail-section-itemKey text-bold">
+                        {t("jobList.amount")}:
+                        </div>
+                        <span>
+                          {amount === 0
+                            ? "Không giới hạn số lượng"
+                            : `${amount} ứng viên`}
+                        </span>
+                      </div>
+                    </div>
+                    {((diffTechSkills && diffTechSkills?.length) ||
+                      (diffSoftSkills && diffSoftSkills?.length)) && (
                       <div style={{ marginTop: "25px" }}>
                         <h2 className="jobSectionHeader">
                           <b style={{ fontSize: "1.125rem" }}>
@@ -242,7 +299,7 @@ const CandidateJobDetail = ({ history }) => {
                           Here's how your resume aligns with the job description
                         </p>
 
-                        {diffTechSkills?.length && (
+                        {diffTechSkills && diffTechSkills?.length && (
                           <MissingSkill
                             title=" Your resume might be missing some technical skills"
                             skills={
@@ -252,7 +309,7 @@ const CandidateJobDetail = ({ history }) => {
                             }
                           />
                         )}
-                        {diffSoftSkills?.length && (
+                        {diffSoftSkills && diffSoftSkills?.length && (
                           <MissingSkill
                             title="Your resume might be missing some soft skills"
                             skills={
@@ -308,20 +365,17 @@ const CandidateJobDetail = ({ history }) => {
                     </div>
 
                     <div className="jobsearch-JobMetadataFooter">
-                      <div className="icl-u-textColor--success">
+                      <strong className="icl-u-textColor--success">
                         {company_name}
-                      </div>
-                      <div>
-                        {getDiffTime(posted_in) > 1
-                          ? getDiffTime(posted_in).toString() + " days"
-                          : getDiffTime(posted_in).toString() + " day"}{" "}
-                        ago
+                      </strong>
+                      <div style={{ marginTop: "5px" }}>
+                        {getDateDiff(posted_in)}
                       </div>
                       <div
                         id="originalJobLinkContainer"
                         className="icl-u-lg-inline icl-us-xs-hide"
                       >
-                        <p>Original job</p>
+                        <p style={{ paddingTop: "5px" }}>Original job</p>
                       </div>
                       <div>
                         <div>
@@ -372,11 +426,7 @@ const CandidateJobDetail = ({ history }) => {
                                     Get job updates from {company_name}
                                   </div>
                                   <div className="name-rating">
-                                    <a
-                                      className="jobsearch-CompanyAvatar-companyLink"
-                                      href=""
-                                      target="_blank"
-                                    >
+                                    <a className="jobsearch-CompanyAvatar-companyLink">
                                       {company_name}
                                     </a>
                                     <div className="rating">
@@ -385,7 +435,7 @@ const CandidateJobDetail = ({ history }) => {
                                           <div
                                             className="icl-Ratings-starsFilled"
                                             style={{
-                                              width: "61.80000114440918px"
+                                              width: "84.8px"
                                             }}
                                           ></div>
                                         </div>

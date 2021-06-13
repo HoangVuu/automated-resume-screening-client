@@ -22,8 +22,6 @@ function Header() {
     i18n.changeLanguage(lang);
   };
 
-  console.log("i18", i18n);
-
   const onEnglish = () => {
     handleClick("en");
     localStorage.setItem("lang", "en");
@@ -45,7 +43,16 @@ function Header() {
   };
 
   useEffect(() => {
-    handleClick(localStorage.getItem("lang"));
+    const langCur = localStorage.getItem("lang");
+    if (langCur) {
+      handleClick(langCur);
+    } else {
+      if (i18n.language === "en") {
+        localStorage.setItem("lang", "en");
+      } else {
+        localStorage.setItem("lang", "vi");
+      }
+    }
   }, []);
 
   return (
@@ -54,15 +61,15 @@ function Header() {
         <div className="container">
           <nav className="navbar navbar-expand-lg header__navbar">
             {/* Header section */}
-            <div className="header__navbar-brand-wrapper">
+            <div
+              className="header__navbar-brand-wrapper"
+              style={{ width: "30%" }}
+            >
               <Link
                 to={`${recruiter ? "/recruiter/home" : "/"}`}
                 className="navbar-brand header__navbar-brand"
-                style={{ width: "fit-content" }}
               >
-                <h3>
-                  Automated&nbsp;<span>Screening</span>
-                </h3>
+                <img src="/assets/img/main-logo.jpg" />
               </Link>
             </div>
 
@@ -102,12 +109,7 @@ function Header() {
                   </li>
                 </ul>
               )}
-              {/* <button >English</button>
-              <button onClick={() => handleClick("vn")}>Vietnamese</button> */}
             </div>
-
-            {/* <p>{t("Thanks.a")}</p>
-            <p>{t("Why.a")}</p> */}
           </nav>
         </div>
       </div>

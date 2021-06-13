@@ -14,9 +14,9 @@ export const NAVIGATIONS = [
 ];
 
 export const CANDIDATE_NAV = [
-  { title: "Job Search", url: "/find-jobs", link: true, isCareer: false },
-  { title: "Profile", url: "/profile", link: true, isCareer: false },
-  { title: "Career Advice", url: "/career-advice", link: true, isCareer: true }
+  { title: "jobSearch", url: "/find-jobs", link: true, isCareer: false },
+  { title: "profile", url: "/profile", link: true, isCareer: false },
+  { title: "careerAdvice", url: "/career-advice", link: true, isCareer: true }
 ];
 
 export const CANDIDATE_NAV_EXTEND = [

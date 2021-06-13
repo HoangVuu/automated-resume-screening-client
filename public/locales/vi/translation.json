@@ -1,8 +1,131 @@
 {
-  "Thanks": {
-    "a": "Cảm ơn nhiều"
-  },
-  "Why": {
-    "a": "Vì đã xem"
-  }
+    "header": {
+        "jobSearch": "Việc làm IT",
+        "profile": "Hồ sơ",
+        "careerAdvice": "Lời khuyên Việc làm",
+        "savedJob": "Việc làm đã lưu",
+        "appliedJob": "Việc làm đã ứng tuyến",
+        "logOut": "Đăng xuất",
+        "logIn": "Đăng nhập",
+        "employer": "Nhà tuyển dụng"
+    },
+    "candidateSignIn": {
+        "areYou": "Bạn là nhà tuyển dụng?",
+        "signIn": "Đăng nhập",
+        "form": {
+            "email": "Địa chỉ email",
+            "enterEmail": "Nhập email...",
+            "password": "Mật khẩu",
+            "enterPassword": "Nhập mật khẩu...",
+            "signIn": "Đăng nhập"
+        },
+        "doNot": "Không có tài khoản?",
+        "register": "Đăng ký"
+    },
+    "home": {
+        "Just": "Hãy khám phá và sau đó ứng tuyển",
+        "Find": "Tìm công việc mơ ước của bạn một cách nhanh chóng",
+        "Popular": "Vị trí phổ biến",
+        "jobSearch": {
+            "Please": "Vui lòng chọn vị trí mà bạn muốn ứng tuyển",
+            "location": "Vị trí",
+            "full": "Toàn thời gian",
+            "part": "Bán thời gian",
+            "internship": "Thực tập"
+        },
+        "location": "Địa điểm làm việc..."
+    },
+    "careerAdvice": {
+        "tab1": "Khám phá việc làm có thể phù hợp với các kĩ năng của tôi",
+        "tab2": "Tìm công việc phù hợp cho tôi",
+        "titleBig": "Làm thế nào để chọn các kỹ năng của bạn cho công việc?",
+        "titleSmall": "Khám phá các vị trí có thể phù hợp với bạn dựa trên kỹ năng và kinh nghiệm của bạn",
+        "contentTitle": "Sự nghiệp của bạn cho đến nay",
+        "contentKey": "Các kỹ năng chính",
+        "lookingFor": "Tìm kiếm một vị trí hoặc kỹ năng cụ thể?",
+        "findOut": "Tìm hiểu thêm về vị trí hoặc kỹ năng mà bạn quan tâm.",
+        "whatRole": "Bạn muốn tham gia vào vị trí công việc nào?",
+        "form": {
+            "enterRole": "Nhập một vị trí công việc...",
+            "explore": "Tìm hiểu"
+        },
+        "searchSuggest": {
+            "enter": "Nhập một kỹ năng...",
+            "what": "Bạn muốn tập trung vào kỹ năng nào?"
+        }
+    },
+    "findJob": {
+        "hi": "Xin chào",
+        "ready": "bạn đã sẵn sàng khám phá lời khuyên và các lựa chọn nghề nghiệp phù hợp với bạn chưa?",
+        "find": "Tìm công việc phù hợp cho tôi",
+        "noToken": {
+            "signIn": "Đăng nhập hoặc đăng ký Hồ sơ để tìm được công việc phù hợp cho bạn",
+            "signInBtn": "Đăng nhập",
+            "or": "hoặc",
+            "register": "Đăng ký"
+        }
+    },
+    "signInDirect": {
+        "isNeedCV": {
+            "create": "Tạo hồ sơ để xem các kết quả phù hợp",
+            "signIn": "Đăng nhập hoặc đăng ký Hồ sơ để xem các kết quả tương thích phù hợp"
+        },
+        "identify": "Xác định các kỹ năng bạn đã có, dựa trên kinh nghiệm của bạn cho đến nay",
+        "see": "Bộ kỹ năng của bạn có thể phù hợp với các vị trí hoặc ngành nghề khác nhau",
+        "rate": "Đánh giá kỹ năng của bạn và những gì bạn thích để tinh chỉnh các tùy chọn của bạn",
+        "discover": "Khám phá những cách tạo thay đổi hoặc mở rộng tầm nhìn của bạn với các kỹ năng mới",
+        "upload": "Tải lên hồ sơ của bạn",
+        "signIn": "Đăng nhập",
+        "or": "hoặc",
+        "register": "Đăng ký"
+    },
+    "jobList": {
+        "jobSearchAdvance": {
+            "job": "Mô tả công việc, vị trí ứng tuyển, từ khóa,...",
+            "location": "Vị trí",
+            "find": "Tìm việc"
+        },
+        "date": "Ngày đăng",
+        "job": "Loại công việc",
+        "minimum": "Mức lương tối thiểu",
+        "maximum": "Mức lương tối đa",
+        "domains": "Vị trí ứng tuyển",
+        "last24": "24 giờ qua",
+        "last3": "3 ngày qua",
+        "last7": "7 ngày qua",
+        "desired": "bạn mong muốn mỗi tháng",
+        "update": "Cập nhập",
+        "million": "triệu",
+        "total": "Tổng cộng",
+        "jobs": "việc làm",
+        "show": "Hiển thị",
+        "10page": "10 tin/ trang",
+        "20page": "20 tin/ trang",
+        "50page": "50 tin/ trang",
+        "jobAlert": {
+            "title": "Hãy là người đầu tiên nhận thông báo công việc mới qua email",
+            "email": "Địa chỉ email",
+            "noti": "Bạn đã kích hoạt email này để nhận thông báo việc làm thông qua email",
+            "active": "Kích hoạt",
+            "by": "Bằng cách kích hoạt thông báo việc làm, bạn đồng ý với điều khoản của chúng tôi. Bạn có thể thay đổi cài đặt đồng ý của mình bất kỳ lúc nào bằng cách hủy đăng ký trong thông tin chi tiết hồ sơ"
+        },
+        "mySearch": "Các tìm kiếm gần đây",
+        "clear": "» Xóa các tìm kiếm",
+        "emptyJob": {
+            "no": "Không có vị trí tuyển dụng!",
+            "search": "Gợi ý tìm kiếm:",
+            "try": "Thử những từ khóa thông thường hơn",
+            "check": "Thử những từ khóa thông thường hơn",
+            "replace": "Thay những từ viết tắt bằng những từ gốc"
+        },
+        "salary": "Lương",
+        "day": " ngày trước",
+        "days": " ngày trước",
+        "justAdd": "Vừa mới đăng",
+        "apply": "Ứng tuyển ngay",
+        "saveJob": "Lưu tin",
+        "deadline": "Hạn nộp hồ sơ",
+        "workType": "Hình thức làm việc",
+        "amount": "Số lượng cần tuyển"
+    }
 }
