@@ -92,12 +92,19 @@
       font-size: 16px;
       text-shadow: none;
 
-      &:hover,
-      &:focus {
+      &:hover {
         background-color: #5c6ed4;
         color: #fff;
       }
     }
+  }
+
+  .applied {
+    cursor: none;
+    background-color: #5c6ed4;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 
   .job-title {

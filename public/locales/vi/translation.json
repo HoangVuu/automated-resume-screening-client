@@ -150,32 +150,95 @@
         "lookingBySkill": "Kĩ năng nào mà bạn muốn tập trung tới?",
         "explore": "Khám phá",
         "sorry": "Xin lỗi, chúng tôi không thể tìm kiếm phù hợp với đề xuất",
-        "self": "Tự đánh giá các kỹ năng của các vai trò trước đây của bạn để xem các cơ hội phù hợp"
+        "self": "Tự đánh giá các kỹ năng của các vai trò trước đây của bạn để xem các cơ hội phù hợp",
+        "minimum": "Mức lương chung tối thiểu",
+        "maximum": "Mức lương chung tối đa"
     },
     "matchedJob": {
-        "match skills": "Những kĩ năng phù hợp với bạn",
-        "numberSkillMatch": "Tìm hiểu xem bạn phù hợp ra sao"
+        "matchSkills": "Những kĩ năng của bạn phù hợp",
+        "numberSkillMatch": "Xem bạn phù hợp thế nào"
     },
     "matchedJobDetail": {
-        "header": "Các kỹ năng phù hợp với vai trò trước đây và của một Developer FullStack.",
-        "bigTitle": "Các từ khoá kỹ năng và kinh nghiệm",
-        "numberOfSkillMatch": "Các vai trò trước của bạn có {0} khoá kỹ năng và kinh nghiệm phù hợp.",
-        "moreAboutCareer": "Tìm hiểu thêm về cơ hội nghề nghiệp này"
+        "header": "Các kỹ năng phù hợp với vị trí ứng tuyển trước đó và của một ",
+        "bigTitle": "Các kỹ năng chính và kinh nghiệm",
+        "numberOfSkillMatch": "Các vị trí ứng tuyển trước đó của bạn có ",
+        "numberOfSkillMatch2": " kỹ năng chính và kinh nghiệm trùng khớp.",
+        "moreAboutCareer": "Tìm hiểu thêm về cơ hội nghề nghiệp này",
+        "close": "Đóng"
     },
-    "findJobSignIn":{
-        "hi":"Chào bạn,",
-        "ready":"bạn đã sẵn sàng khám phá những lời giới thiệu và cơ hội nghề nghiệp phù hợp với bạn chưa?",
-        "role":"Tìm kiếm những những điều mà bạn đang quan tâm",
-        "findLocation":"Vị trí ưu tiên",
-        "bigTitle":"Tìm hiểu những điều bạn cần biết về một vai trò, từ mức lương cho đến mức độ hài lòng trong công việc.",
-        "smallTitle":"Nhận một vai trò mà bạn quan tâm để xem thêm.",
-        "great":"Tuyệt vời, bạn đang quan tâm tới vị trí {0} .",
-        "location":"Tìm hiểu thêm về vị trí này và những vị trí khác tương tự trong {0} .",
-        "detail":{
-            "numberOfJob":"Số lượng công việc hiện có trên website",
-            "minSalary":"Thu nhập bình quân tối thiểu",
-            "maxSalray":"Thu nhập bình quân tối đa",
-            "satisfaction":"Mức độ hài lòng với công việc"
-        }
+    "findJobSignIn": {
+        "role": "Vị trí mà bạn quan tâm cho việc ứng tuyển",
+        "findLocation": "Địa điểm ưu tiên",
+        "bigTitle": "Tìm hiểu những điều bạn cần biết về một vai trò, từ mức lương cho đến mức độ hài lòng trong công việc.",
+        "smallTitle": "Nhận một vai trò mà bạn quan tâm để xem thêm.",
+        "great": "Tuyệt vời, bạn đang quan tâm tới vị trí ",
+        "location": "Tìm hiểu rõ về vị trí này và những vị trí khác tương tự ở ",
+        "detail": {
+            "numberOfJob": "Các công việc hiện có trên website",
+            "minSalary": "Thu nhập bình quân tối thiểu",
+            "maxSalray": "Thu nhập bình quân tối đa",
+            "satisfaction": "Mức độ hài lòng công việc"
+        },
+        "update": "Cập nhật tùy chọn của bạn"
+    },
+    "profile": {
+        "editBtn": "Chỉnh sửa thông tin cá nhân",
+        "edit": "Chỉnh sửa chi tiết thông tin cá nhân",
+        "email": "Địa chỉ email",
+        "fullName": "Tên đầy đủ",
+        "phone": "Số điện thoại",
+        "dateOfBirth": "Ngày sinh",
+        "gender": "Giới tính",
+        "male": "Name",
+        "female": "Nữ",
+        "live": "Sống tại",
+        "save": "Lưu",
+        "cancel": "Hủy",
+        "title": "Tạo một CV mới từ thông tin cá nhân trên FASTJOB bằng cách",
+        "uploadTitle": "Tải lên CV của bạn",
+        "edu": "Trình độ học vấn",
+        "editEdu": "Chỉnh sửa học vấn",
+        "ex": "Kinh nghiệm thực tế",
+        "editEx": "Chỉnh sửa kinh nghiệm",
+        "months": "tháng",
+        "month": "tháng",
+        "skill": "Kỹ năng",
+        "addSkill": "Thêm kỹ năng",
+        "addSkillPlace": "Thêm một kỹ năng mềm...",
+        "addSSkill": "Thêm kỹ năng mềm",
+        "click": "Nhấn để nhiều kĩ năng để giúp nhà tuyển dụng tìm bạn.",
+        "clickS": "Nhấn để thêm nhiều kĩ năng mềm để giúp nhà tuyển dụng tìm bạn.",
+        "softSkill": "Kỹ năng mềm",
+        "resume": "Sơ yếu lý lịch",
+        "aboutRe": "Về sơ yếu lý lịch",
+        "watch": "Xem online",
+        "download": "Tải lên",
+        "delete": "Xóa",
+        "default": "Mặc định",
+        "add": "Added",
+        "days": "ngày trước",
+        "day": "ngày trước",
+        "justAdded": "Vừa mới thêm",
+        "done": "Xong"
+    },
+    "profileSetting": {
+        "bigHeader": "Tầm nhìn hồ sơ",
+        "headerDetail": "Hồ sơ của bạn tồn tại duy nhất trên hệ thống, nhà tuyển dụng có thể tiếp cận bạn với một cơ hội việc làm dành cho bạn.",
+        "standardHeader": "Tiêu chuẩn",
+        "standarđetail": "Với tất cả thông tin mà bạn đã cung cấp, hồ sơ của bạn bao gồm bất kỳ thông tin đăng nhập nào đã được xác minh sẽ được gửi đến nhà tuyển dụng cùng với các ứng dụng của bạn."
+    },
+    "jobInvitation": {
+        "bigHeader": "Tiếp nhận lời mời việc làm",
+        "detailHeader": "Thông báo việc làm qua Email",
+        "active": "Đang hoạt động",
+        "paused": "Đã tạm dừng",
+        "in": "tại",
+        "frequency": "Tần suất",
+        "frequencyDetail": {
+            "daily": "Hằng ngày",
+            "weekly": "Hằng tuần"
+        },
+        "another": "Chọn chủ đề khác",
+        "delete": "Xoá thông báo"
     }
 }

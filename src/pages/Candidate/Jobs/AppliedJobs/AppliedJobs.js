@@ -11,12 +11,13 @@ import { Tooltip, Pagination } from "antd";
 import Loading from "components/Loading/Loading";
 import { Input } from "antd";
 import swal from "sweetalert";
-import { addAppliedNote, deleteAppliedNote } from "services/candidateServices";
+import { addJobNote, deleteJobNote, candidateUnapply } from "services/candidateServices";
 
 function CandidateAppliedJobs() {
   const [jobs, setJobs] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
+  const [unApplied, setUnapplied] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const { token } = useSelector((state) => state.auth.candidate);
@@ -83,7 +84,36 @@ function CandidateAppliedJobs() {
     if (province_list.length) {
       fetchJobs();
     }
-  }, [page, province_list]);
+  }, [page, province_list, unApplied]);
+
+  
+  const handleUnapply = async (job_id) => {
+    swal({
+      title: "Are you sure unapply this job?",
+      text: "You'll delete this job from applied jobs list!",
+      icon: "warning",
+      buttons: ["Cancel", "Delete"],
+      dangerMode: true
+    })
+      .then(async (willDelete) => {
+        if (willDelete) {
+          await candidateUnapply(job_id, token)
+            .then((res) => {
+              setUnapplied(unApplied + 1);
+              toast({
+                type: "success",
+                message: "Unapply job successful"
+              });
+            })
+            .catch((err) => {
+              toastErr(err);
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="container saved-jobs" style={{ marginTop: 20 }}>
@@ -96,7 +126,6 @@ function CandidateAppliedJobs() {
             <div style={{ width: "100%" }}>
               <div
                 className="box box--white"
-                // id="box-result"
                 style={{ borderBottom: "6px solid #0d3880" }}
               >
                 <div className="search-meta">
@@ -119,6 +148,7 @@ function CandidateAppliedJobs() {
                       {...job}
                       token={token}
                       lastChild={index === jobs.length - 1}
+                      handleUnapply = {handleUnapply}
                     />
                   ))}
               </div>
@@ -153,7 +183,8 @@ const Job = ({
   description,
   id,
   note,
-  token
+  token,
+  handleUnapply
 }) => {
   const { TextArea } = Input;
 
@@ -171,7 +202,7 @@ const Job = ({
     })
       .then(async (willDelete) => {
         if (willDelete) {
-          await deleteAppliedNote(id,token)
+          await deleteJobNote(id,token)
             .then((res) => {
               setCurrentNote(null);
               toast({
@@ -192,7 +223,7 @@ const Job = ({
   const onSaveNote = async () => {
     setIsOpen(true);
 
-    await addAppliedNote(noteValue, id, token)
+    await addJobNote(noteValue, id, token)
       .then((res) => {
         console.log('note', res.data.data.note)
         
@@ -345,7 +376,7 @@ const Job = ({
               fontSize: "15px",
               paddingBottom: "30px"
             }}
-            // onClick={() => handleUnsaved(id)}
+            onClick={() => handleUnapply(id)}
           >
             <i className="fa fa-trash mr-10"></i>
             Remove job

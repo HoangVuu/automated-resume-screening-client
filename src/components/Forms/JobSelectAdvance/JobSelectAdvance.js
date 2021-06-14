@@ -8,11 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import SelectWithSearch from "components/SelectWithSearch/SelectWithSearch";
 import qs from "query-string";
-import Select from "components/Select/Select";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { GET_JOB_DOMAIN } from "state/reducers/jobDomainReducer";
-import { requireField } from "utils/formValidate";
+import { useTranslation } from "react-i18next";
+ 
 function JobSelectAdvance({ handleSubmit }) {
+  const { t } = useTranslation();
+
   const [state, setState] = useState({
     loading: false,
     fetch: false,
@@ -61,7 +63,7 @@ function JobSelectAdvance({ handleSubmit }) {
             component={CustomSelect}
             name="job_title"
             className="col-sm-6 pr-10"
-            placeholder="Role you’re interested in applying for"
+            placeholder={t("findJobSignIn.role")}
             options={jobDomains}
             icon={<SearchOutlined style={{ color: "#555" }} />}
             isClearable={true}
@@ -70,7 +72,7 @@ function JobSelectAdvance({ handleSubmit }) {
             component={CustomSelect}
             name="location"
             className="col-sm-6"
-            placeholder="Preferred location"
+            placeholder={t("findJobSignIn.findLocation")}
             options={options}
             icon={<FontAwesomeIcon icon={faMapMarkerAlt} color="#555" />}
             isClearable={true}

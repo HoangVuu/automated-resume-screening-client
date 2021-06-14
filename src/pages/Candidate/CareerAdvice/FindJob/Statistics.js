@@ -8,19 +8,30 @@ import {
 import React, { useEffect, useState } from "react";
 import "./Statistics.scss";
 import { numberToArray } from "utils/index";
+import { useTranslation } from "react-i18next";
 
 const Statistics = ({ total, min, max }) => {
+  const { t, i18n } = useTranslation();
+
   return (
     <div className="statistics">
       <div className="statistics__item">
         <p className="statistics__item__number">
           {total > 0 && total < 10
             ? "0" + total?.toString()
-            : total?.toString() || 10.234}
+            : total?.toString() || 112}
         </p>
         <div className="statistics__item__text">
-          Jobs on website right <br />
-          now
+          {i18n.language === "en" ? (
+            <>
+              Jobs on <strong>FASTJOB</strong> right <br />
+              now
+            </>
+          ) : (
+            <>
+              Công việc hiện có trên <strong>FASTJOB</strong> <br/> ngay bây giờ
+            </>
+          )}
         </div>
       </div>
 
@@ -30,8 +41,16 @@ const Statistics = ({ total, min, max }) => {
           {min || 500}
         </p>
         <div className="statistics__item__text">
-          Minimum common <br />
-          salary
+          {i18n.language === "en" ? (
+            <>
+              Minimum common <br />
+              salary
+            </>
+          ) : (
+            <>
+              Thu nhập bình quân <br /> tối thiểu
+            </>
+          )}
         </div>
       </div>
 
@@ -41,19 +60,24 @@ const Statistics = ({ total, min, max }) => {
           {max || 7000}{" "}
         </p>
         <div className="statistics__item__text">
-          Maximum common <br />
-          salary
+          {i18n.language === "en" ? (
+            <>
+              Maximum common <br />
+              salary
+            </>
+          ) : (
+            <>
+              Thu nhập bình quân <br /> tối đa
+            </>
+          )}
         </div>
       </div>
 
       <div className="statistics__item">
-        <p className="statistics__item__number">3.212</p>
-        <div className="statistics__item__text">Job satisfaction</div>
-        {numberToArray(4).map((item, i) => (
+        <p className="statistics__item__number">79</p>
+        <div className="statistics__item__text">{t("findJobSignIn.detail.satisfaction")}</div>
+        {numberToArray(5).map((item, i) => (
           <StarFilled className="statistics__item__icon-fill" key={i} />
-        ))}
-        {numberToArray(1).map((item, i) => (
-          <StarTwoTone twoToneColor="#F57C00" key={i} />
         ))}
       </div>
     </div>

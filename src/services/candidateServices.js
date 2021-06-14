@@ -14,32 +14,22 @@ export const candidateApply = async (jp_id, resume_id, token) =>
     }
   );
 
-// Saved Note
-export const addSavedNote = async (note, jp_id, token) =>
-  await API.post(
-    `/job-posts/${jp_id}/save/note`,
-    { note },
-    {
-      headers: { Authorization: `Bearer ${token}` }
-    }
-  );
-
-export const deleteSavedNote = async (jp_id, token) =>
-  await API.delete(`/job-posts/${jp_id}/save/note`, {
+export const candidateUnapply = async (jp_id, token) =>
+  await API.delete(`/job-posts/${jp_id}/unapply`, {
     headers: { Authorization: `Bearer ${token}` }
   });
 
-//Applied Note
-export const addAppliedNote = async (note, jp_id, token) =>
+// Saved Note
+export const addJobNote = async (note, jp_id, token) =>
   await API.post(
-    `/job-posts/${jp_id}/apply/note`,
+    `/job-posts/${jp_id}/note`,
     { note },
     {
       headers: { Authorization: `Bearer ${token}` }
     }
   );
 
-export const deleteAppliedNote = async (jp_id, token) =>
-  await API.delete(`/job-posts/${jp_id}/apply/note`, {
+export const deleteJobNote = async (jp_id, token) =>
+  await API.delete(`/job-posts/${jp_id}/note`, {
     headers: { Authorization: `Bearer ${token}` }
   });

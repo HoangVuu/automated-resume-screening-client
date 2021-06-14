@@ -15,7 +15,7 @@ import { toast, toastErr } from "utils/index";
 import Loading from "components/Loading/Loading";
 import { Input } from "antd";
 import swal from "sweetalert";
-import { addSavedNote, deleteSavedNote } from "services/candidateServices";
+import { addJobNote, deleteJobNote } from "services/candidateServices";
 
 function CandidateSavedJobs() {
   const [jobs, setJobs] = useState([]);
@@ -49,7 +49,8 @@ function CandidateSavedJobs() {
           job_title,
           description
         },
-        note
+        note,
+        is_applied
       }) => {
         const province_names = provinces.map((id) => {
           const p = province_list.find((p) => p.province_id === id);
@@ -67,7 +68,8 @@ function CandidateSavedJobs() {
           company_logo,
           job_id,
           description,
-          note
+          note,
+          is_applied
         };
       }
     );
@@ -97,13 +99,30 @@ function CandidateSavedJobs() {
   }, [page, province_list, unsaved]);
 
   const handleUnsaved = async (job_id) => {
-    await saveJob(job_id, 0, token)
-      .then(() => {
-        setUnsaved(unsaved + 1);
-        toast({ message: "Bỏ lưu thành công" });
+    swal({
+      title: "Are you sure unsave this job?",
+      text: "You'll delete this job from saved jobs list!",
+      icon: "warning",
+      buttons: ["Cancel", "Delete"],
+      dangerMode: true
+    })
+      .then(async (willDelete) => {
+        if (willDelete) {
+          await saveJob(job_id, 0, token)
+            .then((res) => {
+              setUnsaved(unsaved + 1);
+              toast({
+                type: "success",
+                message: "Unsave job successful"
+              });
+            })
+            .catch((err) => {
+              toastErr(err);
+            });
+        }
       })
       .catch((err) => {
-        toastErr(err);
+        console.log(err);
       });
   };
 
@@ -173,13 +192,14 @@ const Job = ({
   token,
   handleUnsaved,
   description,
-  note
+  note,
+  is_applied
 }) => {
   const { TextArea } = Input;
 
   const [isOpen, setIsOpen] = useState(false);
   const [noteValue, setNoteValue] = useState();
-  const [currentNote, setCurrentNote] = useState(note)
+  const [currentNote, setCurrentNote] = useState(note);
 
   const onDeleteNote = () => {
     swal({
@@ -191,7 +211,7 @@ const Job = ({
     })
       .then(async (willDelete) => {
         if (willDelete) {
-          await deleteSavedNote(job_id,token)
+          await deleteJobNote(job_id, token)
             .then((res) => {
               setCurrentNote(null);
               toast({
@@ -202,7 +222,7 @@ const Job = ({
             .catch((err) => {
               console.log(err);
             });
-        } 
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -212,13 +232,13 @@ const Job = ({
   const onSaveNote = async () => {
     setIsOpen(true);
 
-    await addSavedNote(noteValue, job_id, token)
+    await addJobNote(noteValue, job_id, token)
       .then((res) => {
-        console.log('note', res.data.data.note)
-        
+        console.log("note", res.data.data.note);
+
         toast({ message: "Add Notes successfull" });
-        setCurrentNote(res.data.data.note)
-        setIsOpen(false)
+        setCurrentNote(res.data.data.note);
+        setIsOpen(false);
       })
       .catch((err) => {
         toastErr(err);
@@ -340,7 +360,7 @@ const Job = ({
                 </div>
               </>
             ) : (
-               currentNote && (
+              currentNote && (
                 <>
                   <div className="note-job__content__edit">
                     <strong style={{ fontSize: "16px" }}>Notes</strong>
@@ -350,7 +370,10 @@ const Job = ({
                     >
                       Edit
                     </div>
-                    <div className="note-job__content__button__text" onClick={onDeleteNote}>
+                    <div
+                      className="note-job__content__button__text"
+                      onClick={onDeleteNote}
+                    >
                       Delete
                     </div>
                   </div>
@@ -360,14 +383,20 @@ const Job = ({
             )}
           </div>
         </div>
-        
+
         <div className="col-sm-2 job-button-group">
-          <button
-            className="view-apply-button saved-job__apply"
-            onClick={toggleModal}
-          >
-            Apply now
-          </button>
+          {is_applied ? (
+            <button className="view-apply-button saved-job__apply applied">
+              Applied
+            </button>
+          ) : (
+            <button
+              className="view-apply-button saved-job__apply"
+              onClick={toggleModal}
+            >
+              Apply now
+            </button>
+          )}
           <div className="box-save-job">
             <button
               className="btn-unsave unsave"
@@ -384,16 +413,16 @@ const Job = ({
             </button>
           </div>
         </div>
-      </div>
 
-      <ApplyModal
-        visible={show}
-        onCancel={toggleModal}
-        company_name={company_name}
-        job_title={job_title}
-        token={token}
-        jp_id={job_id}
-      />
+        <ApplyModal
+          visible={show}
+          onCancel={toggleModal}
+          company_name={company_name}
+          job_title={job_title}
+          token={token}
+          jp_id={job_id}
+        />
+      </div>
     </>
   );
 };

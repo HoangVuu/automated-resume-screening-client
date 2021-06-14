@@ -150,32 +150,95 @@
         "lookingBySkill": "What skill do you want to focus on?",
         "explore": "Explore",
         "sorry": "Sorry, we’re unable to match you with suggestions",
-        "self": "Self evaluate skills of your previous roles to see matching opportunities"
+        "self": "Self evaluate skills of your previous roles to see matching opportunities",
+        "minimum": "Minimum common salary",
+        "maximum": "Maximum common salary"
     },
-    "matchedJob":{
-        "match skills":"Your skills match.",
-        "numberSkillMatch":"See how you match"
+    "matchedJob": {
+        "matchSkills": "Your skills match",
+        "numberSkillMatch": "See how you match"
     },
-    "matchedJobDetail":{
-        "header":"Skill overlaps with your previous roles and Fullstack Developer",
-        "bigTitle":"Key skills and experience",
-        "numberOfSkillMatch":"Your previous roles have {0} overlapping key skills and experience.",
-        "moreAboutCareer":"Learn more about this career"
+    "matchedJobDetail": {
+        "header": "Skill overlaps with your previous roles and Fullstack Developer",
+        "bigTitle": "Key skills and experience",
+        "numberOfSkillMatch": "Your previous roles have",
+        "numberOfSkillMatch2": "overlapping key skills and experience.",
+        "moreAboutCareer": "Learn more about this career",
+        "close": "Close"
     },
-    "findJobSignIn":{
-        "hi":"Hi there,",
-        "ready":"ready to explore advice and career options tailored to you?",
-        "role":"Find you're interested in applying for",
-        "findLocation":"Preferred location",
-        "bigTitle":"Learn what you need to know about a role, from salary to job satisfaction.",
-        "smallTitle":"Get a role  you're interested in to see more.",
-        "great":"Great, you're interested in {0} role.",
-        "location":"Find out the facts about this role and others like it in {0} .",
-        "detail":{
-            "numberOfJob":"Jobs on website right now",
-            "minSalary":"Minimum common salary",
-            "maxSalray":"Maximum common salary",
-            "satisfaction":"Job satisfaction"
-        }
+    "findJobSignIn": {
+        "role": "Role you're interested in applying for",
+        "findLocation": "Preferred location",
+        "bigTitle": "Learn what you need to know about a role, from salary to job satisfaction.",
+        "smallTitle": "Get a role  you're interested in to see more.",
+        "great": "Great, you're interested in",
+        "location": "Find out the facts about this role and others like it in ",
+        "detail": {
+            "numberOfJob": "Jobs on website right now",
+            "minSalary": "Minimum common salary",
+            "maxSalray": "Maximum common salary",
+            "satisfaction": "Job satisfaction"
+        },
+        "update": "Update your preferences"
+    },
+    "profile": {
+        "editBtn": "Edit personal details",
+        "edit": "Edit personal details",
+        "email": "Email address",
+        "fullName": "Fullname",
+        "phone": "Phone",
+        "dateOfBirth": "Date of birth",
+        "gender": "Gender",
+        "male": "Male",
+        "female": "Female",
+        "live": "Lives in",
+        "save": "Save",
+        "cancel": "Cancel",
+        "title": "Create a new resume from your FASTJOB Profile by",
+        "uploadTitle": "Upload your resume",
+        "edu": "Education",
+        "editEdu": "Edit education",
+        "ex": "Experience",
+        "editEx": "Edit experience",
+        "months": "months",
+        "month": "month",
+        "skill": "Skills",
+        "addSkill": "Add skill",
+        "addSkillPlace": "Add soft skill...",
+        "addSSkill": "Add soft skill",
+        "click": "Click add to add more skills help employers find you.",
+        "clickS": "Click add to add more soft skills help employers find you.",
+        "softSkill": "Soft Skills",
+        "resume": "Resume",
+        "aboutRe": "About resume",
+        "watch": "Watch online",
+        "download": "Download",
+        "delete": "Delete",
+        "default": "Default",
+        "add": "Đã thêm",
+        "days": "days",
+        "day": "day",
+        "justAdded": "Just added",
+        "done": "Done"
+    },
+    "profileSetting": {
+        "bigHeader": "Profile Visibility",
+        "headerDetail": "Your profile is the only one in system, recruiters can approach you with job opportunities.",
+        "standardHeader": "Standard",
+        "standarđetail": "For all information you provided, your Profile including any verified credentials will be sent to the recruiters with your applications."
+    },
+    "jobInvitation": {
+        "bigHeader": "Receive Job Invitaion",
+        "detailHeader": "Job Alert Email",
+        "active": "Active",
+        "paused": "Paused",
+        "in": "in",
+        "frequency": "Frequency",
+        "frequencyDetail": {
+            "daily": "Daily",
+            "weekly": "Weekly"
+        },
+        "another": "Get another topic",
+        "delete": "Delete this alert"
     }
 }

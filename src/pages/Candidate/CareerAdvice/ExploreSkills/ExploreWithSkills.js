@@ -17,8 +17,8 @@ import history from "state/history";
 import { exploreSkillsProAction } from "state/actions/candidateJobAction";
 import ContentLoader from "react-content-loader";
 import AddSkillSuggest from "components/AddSkillSuggest/AddSkillSuggest";
-import { useTranslation } from "react-i18next";
 import MatchSkillNone from "./MatchSkillNone";
+import { useTranslation } from "react-i18next";
 
 const ExploreWithSkills = ({ profile }) => {
   const { t, i18n } = useTranslation();
@@ -33,6 +33,7 @@ const ExploreWithSkills = ({ profile }) => {
 
   const [loading, setLoading] = useState(false);
   const [loadContent, setLoadContent] = useState(true);
+  const [listData, setListData] = useState(0);
 
   const [value, setValue] = useState("");
 
@@ -65,14 +66,11 @@ const ExploreWithSkills = ({ profile }) => {
   };
 
   const getNewSkill = (value) => {
-    console.log("new skill", value);
     setValue(value);
     setIsAdd(false);
   };
 
   const onAddSkill = () => {
-    console.log("new skill", value);
-
     const key = skills.length && skills[skills.length - 1].key + 1;
     const newSkills = [...skills, { key, value }];
     setSkills(newSkills);
@@ -86,6 +84,7 @@ const ExploreWithSkills = ({ profile }) => {
 
     dispatch(exploreSkillsProAction({ skills: skillsList }))
       .then(() => {
+        setListData(listData + 1);
         setLoading(false);
       })
       .catch(() => {
@@ -107,9 +106,7 @@ const ExploreWithSkills = ({ profile }) => {
       let filter = item?.matchedSkills.filter((value) =>
         listMain.includes(value)
       );
-      console.log("filter", filter);
       let ratio = filter.length / item.mainSkills.length;
-      console.log(ratio);
       if (ratio > 0.7) {
         return item;
       }
@@ -124,9 +121,7 @@ const ExploreWithSkills = ({ profile }) => {
       let filter = item?.matchedSkills.filter((value) =>
         listMain.includes(value)
       );
-      console.log("filter", filter);
       let ratio = filter.length / item.mainSkills.length;
-      console.log(ratio);
       if (ratio > 0.5) {
         return item;
       }
@@ -147,8 +142,7 @@ const ExploreWithSkills = ({ profile }) => {
       .catch(() => {
         setLoadContent(true);
       });
-    console.log("exploreSkillsData", exploreSkillsData && exploreSkillsData);
-  }, []);
+  }, [listData]);
 
   if (!fetch) {
     if (domains.length && loadingSelect) {

@@ -223,6 +223,8 @@ const FindJob = ({ history, hasResume }) => {
                   <div className="find-job__has-role">
                     <div className="find-job__has-role__greeting">
                       <div style={{ marginBottom: "20px" }}>
+                      {i18n.language === "en" ?
+                        <>
                         Great, you're interested in{" "}
                         <a
                           className="find-job__not-role__content__group"
@@ -232,10 +234,23 @@ const FindJob = ({ history, hasResume }) => {
                           <EditOutlined className="find-job__not-role__content__group__icon" />
                         </a>{" "}
                         roles.
+                        </>
+                         :
+                         <>
+                         Tuyệt vời, bạn đang quan tâm tới vị trí {" "}
+                         <a
+                           className="find-job__not-role__content__group"
+                           onClick={onClickRole}
+                         >
+                           {currentSelected && currentSelected.domain}{" "}
+                           <EditOutlined className="find-job__not-role__content__group__icon" />
+                         </a>
+                         </>
+                         }
                       </div>
 
                       <div>
-                        Find out the facts about this role and others like it in{" "}
+                        {t("findJobSignIn.location")}
                         <a
                           className="find-job__not-role__content__group"
                           onClick={onClickRole}
@@ -390,6 +405,7 @@ const FindJob = ({ history, hasResume }) => {
             )}
 
             <img
+            className="find-job__not-role__girlImg"
               src="https://www.seek.com.au/career-advice/assets/c3f39bdb.svg"
               alt="Career Advice"
               style={{
@@ -405,13 +421,13 @@ const FindJob = ({ history, hasResume }) => {
           <div className="find-job__overlay">
             <div className="container">
               <div className="find-job__overlay__group">
-                <p>Update your preferences</p>
+                <p>{t("findJobSignIn.update")}</p>
                 <button
                   onClick={() => setOverlay(false)}
                   type="submit"
                   className="btn btn-outline-primary "
                 >
-                  Close
+                  {t("matchedJobDetail.close")}
                 </button>
               </div>
             </div>

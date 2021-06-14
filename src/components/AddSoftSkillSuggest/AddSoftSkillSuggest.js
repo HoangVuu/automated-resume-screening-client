@@ -12,8 +12,11 @@ import Loading from "components/Loading/Loading";
 import { Button } from "antd";
 
 import "./AddSoftSkillSuggest.scss";
+import { useTranslation } from "react-i18next";
 
 function AddSoftSkillSuggest({ handleAddSoft, isAddSoft, isCorner = false }) {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
 
   const skillsData = useSelector((state) => state.jobDomain.softSkills);
@@ -61,7 +64,7 @@ function AddSoftSkillSuggest({ handleAddSoft, isAddSoft, isCorner = false }) {
 
   // Autosuggest will pass through all these props to the input.
   const inputProps = {
-    placeholder: "Add soft skill...",
+    placeholder: t("profile.addSkillPlace"),
     value: softValue,
     onChange: (_, { newValue, method }) => {
       setSoftValue(newValue);

@@ -23,6 +23,7 @@ function ApplyModal({
   const dispatch = useDispatch();
 
   useEffect(() => {
+
     const fetchResumes = async () => {
       await candidateGetResumes(token).then((res) => {
         setResumes(res.data.data);
@@ -35,8 +36,11 @@ function ApplyModal({
   }, [token]);
 
   const handleSubmit = () => {
+    console.log('id', jp_id);
+    console.log(location)
+    console.log("==================")
     setLoading(true);
-    dispatch(candidateApplyAction({ jp_id, resume_id: selected, token }))
+    dispatch(candidateApplyAction({ jp_id: jp_id, resume_id: selected, token }))
       .then(() => {
         onCancel();
       })

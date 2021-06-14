@@ -71,6 +71,17 @@ export const formatProvinceName = (province) => {
   return name && name.length && name[1];
 };
 
+// export const formatProvinceNameEn = (province) => {
+//   let name;
+//   if (province && province.includes(" province")) {
+//     name = province.split(" province");
+//   } else if (province && province.includes(" capital")) {
+//     name = province.split(" capital");
+//   }
+
+//   return name && name.length && name[0];
+// };
+
 export const formatProvinceNameBrief = (province) => {
   let provinceName = formatProvinceName(province);
 

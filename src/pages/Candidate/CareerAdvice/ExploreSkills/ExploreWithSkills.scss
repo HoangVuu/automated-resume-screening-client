@@ -222,6 +222,12 @@
     line-height: 20px;
     background-color: rgb(247, 248, 250);
 
+    &:hover{
+      color: #CD026B;
+      font-weight: 700;
+      background-color: #efefef;
+    }
+
     &__content {
       margin-right: 10px;
     }

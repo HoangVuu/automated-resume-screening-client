@@ -80,7 +80,7 @@ function Dropdown({ title, options, value, onChange, select = false }) {
                   </div>
                   <Input
                     value={input}
-                    suffix={t("jobList.million")}
+                    suffix="$ USD"
                     style={{ marginBottom: 16 }}
                     onChange={handleInputChange}
                   />
@@ -111,7 +111,7 @@ function Dropdown({ title, options, value, onChange, select = false }) {
           <span>
             {select
               ? options.find((ele) => ele.value === parseInt(value)).label
-              : `${title}: ${value} triệu`}
+              : `${title}: $${value}`}
             <div className="filters-close" onClick={() => onChange(undefined)}>
               <img src="/assets/svg/Close.svg" alt="clear filter" />
             </div>
