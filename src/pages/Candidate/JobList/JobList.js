@@ -80,18 +80,17 @@ function CandidateJobList({ history }) {
   ];
 
   const CONTACTS = [
-    { value: 0, label:  t("home.jobSearch.full") },
-    { value: 1, label:  t("home.jobSearch.part") },
-    { value: 2, label:  t("home.jobSearch.internship") }
+    { value: 0, label: t("home.jobSearch.full") },
+    { value: 1, label: t("home.jobSearch.part") },
+    { value: 2, label: t("home.jobSearch.internship") }
   ];
 
- const PAGE_SIZES = [
+  const PAGE_SIZES = [
     { value: 10, label: t("jobList.10page") },
     { value: 20, label: t("jobList.20page") },
     { value: 50, label: t("jobList.50page") }
   ];
 
-  
   const token = useSelector((state) => state.auth.candidate.token);
   const profile = useSelector((state) => state.profile.candidateProfile);
 
@@ -350,7 +349,7 @@ function CandidateJobList({ history }) {
                       <div className="resultsTop">
                         <div className="secondRow">
                           <div>
-                          {t("jobList.show")}:{" "}
+                            {t("jobList.show")}:{" "}
                             <span style={{ display: "inline-block" }}>
                               <Select
                                 style={{ width: 140 }}
@@ -363,7 +362,9 @@ function CandidateJobList({ history }) {
                             </span>
                           </div>
                           <div className="searchCountContainer">
-                            <div id="searchCountPages">{t("jobList.total")} {total} {t("jobList.jobs")}</div>
+                            <div id="searchCountPages">
+                              {t("jobList.total")} {total} {t("jobList.jobs")}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -413,7 +414,7 @@ function CandidateJobList({ history }) {
                             <span id="jobalertsending"></span>
                             <div id="jobalertmessage">
                               <label className="jobAlertFormLabel-contrast-color">
-                              {t("jobList.jobAlert.email")}
+                                {t("jobList.jobAlert.email")}
                               </label>
                               <Input
                                 id="alertmail"
@@ -431,7 +432,7 @@ function CandidateJobList({ history }) {
                                         to="/profile"
                                         className="job-list-receiving__link"
                                       >
-                                       {t("jobList.jobAlert.noti")}
+                                        {t("jobList.jobAlert.noti")}
                                       </Link>
                                     </div>
                                   )}
@@ -445,9 +446,7 @@ function CandidateJobList({ history }) {
                                 </span>
                               </span>
                               <div style={{ marginTop: "12px" }}>
-                                <span>
-                                {t("jobList.jobAlert.by")}
-                                </span>
+                                <span>{t("jobList.jobAlert.by")}</span>
                               </div>
                             </div>
                           </div>
@@ -494,25 +493,29 @@ function CandidateJobList({ history }) {
 
 export default CandidateJobList;
 
-const EmptyJob = () => (
-  <div style={{ backgroundColor: "white", marginTop: "1rem" }}>
-    <div className="text-center">
-      <img
-        src="/assets/svg/Empty.svg"
-        alt="empty icon"
-        style={{ width: "380px", height: "160px", margin: "50px auto" }}
-      />
-      <p style={{ paddingBottom: "20px" }}>No job vacancies! </p>
+const EmptyJob = () => {
+  const { t } = useTranslation();
+
+  return (
+    <div style={{ backgroundColor: "white", marginTop: "1rem" }}>
+      <div className="text-center">
+        <img
+          src="/assets/svg/Empty.svg"
+          alt="empty icon"
+          style={{ width: "380px", height: "160px", margin: "50px auto" }}
+        />
+        <p style={{ paddingBottom: "20px" }}>{t("jobList.emptyJob.no")}</p>
+      </div>
+      <div>
+        <p style={{ padding: "20px", color: "#555" }}>
+          <b>{t("jobList.emptyJob.search")}</b>
+          <ul style={{ paddingTop: "10px" }}>
+            <li>{t("jobList.emptyJob.try")}</li>
+            <li>{t("jobList.emptyJob.check")}</li>
+            <li>{t("jobList.emptyJob.replace")}</li>
+          </ul>
+        </p>
+      </div>
     </div>
-    <div>
-      <p style={{ padding: "20px", color: "#555" }}>
-        <b>Search suggestions:</b>
-        <ul style={{ paddingTop: "10px" }}>
-          <li>Try more general keywords</li>
-          <li>Check your spelling</li>
-          <li>Replace abbreviations with the entire word</li>
-        </ul>
-      </p>
-    </div>
-  </div>
-);
+  );
+};

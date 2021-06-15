@@ -113,8 +113,8 @@
         "emptyJob": {
             "no": "Không có vị trí tuyển dụng!",
             "search": "Gợi ý tìm kiếm:",
-            "try": "Thử những từ khóa thông thường hơn",
-            "check": "Thử những từ khóa thông thường hơn",
+            "try": "Thử những từ khóa thông dụng hơn",
+            "check": "Kiểm tra chính tả của bạn",
             "replace": "Thay những từ viết tắt bằng những từ gốc"
         },
         "salary": "Mức lương",
@@ -228,7 +228,7 @@
         "standarđetail": "Với tất cả thông tin mà bạn đã cung cấp, hồ sơ của bạn bao gồm bất kỳ thông tin đăng nhập nào đã được xác minh sẽ được gửi đến nhà tuyển dụng cùng với các ứng dụng của bạn."
     },
     "jobInvitation": {
-        "bigHeader": "Tiếp nhận lời mời việc làm",
+        "bigHeader": "Nhận lời mời việc làm",
         "detailHeader": "Thông báo việc làm qua Email",
         "active": "Đang hoạt động",
         "paused": "Đã tạm dừng",
