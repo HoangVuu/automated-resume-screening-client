@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-function Header() {
+function Header({hasNavbar = true}) {
   const { t, i18n } = useTranslation();
 
   const [currEn, setCurrEn] = useState(localStorage.getItem("lang") === "en");
@@ -21,8 +21,6 @@ function Header() {
   const handleClick = (lang) => {
     i18n.changeLanguage(lang);
   };
-
-  console.log("i18", i18n);
 
   const onEnglish = () => {
     handleClick("en");
@@ -45,29 +43,38 @@ function Header() {
   };
 
   useEffect(() => {
-    handleClick(localStorage.getItem("lang"));
+    const langCur = localStorage.getItem("lang");
+    if (langCur) {
+      handleClick(langCur);
+    } else {
+      if (i18n.language === "en") {
+        localStorage.setItem("lang", "en");
+      } else {
+        localStorage.setItem("lang", "vi");
+      }
+    }
   }, []);
 
   return (
     <header id="header" className="header">
       <div className="header__section">
         <div className="container">
-          <nav className="navbar navbar-expand-lg header__navbar">
+          <nav className="navbar navbar-expand-lg header__navbar" style={{justifyContent: !hasNavbar ? 'space-between': ''}}>
             {/* Header section */}
-            <div className="header__navbar-brand-wrapper">
+            <div
+              className="header__navbar-brand-wrapper"
+              style={{ width: "30%" }}
+            >
               <Link
                 to={`${recruiter ? "/recruiter/home" : "/"}`}
                 className="navbar-brand header__navbar-brand"
-                style={{ width: "fit-content" }}
               >
-                <h3>
-                  Automated&nbsp;<span>Screening</span>
-                </h3>
+                <img src="/assets/img/main-logo.jpg" />
               </Link>
             </div>
 
             {/* Navbar section */}
-            {recruiter ? <RecruiterNavBar /> : <NavBar />}
+            {hasNavbar  && (recruiter ? <RecruiterNavBar /> : <NavBar />)}
 
             <div className="lang">
               <a className="lang__toggle" onClick={toggleDropdown}>
@@ -102,12 +109,7 @@ function Header() {
                   </li>
                 </ul>
               )}
-              {/* <button >English</button>
-              <button onClick={() => handleClick("vn")}>Vietnamese</button> */}
             </div>
-
-            {/* <p>{t("Thanks.a")}</p>
-            <p>{t("Why.a")}</p> */}
           </nav>
         </div>
       </div>

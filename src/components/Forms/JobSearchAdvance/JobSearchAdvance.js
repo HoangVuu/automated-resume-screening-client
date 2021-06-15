@@ -9,13 +9,23 @@ import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import SelectWithSearch from "components/SelectWithSearch/SelectWithSearch";
 import { useSelector, connect } from "react-redux";
 import qs from "query-string";
+import { useTranslation } from "react-i18next";
 
 function JobSearchAdvance({ handleSubmit }) {
+  const { t, i18n } = useTranslation();
+
   const provinces = useSelector((state) => state.cv.provinces);
   const options = provinces.map(({ province_id, province_name }) => ({
     value: province_id,
     label: province_name
   }));
+
+  const optionsEn = useSelector((state) =>
+  state.cv.provinces.map(({ province_id, province_name_en }) => ({
+    value: province_id,
+    label: province_name_en
+  }))
+);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -26,14 +36,14 @@ function JobSearchAdvance({ handleSubmit }) {
             name="job_title"
             icon={<SearchOutlined style={{ color: "#555" }} />}
             formClassName="col-sm-6 pr-10"
-            placeholder="Job title, role, keywords,..."
+            placeholder={t("jobList.jobSearchAdvance.job")}
           />
           <Field
             component={CustomSelect}
             name="location"
             className="col-sm-6"
-            placeholder="Location"
-            options={options}
+            placeholder={t("home.location")}
+            options={i18n.language === "en" ? optionsEn : options}
             icon={<FontAwesomeIcon icon={faMapMarkerAlt} color="#555" />}
             isClearable={true}
           />
@@ -41,7 +51,7 @@ function JobSearchAdvance({ handleSubmit }) {
         <div className="col-sm-2">
           <button type="submit" className="btn job-search-ad__btn btn-full-width" style={{fontWeight: 700}}>
             <SearchOutlined style={{ marginRight: "10px" }} />
-            Find Jobs
+            {t("jobList.jobSearchAdvance.find")}
           </button>
         </div>
       </div>

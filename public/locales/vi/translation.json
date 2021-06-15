@@ -1,8 +1,283 @@
 {
-  "Thanks": {
-    "a": "Cảm ơn nhiều"
-  },
-  "Why": {
-    "a": "Vì đã xem"
-  }
+    "header": {
+        "jobSearch": "Việc làm IT",
+        "profile": "Hồ sơ",
+        "careerAdvice": "Lời khuyên Việc làm",
+        "savedJob": "Việc làm đã lưu",
+        "appliedJob": "Việc làm đã ứng tuyến",
+        "logOut": "Đăng xuất",
+        "logIn": "Đăng nhập",
+        "employer": "Nhà tuyển dụng"
+    },
+    "candidateSignIn": {
+        "areYou": "Bạn là nhà tuyển dụng?",
+        "signIn": "Đăng nhập",
+        "form": {
+            "email": "Địa chỉ email",
+            "enterEmail": "Nhập email...",
+            "password": "Mật khẩu",
+            "enterPassword": "Nhập mật khẩu..."
+        },
+        "doNot": "Không có tài khoản?",
+        "register": "Đăng ký"
+    },
+    "home": {
+        "Just": "Hãy khám phá và sau đó ứng tuyển",
+        "Find": "Tìm công việc mơ ước của bạn một cách nhanh chóng",
+        "Popular": "Vị trí phổ biến",
+        "jobSearch": {
+            "Please": "Vui lòng chọn vị trí mà bạn muốn ứng tuyển",
+            "location": "Vị trí",
+            "full": "Toàn thời gian",
+            "part": "Bán thời gian",
+            "internship": "Thực tập"
+        },
+        "location": "Địa điểm làm việc..."
+    },
+    "careerAdvice": {
+        "tab1": "Khám phá việc làm có thể phù hợp với các kĩ năng của tôi",
+        "tab2": "Tìm công việc phù hợp cho tôi",
+        "titleBig": "Làm thế nào để chọn các kỹ năng của bạn cho công việc?",
+        "titleSmall": "Khám phá các vị trí có thể phù hợp với bạn dựa trên kỹ năng và kinh nghiệm của bạn",
+        "contentTitle": "Sự nghiệp của bạn cho đến nay",
+        "contentKey": "Các kỹ năng chính",
+        "lookingFor": "Tìm kiếm một vị trí hoặc kỹ năng cụ thể?",
+        "findOut": "Tìm hiểu thêm về vị trí hoặc kỹ năng mà bạn quan tâm.",
+        "whatRole": "Bạn muốn tham gia vào vị trí công việc nào?",
+        "form": {
+            "enterRole": "Nhập một vị trí công việc...",
+            "explore": "Tìm hiểu"
+        },
+        "searchSuggest": {
+            "enter": "Nhập một kỹ năng...",
+            "what": "Bạn muốn tập trung vào kỹ năng nào?"
+        }
+    },
+    "findJob": {
+        "hi": "Xin chào",
+        "ready": "bạn đã sẵn sàng khám phá lời khuyên và các lựa chọn nghề nghiệp phù hợp với bạn chưa?",
+        "find": "Tìm công việc phù hợp cho tôi",
+        "noToken": {
+            "signIn": "Đăng nhập hoặc đăng ký Hồ sơ để tìm được công việc phù hợp cho bạn",
+            "signInBtn": "Đăng nhập",
+            "or": "hoặc",
+            "register": "Đăng ký"
+        }
+    },
+    "signInDirect": {
+        "isNeedCV": {
+            "create": "Tạo hồ sơ để xem các kết quả phù hợp",
+            "signIn": "Đăng nhập hoặc đăng ký Hồ sơ để xem các kết quả tương thích phù hợp"
+        },
+        "identify": "Xác định các kỹ năng bạn đã có, dựa trên kinh nghiệm của bạn cho đến nay",
+        "see": "Bộ kỹ năng của bạn có thể phù hợp với các vị trí hoặc ngành nghề khác nhau",
+        "rate": "Đánh giá kỹ năng của bạn và những gì bạn thích để tinh chỉnh các tùy chọn của bạn",
+        "discover": "Khám phá những cách tạo thay đổi hoặc mở rộng tầm nhìn của bạn với các kỹ năng mới",
+        "upload": "Tải lên hồ sơ của bạn",
+        "signIn": "Đăng nhập",
+        "or": "hoặc",
+        "register": "Đăng ký"
+    },
+    "jobList": {
+        "jobSearchAdvance": {
+            "job": "Mô tả công việc, vị trí ứng tuyển, từ khóa,...",
+            "location": "Vị trí",
+            "find": "Tìm việc"
+        },
+        "date": "Ngày đăng",
+        "job": "Loại công việc",
+        "minimum": "Mức lương tối thiểu",
+        "maximum": "Mức lương tối đa",
+        "domains": "Vị trí ứng tuyển",
+        "last24": "24 giờ qua",
+        "last3": "3 ngày qua",
+        "last7": "7 ngày qua",
+        "desired": "bạn mong muốn mỗi tháng",
+        "update": "Cập nhập",
+        "million": "triệu",
+        "total": "Tổng cộng",
+        "jobs": "việc làm",
+        "show": "Hiển thị",
+        "10page": "10 tin/ trang",
+        "20page": "20 tin/ trang",
+        "50page": "50 tin/ trang",
+        "jobAlert": {
+            "title": "Hãy là người đầu tiên nhận thông báo công việc mới qua email",
+            "email": "Địa chỉ email",
+            "noti": "Bạn đã kích hoạt email này để nhận thông báo việc làm thông qua email",
+            "active": "Kích hoạt",
+            "by": "Bằng cách kích hoạt thông báo việc làm, bạn đồng ý với điều khoản của chúng tôi. Bạn có thể thay đổi cài đặt đồng ý của mình bất kỳ lúc nào bằng cách hủy đăng ký trong thông tin chi tiết hồ sơ"
+        },
+        "mySearch": "Các tìm kiếm gần đây",
+        "clear": "» Xóa các tìm kiếm",
+        "emptyJob": {
+            "no": "Không có vị trí tuyển dụng!",
+            "search": "Gợi ý tìm kiếm:",
+            "try": "Thử những từ khóa thông dụng hơn",
+            "check": "Kiểm tra chính tả của bạn",
+            "replace": "Thay những từ viết tắt bằng những từ gốc"
+        },
+        "salary": "Mức lương",
+        "day": " ngày trước",
+        "days": " ngày trước",
+        "justAdd": "Vừa mới đăng",
+        "apply": "Ứng tuyển ngay",
+        "saveJob": "Lưu tin",
+        "deadline": "Hạn nộp hồ sơ",
+        "workType": "Hình thức làm việc",
+        "amount": "Số lượng cần tuyển",
+        "noLimit": "Không giới hạn ứng viên",
+        "jobDetail": "Chi tiết công việc",
+        "fullJob": "Mô tả đầy đủ chi tiết công việc",
+        "des": "Mô tả công việc",
+        "roleReq": "Yêu cầu ứng viên",
+        "benefit": "Quyền lợi ứng viên",
+        "candidate": "ứng viên",
+        "candidates": "ứng viên"
+    },
+    "explore": {
+        "smallTitle": "Sử dụng các kỹ năng đã được liệt kê trong hồ sơ, chúng tôi sẽ giúp bạn khám phá các cơ hội nghề nghiệp.",
+        "addSkill": "Thêm kĩ năng",
+        "addASkill": "Thêm một kĩ năng...",
+        "Save": "Tìm kiếm phù hợp",
+        "matchedTitle": "Các cơ hội việc làm phù hợp",
+        "mostMatches": "Phù hợp hầu hết các kĩ năng",
+        "goodSkill": "Những cơ hội tốt với bạn",
+        "enjoy": "Những cơ hội bạn thích",
+        "lookingBigTitle": "Bạn đang tìm kiếm một vai trò hoặc kỹ năng cụ thể?",
+        "lookingSmallTitle": "Tìm hiểu thêm về vai trò hoặc kỹ năng mà bạn quan tâm",
+        "lookingByRole": "Bạn muốn tham gia với vai trò nào?",
+        "lookingBySkill": "Kĩ năng nào mà bạn muốn tập trung tới?",
+        "explore": "Khám phá",
+        "sorry": "Xin lỗi, chúng tôi không thể tìm kiếm phù hợp với đề xuất",
+        "self": "Tự đánh giá các kỹ năng của các vai trò trước đây của bạn để xem các cơ hội phù hợp",
+        "minimum": "Mức lương chung tối thiểu",
+        "maximum": "Mức lương chung tối đa"
+    },
+    "matchedJob": {
+        "matchSkills": "Những kĩ năng của bạn phù hợp",
+        "numberSkillMatch": "Xem bạn phù hợp thế nào"
+    },
+    "matchedJobDetail": {
+        "header": "Các kỹ năng phù hợp với vị trí ứng tuyển trước đó và của một ",
+        "bigTitle": "Các kỹ năng chính và kinh nghiệm",
+        "numberOfSkillMatch": "Các vị trí ứng tuyển trước đó của bạn có ",
+        "numberOfSkillMatch2": " kỹ năng chính và kinh nghiệm trùng khớp.",
+        "moreAboutCareer": "Tìm hiểu thêm về cơ hội nghề nghiệp này",
+        "close": "Đóng"
+    },
+    "findJobSignIn": {
+        "role": "Vị trí mà bạn quan tâm cho việc ứng tuyển",
+        "findLocation": "Địa điểm ưu tiên",
+        "bigTitle": "Tìm hiểu những điều bạn cần biết về một vai trò, từ mức lương cho đến mức độ hài lòng trong công việc.",
+        "smallTitle": "Nhận một vai trò mà bạn quan tâm để xem thêm.",
+        "great": "Tuyệt vời, bạn đang quan tâm tới vị trí ",
+        "location": "Tìm hiểu rõ về vị trí này và những vị trí khác tương tự ở ",
+        "detail": {
+            "numberOfJob": "Các công việc hiện có trên website",
+            "minSalary": "Thu nhập bình quân tối thiểu",
+            "maxSalray": "Thu nhập bình quân tối đa",
+            "satisfaction": "Mức độ hài lòng công việc"
+        },
+        "update": "Cập nhật tùy chọn của bạn"
+    },
+    "profile": {
+        "editBtn": "Chỉnh sửa thông tin cá nhân",
+        "edit": "Chỉnh sửa chi tiết thông tin cá nhân",
+        "email": "Địa chỉ email",
+        "fullName": "Tên đầy đủ",
+        "phone": "Số điện thoại",
+        "dateOfBirth": "Ngày sinh",
+        "gender": "Giới tính",
+        "male": "Name",
+        "female": "Nữ",
+        "live": "Sống tại",
+        "save": "Lưu",
+        "cancel": "Hủy",
+        "title": "Tạo một CV mới từ thông tin cá nhân trên FASTJOB bằng cách",
+        "uploadTitle": "Tải lên CV của bạn",
+        "edu": "Trình độ học vấn",
+        "editEdu": "Chỉnh sửa học vấn",
+        "ex": "Kinh nghiệm thực tế",
+        "editEx": "Chỉnh sửa kinh nghiệm",
+        "months": "tháng",
+        "month": "tháng",
+        "skill": "Kỹ năng",
+        "addSkill": "Thêm kỹ năng",
+        "addSkillPlace": "Thêm một kỹ năng mềm...",
+        "addSSkill": "Thêm kỹ năng mềm",
+        "click": "Nhấn để nhiều kĩ năng để giúp nhà tuyển dụng tìm bạn.",
+        "clickS": "Nhấn để thêm nhiều kĩ năng mềm để giúp nhà tuyển dụng tìm bạn.",
+        "softSkill": "Kỹ năng mềm",
+        "resume": "Sơ yếu lý lịch",
+        "aboutRe": "Về sơ yếu lý lịch",
+        "watch": "Xem online",
+        "download": "Tải lên",
+        "delete": "Xóa",
+        "default": "Mặc định",
+        "add": "Added",
+        "days": "ngày trước",
+        "day": "ngày trước",
+        "justAdded": "Vừa mới thêm",
+        "done": "Xong",
+        "upload": "Tải lên",
+        "addRe": "Để thêm một Sơ yếu lý lịch, nhấn vào đây để tìm một tập tin.",
+        "accept": "Thêm một Sơ yếu lý lịch. Chỉ chấp nhận các loại tệp: Microsoft Word (.doc or .docx) hoặc Adobe PDF (.pdf)"
+    },
+    "profileSetting": {
+        "bigHeader": "Tầm nhìn hồ sơ",
+        "headerDetail": "Hồ sơ của bạn tồn tại duy nhất trên hệ thống, nhà tuyển dụng có thể tiếp cận bạn với một cơ hội việc làm dành cho bạn.",
+        "standardHeader": "Tiêu chuẩn",
+        "standarđetail": "Với tất cả thông tin mà bạn đã cung cấp, hồ sơ của bạn bao gồm bất kỳ thông tin đăng nhập nào đã được xác minh sẽ được gửi đến nhà tuyển dụng cùng với các ứng dụng của bạn."
+    },
+    "jobInvitation": {
+        "bigHeader": "Nhận lời mời việc làm",
+        "detailHeader": "Thông báo việc làm qua Email",
+        "active": "Đang hoạt động",
+        "paused": "Đã tạm dừng",
+        "in": "tại",
+        "frequency": "Tần suất",
+        "frequencyDetail": {
+            "daily": "Hằng ngày",
+            "weekly": "Hằng tuần"
+        },
+        "another": "Chọn chủ đề khác",
+        "delete": "Xoá thông báo",
+        "mail": "Kích hoạt email để nhận thông báo về nhiều việc làm từ chúng tôi."
+    },
+    "skillSuggest": {
+        "insight": "Cái nhìn tổng quan về sơ yếu lý lịch",
+        "here": "Đây là cách sơ yếu lý lịch của bạn phù hợp thế nào với mô tả công việc",
+        "make": "Đảm bảo sơ yếu lý lịch của bạn được cập nhật",
+        "change": "Các thay đổi có thể mất một thời gian để được phản ánh lại trong thông báo trên.",
+        "update": "Cập nhập hồ sơ",
+        "your": "Hồ sơ của bạn có thể thiếu một số kỹ năng kỹ thuật",
+        "yourS": "Hồ sơ của bạn có thể thiếu một số kỹ năng mềm",
+        "more": "+Hiển thị thêm",
+        "less": "-Ẩn bớt"
+    },
+    "detail": {
+        "enter": "Nhập mô tả công việc, vị trí ứng tuyển, từ khóa...",
+        "location": "Nhập địa điểm làm việc...",
+        "similar": "Việc làm tương tự",
+        "report": "Báo cáo việc làm",
+        "see": "Xem thêm việc làm",
+        "find": "Tìm việc",
+        "company": "Thông tin công ty",
+        "follow": "Theo dõi",
+        "jobUpdate": "Nhận cập nhập việc làm từ",
+        "companyText:": "Whether it's helping a vulnerable child, making highways safer or restoring salmon habitat, the work that we do matters to the people of ...",
+        "let": "Hãy để nhà tuyển dụng tìm thấy bạn",
+        "thousand": "Hàng nghìn nhà tuyển dụng tìm kiếm ứng viên trên trang web của chúng tôi",
+        "upload": "Tải lên hồ sơ của bạn",
+        "update": "Cập nhập hồ sơ của bạn"
+    },
+    "myJob": {
+        "saved": "Đã lưu",
+        "applied": "Đã ứng tuyển",
+        "job": "việc làm",
+        "jobs": "việc làm",
+        "addNote": "Thêm ghi chú",
+        "saveOn": "Đã lưu vào"
+    }
 }

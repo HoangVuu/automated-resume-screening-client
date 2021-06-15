@@ -10,10 +10,13 @@ import { GET_JOB_SKILL } from "state/reducers/jobDomainReducer";
 import { toastErr, toast } from "utils/index";
 import Loading from "components/Loading/Loading";
 import { Button } from "antd";
+import { useTranslation } from "react-i18next";
 
 import "./AddSkillSuggest.scss";
 
 function AddSkillSuggest({ handleAdd, isAdd, isCorner = false }) {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
 
   const skillsData = useSelector((state) => state.jobDomain.skills);
@@ -56,12 +59,12 @@ function AddSkillSuggest({ handleAdd, isAdd, isCorner = false }) {
   const onSuggestionsClearRequested = () => setSuggestions([]);
 
   const onSuggestionSelected = (_, { suggestionValue }) => {
-    console.log("Selected: " + suggestionValue);
+    // console.log("Selected: " + suggestionValue);
   };
 
   // Autosuggest will pass through all these props to the input.
   const inputProps = {
-    placeholder: "Add skill...",
+    placeholder: t("explore.addASkill"),
     value: value,
     onChange: (_, { newValue, method }) => {
       setValue(newValue);
@@ -84,7 +87,6 @@ function AddSkillSuggest({ handleAdd, isAdd, isCorner = false }) {
     );
   }
 
-  console.log("isAdd", isAdd);
   if (isAdd) {
     value && setValue("");
   }
@@ -146,7 +148,7 @@ function AddSkillSuggest({ handleAdd, isAdd, isCorner = false }) {
         icon={<PlusOutlined />}
         onClick={handleAdd(value)}
       >
-        Add skill
+        {t("explore.addSkill")}
       </button>
     </div>
   );

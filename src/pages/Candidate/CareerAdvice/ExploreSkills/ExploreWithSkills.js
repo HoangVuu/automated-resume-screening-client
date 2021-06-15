@@ -1,7 +1,7 @@
 import { Tabs, Tab } from "react-bootstrap";
 import ContentEditable from "react-contenteditable";
 import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Input } from "antd";
+import { Button } from "antd";
 
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,13 +13,16 @@ import MatchSkill from "components/MatchSkill/MatchSkill";
 import { getIndexArray } from "utils/index";
 import Loading from "components/Loading/Loading";
 
-import { GET_JOB_DOMAIN, GET_JOB_SKILL } from "state/reducers/jobDomainReducer";
 import history from "state/history";
 import { exploreSkillsProAction } from "state/actions/candidateJobAction";
 import ContentLoader from "react-content-loader";
 import AddSkillSuggest from "components/AddSkillSuggest/AddSkillSuggest";
+import MatchSkillNone from "./MatchSkillNone";
+import { useTranslation } from "react-i18next";
 
 const ExploreWithSkills = ({ profile }) => {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
 
   const domains = useSelector((state) => state.jobDomain.domains);
@@ -30,6 +33,7 @@ const ExploreWithSkills = ({ profile }) => {
 
   const [loading, setLoading] = useState(false);
   const [loadContent, setLoadContent] = useState(true);
+  const [listData, setListData] = useState(0);
 
   const [value, setValue] = useState("");
 
@@ -62,14 +66,11 @@ const ExploreWithSkills = ({ profile }) => {
   };
 
   const getNewSkill = (value) => {
-    console.log("new skill", value);
     setValue(value);
     setIsAdd(false);
   };
 
   const onAddSkill = () => {
-    console.log("new skill", value);
-
     const key = skills.length && skills[skills.length - 1].key + 1;
     const newSkills = [...skills, { key, value }];
     setSkills(newSkills);
@@ -83,6 +84,7 @@ const ExploreWithSkills = ({ profile }) => {
 
     dispatch(exploreSkillsProAction({ skills: skillsList }))
       .then(() => {
+        setListData(listData + 1);
         setLoading(false);
       })
       .catch(() => {
@@ -99,40 +101,34 @@ const ExploreWithSkills = ({ profile }) => {
   };
 
   const getGood = (data) => {
-    const filteredArray =
-    data?.filter((item) => {
+    const filteredArray = data?.filter((item) => {
       const listMain = item.mainSkills.map((item) => item.name);
       let filter = item?.matchedSkills.filter((value) =>
         listMain.includes(value)
       );
-      console.log("filter", filter);
       let ratio = filter.length / item.mainSkills.length;
-      console.log(ratio);
       if (ratio > 0.7) {
         return item;
       }
     });
 
-    return filteredArray
-  }
+    return filteredArray;
+  };
 
   const getEnjoy = (data) => {
-    const filteredArray =
-    data?.filter((item) => {
+    const filteredArray = data?.filter((item) => {
       const listMain = item.mainSkills.map((item) => item.name);
       let filter = item?.matchedSkills.filter((value) =>
         listMain.includes(value)
       );
-      console.log("filter", filter);
       let ratio = filter.length / item.mainSkills.length;
-      console.log(ratio);
       if (ratio > 0.5) {
         return item;
       }
     });
 
-    return filteredArray
-  }
+    return filteredArray;
+  };
 
   useEffect(() => {
     history.push("/career-advice");
@@ -146,8 +142,7 @@ const ExploreWithSkills = ({ profile }) => {
       .catch(() => {
         setLoadContent(true);
       });
-    console.log("exploreSkillsData", exploreSkillsData && exploreSkillsData);
-  }, []);
+  }, [listData]);
 
   if (!fetch) {
     if (domains.length && loadingSelect) {
@@ -180,30 +175,34 @@ const ExploreWithSkills = ({ profile }) => {
 
       <div className="explore__title">
         <div className="container">
-          <h1 className="explore__title__big">
-            How can you put your skills to work?
+          <h1
+            className="explore__title__big"
+            style={{ width: "80%", lineHeight: "1.08" }}
+          >
+            {t("careerAdvice.titleBig")}
           </h1>
           <p className="explore__title__small">
-            Explore roles that could suit you based on your skills and
-            experience
+            {t("careerAdvice.titleSmall")}
           </p>
         </div>
       </div>
 
       <div className="container">
         <div className="explore__content">
-          <h2 className="explore__content__title">Your career so far</h2>
+          <h2 className="explore__content__title">
+            {t("careerAdvice.contentTitle")}
+          </h2>
           <div className="explore__content__key">
-            <p>Key skills</p>
+            <p>{t("careerAdvice.contentKey")}</p>
           </div>
           <div className="explore__content__skills">
             <p className="explore__content__skills__intro">
-              Using skills listed in your Profile, we’ll help you discover
-              career options.
+              {t("explore.smallTitle")}
             </p>
 
             <div className="chip" style={{ marginTop: "20px" }}>
-              {skills.length &&
+              {skills &&
+                skills?.length &&
                 skills.map(({ key, value }) => (
                   <Skill skill={value} key={key} id={key} onDelete={onDelete} />
                 ))}
@@ -224,7 +223,7 @@ const ExploreWithSkills = ({ profile }) => {
                   icon={<PlusOutlined />}
                   onClick={onAddSkill}
                 >
-                  Add skill
+                  {t("explore.addSkill")}
                 </Button>
               </div>
             </div>
@@ -235,25 +234,62 @@ const ExploreWithSkills = ({ profile }) => {
                 style={{ fontWeight: 700 }}
                 onClick={handleMatch}
               >
-                Save and Match now
+                {t("explore.Save")}
               </button>
             </div>
 
             <div className="explore__content__match">
               <h2 className="explore__content__title">
-                Your matched opportunities
+                {t("explore.matchedTitle")}
               </h2>
 
               <div className="explore__content__match__tabs">
                 <Tabs className="child-tabs" defaultActiveKey="1">
-                  <Tab eventKey="1" title="Most skill matches">
+                  <Tab eventKey="1" title={t("explore.mostMatches")}>
                     {loadContent ? (
                       <MyLoader />
                     ) : (
-                      exploreSkillsData.length &&
-                      sortData(exploreSkillsData)
-                        .slice(0, 5)
-                        .map(
+                      exploreSkillsData &&
+                      exploreSkillsData?.length &&
+                      (sortData(exploreSkillsData).length > 0 ? (
+                        sortData(exploreSkillsData)
+                          .slice(0, 5)
+                          .map(
+                            (
+                              {
+                                domain,
+                                matchedSkills,
+                                salary,
+                                totalCount,
+                                mainSkills
+                              },
+                              index
+                            ) => (
+                              <MatchSkill
+                                key={index}
+                                domain={domain}
+                                matchedSkills={matchedSkills}
+                                salary={salary}
+                                totalCount={totalCount}
+                                mainSkills={mainSkills}
+                              />
+                            )
+                          )
+                      ) : (
+                        <MatchSkillNone />
+                      ))
+                    )}
+                  </Tab>
+                  <Tab eventKey="2" title={t("explore.goodSkill")}>
+                    {loadContent ? (
+                      <MyLoader />
+                    ) : (
+                      exploreSkillsData &&
+                      exploreSkillsData?.length &&
+                      (getGood(exploreSkillsData).length > 0 ? (
+                        getGood(
+                          exploreSkillsData
+                        ).map(
                           (
                             {
                               domain,
@@ -274,66 +310,44 @@ const ExploreWithSkills = ({ profile }) => {
                             />
                           )
                         )
+                      ) : (
+                        <MatchSkillNone />
+                      ))
                     )}
                   </Tab>
-                  <Tab eventKey="2" title="What you're good at">
+                  <Tab eventKey="3" title={t("explore.enjoy")}>
                     {loadContent ? (
                       <MyLoader />
                     ) : (
-                      exploreSkillsData.length &&
-                      getGood(
-                        exploreSkillsData
-                      ).map(
-                        (
-                          {
-                            domain,
-                            matchedSkills,
-                            salary,
-                            totalCount,
-                            mainSkills
-                          },
-                          index
-                        ) => (
-                          <MatchSkill
-                            key={index}
-                            domain={domain}
-                            matchedSkills={matchedSkills}
-                            salary={salary}
-                            totalCount={totalCount}
-                            mainSkills={mainSkills}
-                          />
+                      exploreSkillsData &&
+                      exploreSkillsData?.length &&
+                      (getEnjoy(exploreSkillsData).length > 0 ? (
+                        getEnjoy(
+                          exploreSkillsData
+                        ).map(
+                          (
+                            {
+                              domain,
+                              matchedSkills,
+                              salary,
+                              totalCount,
+                              mainSkills
+                            },
+                            index
+                          ) => (
+                            <MatchSkill
+                              key={index}
+                              domain={domain}
+                              matchedSkills={matchedSkills}
+                              salary={salary}
+                              totalCount={totalCount}
+                              mainSkills={mainSkills}
+                            />
+                          )
                         )
-                      )
-                    )}
-                  </Tab>
-                  <Tab eventKey="3" title="What you enjoy">
-                  {loadContent ? (
-                      <MyLoader />
-                    ) : (
-                      exploreSkillsData.length &&
-                      getEnjoy(
-                        exploreSkillsData
-                      ).map(
-                        (
-                          {
-                            domain,
-                            matchedSkills,
-                            salary,
-                            totalCount,
-                            mainSkills
-                          },
-                          index
-                        ) => (
-                          <MatchSkill
-                            key={index}
-                            domain={domain}
-                            matchedSkills={matchedSkills}
-                            salary={salary}
-                            totalCount={totalCount}
-                            mainSkills={mainSkills}
-                          />
-                        )
-                      )
+                      ) : (
+                        <MatchSkillNone />
+                      ))
                     )}
                   </Tab>
                 </Tabs>

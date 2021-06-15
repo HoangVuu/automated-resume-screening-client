@@ -4,8 +4,9 @@ import { FullscreenOutlined } from "@ant-design/icons";
 import { Tooltip } from "antd";
 
 import JobDetail from "components/JobItem/JobDetail";
-import { getDiffTime, formatProvince } from "utils/index";
+import { getDiffTime, formatProvince, formatProvinceEn } from "utils/index";
 import history from "state/history";
+import { useTranslation } from "react-i18next";
 
 const JobItem = ({
   jobId,
@@ -22,14 +23,70 @@ const JobItem = ({
   provinces,
   provinceId
 }) => {
+  const { t, i18n } = useTranslation();
+
   const getProvince = () => {
-    return (
-      provinceId &&
-      provinceId
-        .split(",")
-        .map((p) => formatProvince(provinces, p))
-        .join(", ")
-    );
+    let result = "";
+
+    if(i18n.language === 'vi'){
+      result = provinceId && provinceId
+      .split(",")
+      .map((p) => formatProvince(provinces, p))
+      .join(", ");
+    }
+    else {
+      result = provinceId && provinceId
+      .split(",")
+      .map((p) => formatProvinceEn(provinces, p))
+      .join(", ");
+    }
+
+    return result;
+  };
+
+  const getLangSalary = (salary) => {
+   if(salary){
+    if (salary === "Thoả thuận") {
+      salary = i18n.language === "vi" ? "Thoả thuận" : "Wage agreement";
+    } else if (salary.includes("Lên đến")) {
+      salary =
+        i18n.language === "vi"
+          ? salary
+          : salary.replaceAll("Lên đến", "Up to ");
+    } else if (salary.includes("Từ")) {
+      salary =
+        i18n.language === "vi" ? salary : salary.replaceAll("Từ", "From ");
+    }
+   }
+
+    return salary;
+  };
+
+  const getLangContractType = (type) => {
+    if(type){
+      if (type === "Toàn thời gian") {
+        type = i18n.language === "vi" ? "Toàn thời gian" : "Fulltime";
+      } else if (type === "Bán thời gian") {
+        type = i18n.language === "vi" ? "Bán thời gian" : "Parttime";
+      } else if (type === "Thực tập") {
+        type = i18n.language === "vi" ? "Thực tập" : "Internship";
+      }
+    }
+
+    return type;
+  };
+
+  const getDateDiff = (post) => {
+    let date =
+      getDiffTime(post) > 1
+        ? getDiffTime(post).toString() + t("jobList.days")
+        : getDiffTime(post).toString() + t("jobList.day");
+
+    if (getDiffTime(post) === 0) {
+      date = t("jobList.justAdd");
+    }
+
+    return date;
   };
 
   return (
@@ -57,7 +114,9 @@ const JobItem = ({
               <p>{company}</p>
             </span>
             <span className="remote-bullet">•</span>
-            <span className="contact-type">{contractType}</span>
+            <span className="contact-type">
+              {getLangContractType(contractType)}
+            </span>
             <span className="location accessible-contrast-color-location">
               {getProvince()}
             </span>
@@ -65,8 +124,8 @@ const JobItem = ({
         </div>
         <div className="salarySnippet holisticSalary">
           <span className="salary no-wrap">
-            <span>Lương: </span>
-            <span className="salaryText">{salary}</span>
+            <span>{t("jobList.salary")}: &nbsp; </span>
+            <span className="salaryText">{getLangSalary(salary)}</span>
           </span>
         </div>
         <div
@@ -77,22 +136,7 @@ const JobItem = ({
           <div className="jobsearch-SerpJobCard-footerActions">
             <div className="result-link-bar-container">
               <div className="result-link-bar">
-                <span className="date">
-                  {" "}
-                  {getDiffTime(postedIn) > 1
-                    ? getDiffTime(postedIn).toString() + " days"
-                    : getDiffTime(postedIn).toString() + " day"}{" "}
-                  ago
-                </span>
-                {/* <div className="tt_set">
-                    <div className="job-reaction">
-                      <Tooltip placement="right" title="Nhấn để lưu tin này">
-                        <button className="job-reaction-love">
-                          <HeartOutlined style={{ fontSize: "24px" }} />
-                        </button>
-                      </Tooltip>
-                    </div>
-                  </div> */}
+                <span className="date"> {getDateDiff(postedIn)}</span>
               </div>
             </div>
           </div>

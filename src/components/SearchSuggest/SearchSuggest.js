@@ -8,11 +8,13 @@ import { getJobSkill } from "services/hrJobServices";
 import { GET_JOB_SKILL } from "state/reducers/jobDomainReducer";
 import { toastErr, toast } from "utils/index";
 import Loading from "components/Loading/Loading";
+import { useTranslation } from "react-i18next";
 
 import "./SearchSuggest.scss";
-import { getValues } from "../../../node_modules/jest-validate/build/condition";
 
 function SearchSuggest({ handleSubmit }) {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
 
   const skillsData = useSelector((state) => state.jobDomain.skills);
@@ -61,7 +63,7 @@ function SearchSuggest({ handleSubmit }) {
 
   // Autosuggest will pass through all these props to the input.
   const inputProps = {
-    placeholder: "Enter a skill...",
+    placeholder: t("careerAdvice.searchSuggest.enter"),
     value: value,
     onChange: (_, { newValue, method }) => {
       setValue(newValue);
@@ -118,7 +120,7 @@ function SearchSuggest({ handleSubmit }) {
       <Loading loading={loading} />
 
       <h2 className="explore-look__title">
-        What skill do you want to focus on?
+      {t("careerAdvice.searchSuggest.what")}
       </h2>
       <div
         className="row"
@@ -146,7 +148,7 @@ function SearchSuggest({ handleSubmit }) {
             style={{ fontWeight: 700 }}
             onClick={getValue}
           >
-            Explore
+            {t("careerAdvice.form.explore")}
           </button>
         </div>
       </div>

@@ -5,11 +5,18 @@ import { Close } from "constants/svg";
 import ContentLoader from "react-content-loader";
 import ApplyModal from "components/Modals/Apply/ApplyModal";
 import { getJobDetail, saveJob } from "services/jobServices";
-import { format_date, toast, toastErr, formatProvince } from "utils/index";
+import {
+  format_date,
+  toast,
+  toastErr,
+  formatProvince,
+  formatProvinceEn
+} from "utils/index";
 import LoginModal from "components/Modals/LoginModal/LoginModal";
 import { useSelector } from "react-redux";
 import MissingSkillItem from "./MissingSkillItem";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const DEFAULT = {
   apply: false,
@@ -17,6 +24,8 @@ const DEFAULT = {
 };
 
 function JobDetail({ id, top, onChangeSelect, bottom }) {
+  const { t, i18n } = useTranslation();
+
   const [showModal, toggleShowModal] = useState(DEFAULT);
   const [job, setJob] = useState({});
   const [loading, setLoading] = useState(false);
@@ -91,6 +100,56 @@ function JobDetail({ id, top, onChangeSelect, bottom }) {
     soft_skills?.split("|").filter((value) => !candSoftSkill?.includes(value));
   console.log("filter", diffSoftSkills);
 
+  const getLangSalary = (salary) => {
+    if (salary) {
+      if (salary === "Thoả thuận") {
+        salary = i18n.language === "vi" ? "Thoả thuận" : "Wage agreement";
+      } else if (salary.includes("Lên đến")) {
+        salary =
+          i18n.language === "vi"
+            ? salary
+            : salary.replaceAll("Lên đến", "Up to ");
+      } else if (salary.includes("Từ")) {
+        salary =
+          i18n.language === "vi" ? salary : salary.replaceAll("Từ", "From ");
+      }
+    }
+
+    return salary;
+  };
+
+  const getLangContractType = (type) => {
+    if (type) {
+      if (type === "Toàn thời gian") {
+        type = i18n.language === "vi" ? "Toàn thời gian" : "Fulltime";
+      } else if (type === "Bán thời gian") {
+        type = i18n.language === "vi" ? "Bán thời gian" : "Parttime";
+      } else if (type === "Thực tập") {
+        type = i18n.language === "vi" ? "Thực tập" : "Internship";
+      }
+    }
+
+    return type;
+  };
+
+  const getAmount = (amount) => {
+    if (amount) {
+      if (
+        amount === "Không giới hạn ứng viên" ||
+        amount === "Không giới hạn" ||
+        parseInt(amount) === 0
+      ) {
+        amount = t("jobList.noLimit");
+      } else if (parseInt(amount) === 1) {
+        amount = `${amount} ${t("jobList.candidate")}`;
+      } else if (parseInt(amount) > 1) {
+        amount = `${amount} ${t("jobList.candidates")}`;
+      }
+    }
+
+    return amount;
+  };
+
   return (
     <>
       <div
@@ -127,51 +186,49 @@ function JobDetail({ id, top, onChangeSelect, bottom }) {
                     className="job-detail-section-container"
                   >
                     <div className="job-detail-section-title">
-                      <div className="job-detail-section-title--main text-bold">
-                        Job Details
+                      <div
+                        className="job-detail-section-title--main text-bold"
+                        style={{ letterSpacing: "0.06rem" }}
+                      >
+                        {t("jobList.jobDetail")}
                       </div>
                     </div>
                     <div className="job-detail-section-item">
                       <div className="job-detail-section-itemKey text-bold">
-                        Salary:
+                        {t("jobList.salary")}:
                       </div>
-                      <span>{salary}</span>
+                      <span>{getLangSalary(salary)}</span>
                     </div>
                     <div className="job-detail-section-item">
                       <div className="job-detail-section-itemKey text-bold">
-                        {/* {"Hình thức làm việc: "} */}
-                        Work type:
+                        {t("jobList.workType")}:
                       </div>
-                      <span>{contract_type}</span>
+                      <span>{getLangContractType(contract_type)}</span>
                     </div>
                     <div className="job-detail-section-item">
                       <div className="job-detail-section-itemKey text-bold">
-                        {/* {"Số lượng cần tuyển: "} */}
-                        Amount:
+                        {t("jobList.amount")}:
                       </div>
-                      <span>
-                        {amount === 0
-                          ? "Không giới hạn số lượng"
-                          : `${amount} ứng viên`}
-                      </span>
+                      <span>{getAmount(amount)}</span>
                     </div>
                   </div>
 
                   <div>
-                    {(diffTechSkills?.length || diffSoftSkills?.length) && (
+                    {((diffTechSkills && diffTechSkills?.length) ||
+                      (diffSoftSkills && diffSoftSkills?.length)) && (
                       <div style={{ marginTop: "5px" }}>
                         <h2 className="jobSectionHeader">
                           <b style={{ fontSize: "1.125rem" }}>
-                            Resume insights
+                            {t("skillSuggest.insight")}
                           </b>
                         </h2>
                         <p className="detail-page__miss-sub">
-                          Here's how your resume aligns with the job description
+                          {t("skillSuggest.here")}
                         </p>
 
-                        {diffTechSkills?.length && (
+                        {diffTechSkills && diffTechSkills?.length && (
                           <MissingSkillItem
-                            title=" Your resume might be missing some technical skills"
+                            title={t("skillSuggest.your")}
                             skills={
                               diffTechSkills.length > 10
                                 ? diffTechSkills?.slice(0, 10)
@@ -179,9 +236,9 @@ function JobDetail({ id, top, onChangeSelect, bottom }) {
                             }
                           />
                         )}
-                        {diffSoftSkills?.length && (
+                        {diffSoftSkills && diffSoftSkills?.length && (
                           <MissingSkillItem
-                            title="Your resume might be missing some soft skills"
+                            title={t("skillSuggest.yourS")}
                             skills={
                               diffSoftSkills.length > 10
                                 ? diffSoftSkills?.slice(0, 10)
@@ -192,25 +249,24 @@ function JobDetail({ id, top, onChangeSelect, bottom }) {
 
                         <div className="detail-page__resume">
                           <span className="detail-page__resume__title">
-                            Make sure your resume is up to date
+                            {t("skillSuggest.make")}
                           </span>
                           <span className="detail-page__resume__sub-title">
-                            Changes may take some time to be reflected in the
-                            above message.
+                          {t("skillSuggest.change")}
                           </span>
 
                           <button className="detail-page__resume__button">
-                            <Link to="/profile">Update Resume</Link>
+                            <Link to="/profile">{t("skillSuggest.update")}</Link>
                           </button>
                         </div>
                       </div>
                     )}
                   </div>
 
-                  <div id="jobDescriptionTitle">Full Job Description</div>
+                  <div id="jobDescriptionTitle"> {t("jobList.fullJob")}</div>
                   <div id="jobDescriptionText">
                     <p>
-                      <b>Description: </b>
+                      <b>{t("jobList.des")}: </b>
                     </p>
                     <div
                       dangerouslySetInnerHTML={{ __html: description }}
@@ -219,14 +275,14 @@ function JobDetail({ id, top, onChangeSelect, bottom }) {
                     <br />
 
                     <p>
-                      <b>Role Requirements: </b>
+                      <b>{t("jobList.roleReq")}: </b>
                     </p>
                     <div dangerouslySetInnerHTML={{ __html: requirement }} />
 
                     <p></p>
                     <br />
                     <p>
-                      <b>Perks and Benefits: </b>
+                      <b>{t("jobList.benefit")}: </b>
                     </p>
                     <div dangerouslySetInnerHTML={{ __html: benefit }} />
                     <p></p>
@@ -277,12 +333,20 @@ const Header = ({
   provinceTotal,
   saved
 }) => {
+  const { t, i18n } = useTranslation();
+
   const [save, setSave] = useState(saved ? true : false);
   const [loading, setLoading] = useState(false);
 
   const handleSaveJP = async () => {
     if (!token) {
-      toast({ type: "info", message: "Please login to save job" });
+      toast({
+        type: "info",
+        message:
+          i18n.language === "en"
+            ? "Please login to save job"
+            : "Vui lòng đăng nhập để lưu việc làm"
+      });
     } else {
       setLoading(true);
       setSave(!save);
@@ -297,14 +361,25 @@ const Header = ({
     }
   };
 
+  const getProvince = () => {
+    let result = "";
+
+    if (i18n.language === "vi") {
+      result =
+        provinces &&
+        provinces.map((p) => formatProvince(provinceTotal, p)).join(", ");
+    } else {
+      result =
+        provinces &&
+        provinces.map((p) => formatProvinceEn(provinceTotal, p)).join(", ");
+    }
+
+    return result;
+  };
+
   return (
     <div id="vjs-header" className="vjs-header-no-shadow">
       <div id="vjs-image-wrapper">
-        {/* <img
-          src={company_background || "/assets/img/company-default-bg.jpg"}
-          alt="company background"
-          className="vjs-header-background"
-        /> */}
         <img
           src={company_logo || "/assets/img/company-default-logo.png"}
           alt="company logo"
@@ -318,12 +393,12 @@ const Header = ({
             <span id="vjs-cn">{company_name}</span>
             <span id="vjs-loc">
               <span> - </span>
-              {provinces &&
-                provinces.length !== 0 &&
-                formatProvince(provinceTotal, provinces[0])}
+              {getProvince()}
             </span>
           </div>
-          <div>Hạn nộp hồ sơ: {format_date(deadline)}</div>
+          <div>
+            {t("jobList.deadline")}: {format_date(deadline)}
+          </div>
         </div>
       </div>
       <div id="vjs-x">
@@ -340,7 +415,7 @@ const Header = ({
             className="view-apply-button blue-button"
             onClick={toggleModal}
           >
-            Apply Now
+            {t("jobList.apply")}
           </button>
           <span id="state-picker-container" className="dd-wrapper">
             <button className="state-picker-button" onClick={handleSaveJP}>
@@ -355,7 +430,7 @@ const Header = ({
                       style={{ fontSize: "18px", fontWeight: "700" }}
                       className="mr-5"
                     />
-                    Save Job
+                    {t("jobList.saveJob")}
                   </>
                 ) : (
                   <>
@@ -363,7 +438,7 @@ const Header = ({
                       style={{ fontSize: "18px", fontWeight: "700" }}
                       className="mr-5"
                     />
-                    Saved Job
+                    {i18n.language === "en" ? "Saved Job" : "Đã lưu"}
                   </>
                 )}
               </span>

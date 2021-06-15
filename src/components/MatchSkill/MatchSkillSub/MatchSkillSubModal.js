@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 
 import "../MatchSkill.scss";
+import { useTranslation } from "react-i18next";
 
 const MatchSkillSubModal = ({
   show,
@@ -11,6 +12,8 @@ const MatchSkillSubModal = ({
   mainSkills,
   name
 }) => {
+  const { t, i18n } = useTranslation();
+
   const handleCloseModal = () => {
     toggleModal();
   };
@@ -22,20 +25,28 @@ const MatchSkillSubModal = ({
     <Modal show={show} onHide={handleCloseModal} dialogClassName="skills-modal">
       <Modal.Header>
         <Modal.Title>{name}</Modal.Title>
-        <Button onClick={handleCloseModal}>Close</Button>
+        <Button onClick={handleCloseModal}>{t("matchedJobDetail.close")}</Button>
       </Modal.Header>
 
       <Modal.Body>
         <div className="row skills-modal__header-text">
-          <img src="https://www.seek.com.au/career-advice/assets/801328b9.svg" alt="icon match"/>
-          <span>Skill overlaps with your previous roles and {name}</span>
+          <img
+            src="https://www.seek.com.au/career-advice/assets/801328b9.svg"
+            alt="icon match"
+          />
+          <span>
+            {t("matchedJobDetail.header")} {name}
+          </span>
         </div>
 
-        <h3 className="row skills-modal__title">Key skills and experience</h3>
+        <h3 className="row skills-modal__title">
+          {t("matchedJobDetail.bigTitle")}
+        </h3>
 
         <p className="row skills-modal__sub-title">
-          Your previous roles have&nbsp;<b>{matchedSkills.length}</b>
-          &nbsp;overlapping key skills and experience.
+          {t("matchedJobDetail.numberOfSkillMatch")}&nbsp;
+          <b>{matchedSkills.length}</b>&nbsp;
+          {t("matchedJobDetail.numberOfSkillMatch2")}
         </p>
 
         <div className="skills-modal__list">
@@ -54,7 +65,7 @@ const MatchSkillSubModal = ({
             src="https://www.seek.com.au/career-advice/assets/a9c6382f.svg"
             alt="arrow right"
           />
-          <span>Learn more about this career</span>
+          <span>{t("matchedJobDetail.moreAboutCareer")}</span>
         </Link>
       </Modal.Body>
 

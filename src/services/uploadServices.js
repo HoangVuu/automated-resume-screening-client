@@ -10,7 +10,7 @@ export const updateCV = async (data, token) =>
     headers: { Authorization: `Bearer ${token}` }
   });
 
-export const deleteResume = async (id, token) =>
-  await API.delete(`/resume/${id}`, {
+export const deleteResume = async ( token) =>
+  await API.delete("/resume/delete", {
     headers: { Authorization: `Bearer ${token}` }
   });

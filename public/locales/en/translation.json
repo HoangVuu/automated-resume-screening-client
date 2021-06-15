@@ -1,8 +1,283 @@
 {
-  "Thanks": {
-    "a": "Thanks"
-  },
-  "Why": {
-    "a": "for watching"
-  }
+    "header": {
+        "jobSearch": "Job Search",
+        "profile": "Profile",
+        "careerAdvice": "Career Advice",
+        "savedJob": "Saved Jobs",
+        "appliedJob": "Applied Jobs",
+        "logOut": "Logout",
+        "logIn": "Login",
+        "employer": "Employer"
+    },
+    "candidateSignIn": {
+        "areYou": "Are you an employer?",
+        "signIn": "Sign in",
+        "form": {
+            "email": "Email address",
+            "enterEmail": "Enter email...",
+            "password": "Password",
+            "enterPassword": "Enter password..."
+        },
+        "doNot": "Don't have an account?",
+        "register": "Register"
+    },
+    "home": {
+        "Just": "Just explore then apply",
+        "Find": "Find your dream job in a quick way",
+        "Popular": "Popular position",
+        "jobSearch": {
+            "Please": "Please choose your role you want to apply...",
+            "location": "Location",
+            "full": "Full time",
+            "part": "Part time",
+            "internship": "Internship"
+        },
+        "location": "Work location..."
+    },
+    "careerAdvice": {
+        "tab1": "Explore what I can do with my skills",
+        "tab2": "Find the right job for me",
+        "titleBig": "How can you put your skills to work?",
+        "titleSmall": "Explore roles that could suit you based on your skills and experience",
+        "contentTitle": "Your career so far",
+        "contentKey": "Key skills",
+        "lookingFor": "Looking for a specific role or skill?",
+        "findOut": "Find out more about a role or skill you’re interested in.",
+        "whatRole": "What role would you like to get into?",
+        "form": {
+            "enterRole": "Enter a role...",
+            "explore": "Explore"
+        },
+        "searchSuggest": {
+            "enter": "Enter a skill...",
+            "what": "What skill do you want to focus on?"
+        }
+    },
+    "findJob": {
+        "hi": "Hi there",
+        "ready": "ready to explore advice and career options tailored to you?",
+        "find": "Find the right job for me",
+        "noToken": {
+            "signIn": "Sign in or register a Profile to find the right job for you",
+            "signInBtn": "Sign In",
+            "or": "or",
+            "register": "Register"
+        }
+    },
+    "signInDirect": {
+        "isNeedCV": {
+            "create": "Create a Profile to see tailored matches",
+            "signIn": "Sign in or register a Profile to see tailored matches"
+        },
+        "identify": "Identify the skills you already have, based on your experience so far",
+        "see": "See how your skill set could make you a match for different roles or industries",
+        "rate": "Rate your skills levels and what you enjoy to refine your options",
+        "discover": "Discover ways to make a change or expand your horizons with new skills",
+        "upload": "Upload your resume",
+        "signIn": "Sign In",
+        "or": "or",
+        "register": "Register"
+    },
+    "jobList": {
+        "jobSearchAdvance": {
+            "job": "Job title, role, keywords,...",
+            "location": "Location",
+            "find": "Find Jobs"
+        },
+        "date": "Date posted",
+        "job": "Job types",
+        "minimum": "Minimum salary",
+        "maximum": "Maximum salary",
+        "domains": "Job domains",
+        "last24": "Last 24 hours",
+        "last3": "Last 3 days",
+        "last7": "Last 7 days",
+        "desired": "you desired per month",
+        "update": "Update",
+        "million": "million",
+        "total": "Total",
+        "jobs": "jobs",
+        "show": "Show",
+        "10page": "10 jobs/ page",
+        "20page": "20 jobs/ page",
+        "50page": "50 jobs/ page",
+        "jobAlert": {
+            "title": "Be the first to see new jobs via email",
+            "email": "Email address",
+            "noti": "You actived email to receive jobs alert from us via email",
+            "active": "Active",
+            "by": "By creating a job alert, you agree to our Terms. You can change your consent settings at any time by unsubscribing in Profile."
+        },
+        "mySearch": "My recent searches",
+        "clear": "» Clear searches",
+        "emptyJob": {
+            "no": "No job vacancies!",
+            "search": "Search suggestions:",
+            "try": "Try more general keywords",
+            "check": "Check your spelling",
+            "replace": "Replace abbreviations with the entire word"
+        },
+        "salary": "Salary",
+        "day": " day ago",
+        "days": " days ago",
+        "justAdd": "Just added",
+        "apply": "Apply Now",
+        "saveJob": "Save Job",
+        "deadline": "Deadline for submission",
+        "workType": "Work type",
+        "amount": "Amount",
+        "noLimit": "Unlimited",
+        "jobDetail": "Job details",
+        "fullJob": "Full Job Description",
+        "des": "Description",
+        "roleReq": "Role Requirements",
+        "benefit": "Perks and Benefits",
+        "candidate": "candidate",
+        "candidates": "candidates"
+    },
+    "explore": {
+        "smallTitle": "Using skills listed in your Profile, we’ll help you discover career options.",
+        "addSkill": "Add skill",
+        "addASkill": "Add a skill....",
+        "Save": "Save and Match now",
+        "matchedTitle": "Your matched opportunities",
+        "mostMatches": "Most skill matches",
+        "goodSkill": "what you're good at",
+        "enjoy": "What you like",
+        "lookingBigTitle": "Looking for a specific role or skill?",
+        "lookingSmallTitle": "Find out more about a role or skill you’re interested in",
+        "lookingByRole": "What role would you like to get into?",
+        "lookingBySkill": "What skill do you want to focus on?",
+        "explore": "Explore",
+        "sorry": "Sorry, we’re unable to match you with suggestions",
+        "self": "Self evaluate skills of your previous roles to see matching opportunities",
+        "minimum": "Minimum common salary",
+        "maximum": "Maximum common salary"
+    },
+    "matchedJob": {
+        "matchSkills": "Your skills match",
+        "numberSkillMatch": "See how you match"
+    },
+    "matchedJobDetail": {
+        "header": "Skill overlaps with your previous roles and Fullstack Developer",
+        "bigTitle": "Key skills and experience",
+        "numberOfSkillMatch": "Your previous roles have",
+        "numberOfSkillMatch2": "overlapping key skills and experience.",
+        "moreAboutCareer": "Learn more about this career",
+        "close": "Close"
+    },
+    "findJobSignIn": {
+        "role": "Role you're interested in applying for",
+        "findLocation": "Preferred location",
+        "bigTitle": "Learn what you need to know about a role, from salary to job satisfaction.",
+        "smallTitle": "Get a role  you're interested in to see more.",
+        "great": "Great, you're interested in",
+        "location": "Find out the facts about this role and others like it in ",
+        "detail": {
+            "numberOfJob": "Jobs on website right now",
+            "minSalary": "Minimum common salary",
+            "maxSalray": "Maximum common salary",
+            "satisfaction": "Job satisfaction"
+        },
+        "update": "Update your preferences"
+    },
+    "profile": {
+        "editBtn": "Edit personal details",
+        "edit": "Edit personal details",
+        "email": "Email address",
+        "fullName": "Fullname",
+        "phone": "Phone",
+        "dateOfBirth": "Date of birth",
+        "gender": "Gender",
+        "male": "Male",
+        "female": "Female",
+        "live": "Lives in",
+        "save": "Save",
+        "cancel": "Cancel",
+        "title": "Create a new resume from your FASTJOB Profile by",
+        "uploadTitle": "Upload your resume",
+        "edu": "Education",
+        "editEdu": "Edit education",
+        "ex": "Experience",
+        "editEx": "Edit experience",
+        "months": "months",
+        "month": "month",
+        "skill": "Skills",
+        "addSkill": "Add skill",
+        "addSkillPlace": "Add soft skill...",
+        "addSSkill": "Add soft skill",
+        "click": "Click add to add more skills help employers find you.",
+        "clickS": "Click add to add more soft skills help employers find you.",
+        "softSkill": "Soft Skills",
+        "resume": "Resume",
+        "aboutRe": "About resume",
+        "watch": "Watch online",
+        "download": "Download",
+        "delete": "Delete",
+        "default": "Default",
+        "add": "Đã thêm",
+        "days": "days",
+        "day": "day",
+        "justAdded": "Just added",
+        "done": "Done",
+        "upload": "Upload",
+        "addRe": "To add a resume, click here and simply browse for a file.",
+        "accept": "Add 1 resume. Accepted file types: Microsoft Word (.doc or .docx) or Adobe PDF (.pdf)"
+    },
+    "profileSetting": {
+        "bigHeader": "Profile Visibility",
+        "headerDetail": "Your profile is the only one in system, recruiters can approach you with job opportunities.",
+        "standardHeader": "Standard",
+        "standarđetail": "For all information you provided, your Profile including any verified credentials will be sent to the recruiters with your applications."
+    },
+    "jobInvitation": {
+        "bigHeader": "Receive Job Invitaion",
+        "detailHeader": "Job Alert Email",
+        "active": "Active",
+        "paused": "Paused",
+        "in": "in",
+        "frequency": "Frequency",
+        "frequencyDetail": {
+            "daily": "Daily",
+            "weekly": "Weekly"
+        },
+        "another": "Get another topic",
+        "delete": "Delete this alert",
+        "mail": "Active email to receive more jobs from us"
+    },
+    "skillSuggest": {
+        "insight" : "Resume insights",
+        "here": "Here's how your resume aligns with the job description",
+        "make": "Make sure your resume is up to date",
+        "change": "Changes may take some time to be reflected in the above message.",
+        "update": "Update Resume",
+        "your": "Your resume might be missing some technical skills",
+        "yourS": "Your resume might be missing some soft skills",
+        "more": "+show more",
+        "less": "-show less"
+    },
+    "detail": {
+        "enter": "Enter job title, role, keywords...",
+        "location": "Enter work location...",
+        "similar": "Similar Job",
+        "report": "Report job",
+        "see": "See more jobs",
+        "find": "Find Jobs",
+        "company": "Company Info",
+        "follow": "Follow",
+        "jobUpdate": "Get job updates from",
+        "companyText:": "Whether it's helping a vulnerable child, making highways safer or restoring salmon habitat, the work that we do matters to the people of ...",
+        "let": "Let employers find you",
+        "thousand": "Thousands of employers search for candidates on our website",
+        "upload": "Upload your resume",
+        "update": "Update your resume"
+    },
+    "myJob": {
+        "saved": "Saved",
+        "applied": "Applied",
+        "job": "job",
+        "jobs": "jobs",
+        "addNote": "Add Notes",
+        "saveOn": "Saved job on"
+    }
 }

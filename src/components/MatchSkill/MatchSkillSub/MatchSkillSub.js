@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import "../MatchSkill.scss";
 import MatchSkillSubModal from "./MatchSkillSubModal";
+import { useTranslation } from "react-i18next";
 
 const MatchSkillSub = ({ matchedSkills, mainSkills, name }) => {
+  const { t, i18n } = useTranslation();
+
   const [show, toggleShow] = useState(false);
   const toggleModal = () => {
     toggleShow(true);
@@ -12,8 +14,8 @@ const MatchSkillSub = ({ matchedSkills, mainSkills, name }) => {
 
   return (
     <>
-      <div onClick={toggleModal} className="match-skill__sub row">
-        <div className="match-skill__sub__title">See how you match</div>
+      <div onClick={toggleModal} className="match-skill__sub row" style={{maxWidth: i18n.language === 'vi' && "283px"}}>
+        <div className="match-skill__sub__title">{t("matchedJob.numberSkillMatch")}</div>
         <div className="match-skill__sub__number">
           <span>{matchedSkills.length}</span>
         </div>

@@ -4,8 +4,11 @@ import "./Dropdown.scss";
 import { Input } from "antd";
 import OutsideClickWrapper from "components/OutsideClickWrapper/OutsideClickWrapper";
 import { Close } from "constants/svg";
+import { useTranslation } from "react-i18next";
 
 function Dropdown({ title, options, value, onChange, select = false }) {
+  const { t } = useTranslation();
+
   const [isShowing, setShowing] = useState(false);
   const [input, setInput] = useState(0);
 
@@ -72,12 +75,12 @@ function Dropdown({ title, options, value, onChange, select = false }) {
                 >
                   <div className="salary-selector-content">
                     <h2 className="salary-header">
-                      {title} you desired per month
+                      {title} {t("jobList.desired")}
                     </h2>
                   </div>
                   <Input
                     value={input}
-                    suffix="million"
+                    suffix="$ USD"
                     style={{ marginBottom: 16 }}
                     onChange={handleInputChange}
                   />
@@ -88,7 +91,7 @@ function Dropdown({ title, options, value, onChange, select = false }) {
                       role="button"
                       className="apply-button"
                     >
-                     Update
+                     {t("jobList.update")}
                     </span>
                   </div>
                   <div
@@ -108,7 +111,7 @@ function Dropdown({ title, options, value, onChange, select = false }) {
           <span>
             {select
               ? options.find((ele) => ele.value === parseInt(value)).label
-              : `${title}: ${value} triệu`}
+              : `${title}: $${value}`}
             <div className="filters-close" onClick={() => onChange(undefined)}>
               <img src="/assets/svg/Close.svg" alt="clear filter" />
             </div>

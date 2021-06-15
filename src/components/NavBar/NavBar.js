@@ -6,7 +6,6 @@ import {
   SmileTwoTone,
   HeartTwoTone,
   CheckCircleTwoTone,
-  LikeTwoTone,
   StarTwoTone
 } from "@ant-design/icons";
 
@@ -20,8 +19,11 @@ import { checkCookie, setCookie } from "utils/cookies";
 import "./NavBar.scss";
 import { candidateProfileAction, resetProfile } from "state/actions/profileAction";
 import isEmpty from "lodash/isEmpty";
+import { useTranslation } from "react-i18next";
 
 function NavBar() {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.auth.candidate.token);
   const profile = useSelector((state) => state.profile.candidateProfile);
@@ -41,7 +43,6 @@ function NavBar() {
   };
 
   const handleClick = (i) => {
-    console.log("i", i);
     setClickItem(i);
   };
 
@@ -50,7 +51,6 @@ function NavBar() {
       let n = profile.fullName.lastIndexOf(" ");
       var res = profile.fullName.substring(n);
     }
-    console.log(res);
     return res;
   };
 
@@ -97,7 +97,7 @@ function NavBar() {
                   to="/profile"
                   className="header__navbar__info__group__item"
                 >
-                  <span>Profile</span>
+                  <span>{t("header.profile")}</span>
                   <SmileTwoTone />
                 </Link>
 
@@ -105,7 +105,7 @@ function NavBar() {
                   to="/saved-jobs"
                   className="header__navbar__info__group__item"
                 >
-                  <span>Saved Jobs</span>
+                  <span>{t("header.savedJob")}</span>
                   <HeartTwoTone twoToneColor="#eb2f96" />
                 </Link>
 
@@ -113,7 +113,7 @@ function NavBar() {
                   to="/applied-jobs"
                   className="header__navbar__info__group__item"
                 >
-                  <span>Applied Jobs</span>
+                  <span>{t("header.appliedJob")}</span>
                   <CheckCircleTwoTone twoToneColor="#52c41a" />
                 </Link>
 
@@ -126,7 +126,7 @@ function NavBar() {
                   className="header__navbar__info__group__item"
                   onClick={logOut}
                 >
-                  <span>Logout</span>
+                  <span>{t("header.logOut")}</span>
                 </div>
               </div>
             )}
@@ -134,7 +134,7 @@ function NavBar() {
         ) : (
           <NavItem
             {...{
-              title: "Login",
+              title: t("header.logIn"),
               url: "/sign-in",
               button: true
             }}
@@ -146,7 +146,7 @@ function NavBar() {
           size="large"
           onClick={() => history.push("/recruiter/home")}
         >
-          Employer
+         {t("header.employer")}
         </Button>
       </ul>
     </div>
@@ -166,6 +166,8 @@ const NavItem = ({
   isActive,
   isCareer = false
 }) => {
+  const { t } = useTranslation();
+
   return (
     <li className="nav-item header__nav-item">
       {link && (
@@ -178,7 +180,7 @@ const NavItem = ({
           }
           onClick={linkClick}
         >
-          {title}
+          {t(`header.${title}`)}
           {isCareer && <StarTwoTone className="nav-link__icon" twoToneColor="#F57C00" />}
         </Link>
       )}

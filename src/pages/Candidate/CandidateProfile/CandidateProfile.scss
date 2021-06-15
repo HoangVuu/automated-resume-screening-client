@@ -67,6 +67,10 @@
         padding-left: 24px;
       }
 
+      label[for="nest-messages_province_id"] {
+        font-size: 16px;
+      }
+
       &__form {
         label::before {
           display: none !important;
@@ -263,30 +267,29 @@
       position: sticky;
       top: 20px;
 
-      &__res{
+      &__res {
         display: flex;
         justify-content: space-between;
         align-items: center;
         border-top: 1px solid #ececec;
-        padding-top: 10px;
+        padding-top: 20px;
         margin-bottom: 10px;
       }
 
-      &__top{
+      &__top {
         padding: 25px;
         background-color: #fff;
       }
 
-      &__bottom{
+      &__bottom {
         margin-top: 20px;
         padding: 25px;
         background-color: #fff;
 
-        &__edit{
+        &__edit {
           display: flex;
           justify-content: space-between;
           margin-top: 30px;
-
         }
       }
 
@@ -417,6 +420,14 @@
     //   max-height: 480px;
     //   overflow: auto;
     // }
+  }
+
+  .edit-mode-ex {
+    div {
+      position: relative;
+      max-height: 480px;
+      overflow: auto;
+    }
   }
 
   .ant-input-number {

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { SearchOutlined, CloseOutlined, PlusOutlined } from "@ant-design/icons";
-import qs from "query-string";
 import AutoSuggest from "react-autosuggest";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -9,11 +8,13 @@ import { getSoftSkill } from "services/hrJobServices";
 import { GET_SOFT_SKILL } from "state/reducers/jobDomainReducer";
 import { toastErr, toast } from "utils/index";
 import Loading from "components/Loading/Loading";
-import { Button } from "antd";
 
 import "./AddSoftSkillSuggest.scss";
+import { useTranslation } from "react-i18next";
 
 function AddSoftSkillSuggest({ handleAddSoft, isAddSoft, isCorner = false }) {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
 
   const skillsData = useSelector((state) => state.jobDomain.softSkills);
@@ -56,12 +57,12 @@ function AddSoftSkillSuggest({ handleAddSoft, isAddSoft, isCorner = false }) {
   const onSuggestionsClearRequested = () => setSuggestions([]);
 
   const onSuggestionSelected = (_, { suggestionValue }) => {
-    console.log("Selected: " + suggestionValue);
+    // console.log("Selected: " + suggestionValue);
   };
 
   // Autosuggest will pass through all these props to the input.
   const inputProps = {
-    placeholder: "Add soft skill...",
+    placeholder: t("profile.addSkillPlace"),
     value: softValue,
     onChange: (_, { newValue, method }) => {
       setSoftValue(newValue);

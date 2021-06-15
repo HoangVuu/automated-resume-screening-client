@@ -5,7 +5,6 @@ import { Tabs, Tab } from "react-bootstrap";
 
 import React, { useEffect, useState } from "react";
 import "./CareerAdvice.scss";
-import { useLocation } from "react-router-dom";
 import qs from "query-string";
 import { candidateProfileAction } from "state/actions/profileAction";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,14 +14,17 @@ import SignInDirect from "./SignInDirect/SignInDirect";
 
 import { toastErr } from "utils/index";
 import isEmpty from "lodash/isEmpty";
-import { GET_JOB_DOMAIN, GET_JOB_SKILL } from "state/reducers/jobDomainReducer";
+import { GET_JOB_DOMAIN } from "state/reducers/jobDomainReducer";
 import Select from "react-select";
 import { SearchOutlined } from "@ant-design/icons";
 import SearchSuggest from "components/SearchSuggest/SearchSuggest";
+import { useTranslation } from "react-i18next";
 
 function CandidateCareerAdvice({ history }) {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
-  const profile = useSelector((state) => state.profile.candidateProfile);
+  // const profile = useSelector((state) => state.profile.candidateProfile);
   const token = useSelector((state) => state.auth.candidate.token);
   const domains = useSelector((state) => state.jobDomain.domains);
 
@@ -116,7 +118,7 @@ function CandidateCareerAdvice({ history }) {
         className="main-tabs"
         defaultActiveKey="explore"
       >
-        <Tab eventKey="explore" title="Explore what I can do with my skills">
+        <Tab eventKey="explore" title={t("careerAdvice.tab1")}>
           {state === "explore" &&
             (token ? (
               !isEmpty(resume) ? (
@@ -125,10 +127,10 @@ function CandidateCareerAdvice({ history }) {
                 <div className="container">
                   <div className="explore__content">
                     <h2 className="explore__content__title">
-                      Your career so far
+                    {t("careerAdvice.contentTitle")}
                     </h2>
                     <div className="explore__content__key">
-                      <p>Key skills</p>
+                      <p>{t("careerAdvice.contentKey")}</p>
                     </div>
                     <SignInDirect isNeedCV={true} />
                   </div>
@@ -138,12 +140,11 @@ function CandidateCareerAdvice({ history }) {
               <div className="explore">
                 <div className="explore__title">
                   <div className="container">
-                    <h1 className="explore__title__big">
-                      How can you put your skills to work?
+                    <h1 className="explore__title__big" style={{width: '80%', lineHeight: '1.08'}}>
+                      {t("careerAdvice.titleBig")}
                     </h1>
                     <p className="explore__title__small">
-                      Explore roles that could suit you based on your skills and
-                      experience
+                    {t("careerAdvice.titleSmall")}
                     </p>
                   </div>
                 </div>
@@ -151,10 +152,10 @@ function CandidateCareerAdvice({ history }) {
                 <div className="container">
                   <div className="explore__content">
                     <h2 className="explore__content__title">
-                      Your career so far
+                     {t("careerAdvice.contentTitle")}
                     </h2>
                     <div className="explore__content__key">
-                      <p>Key skills</p>
+                      <p>{t("careerAdvice.contentKey")}</p>
                     </div>
                     <SignInDirect />
                   </div>
@@ -164,14 +165,14 @@ function CandidateCareerAdvice({ history }) {
 
           <div className="container">
             <h2 className="explore__title-look">
-              Looking for a specific role or skill?
+              {t("careerAdvice.lookingFor")}
             </h2>
             <div className="explore__title-sub">
-              Find out more about a role or skill you’re interested in.
+            {t("careerAdvice.findOut")}
             </div>
             <div className="explore-look">
               <h2 className="explore-look__title">
-                What role would you like to get into?
+              {t("careerAdvice.whatRole")}
               </h2>
 
               <form>
@@ -182,7 +183,7 @@ function CandidateCareerAdvice({ history }) {
                         value={role}
                         onChange={(value) => setRole(value)}
                         options={jobDomains}
-                        placeholder="Enter a role..."
+                        placeholder={t("careerAdvice.form.enterRole")}
                         menuPosition="fixed"
                         isClearable={true}
                       />
@@ -197,7 +198,7 @@ function CandidateCareerAdvice({ history }) {
                       style={{ fontWeight: 700 }}
                       onClick={subitSearch}
                     >
-                      Explore
+                      {t("careerAdvice.form.explore")}
                     </button>
                   </div>
                 </div>
@@ -208,7 +209,7 @@ function CandidateCareerAdvice({ history }) {
             <SearchSuggest handleSubmit={submit} />
           </div>
         </Tab>
-        <Tab eventKey="find" title="Find the right job for me">
+        <Tab eventKey="find" title={t("careerAdvice.tab2")}>
           {state === "find" && (
             <FindJob history={history} hasResume={!isEmpty(resume)} />
           )}

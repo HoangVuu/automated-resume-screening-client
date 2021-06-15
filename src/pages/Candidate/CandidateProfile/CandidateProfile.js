@@ -30,13 +30,16 @@ import {
 } from "@ant-design/icons";
 
 import swal from "sweetalert";
+import { useTranslation } from "react-i18next";
 
 import isEmpty from "lodash/isEmpty";
 import {
   toastErr,
   toast,
   formatProvince,
-  formatProvinceName
+  formatProvinceName,
+  formatProvinceEn,
+  formatProvinceNameEn
 } from "utils/index";
 import ContentEditable from "react-contenteditable";
 
@@ -55,6 +58,7 @@ import { candidateProfileAction } from "state/actions/profileAction";
 import { updateProfileProAction } from "state/actions/profileAction";
 import { updateCVProfileAction } from "state/actions/index";
 import { Link } from "react-router-dom";
+import { deleteResume } from "services/uploadServices";
 
 const ACCEPTS = [
   "application/msword",
@@ -81,6 +85,8 @@ const validateMessages = {
 };
 
 function MyProfile() {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
 
   // ref
@@ -132,10 +138,24 @@ function MyProfile() {
     }))
   );
 
+  const provinceEn = useSelector((state) =>
+    state.cv.provinces.map(({ province_id, province_name_en }) => ({
+      value: province_id,
+      label: province_name_en
+    }))
+  );
+
   const provinceList = useSelector((state) => state.cv.provinces);
 
   const defaultProvince = (id) =>
-    provinces.length && provinces.find((item) => item.value === id);
+    provinces &&
+    provinces.length &&
+    provinces.find((item) => item.value === id);
+
+  const defaultProvinceEn = (id) =>
+    provinceEn &&
+    provinceEn.length &&
+    provinceEn.find((item) => item.value === id);
 
   const onFinish = (fieldsValue) => {
     const values = {
@@ -269,7 +289,13 @@ function MyProfile() {
     const file = e.target.files[0];
 
     if (!ACCEPTS.includes(file.type)) {
-      toast({ type: "error", message: "Định dạng tệp không hợp lệ" });
+      toast({
+        type: "error",
+        message:
+          i18n.language === "vi"
+            ? "Định dạng tệp không hợp lệ"
+            : "Invalid file format"
+      });
     } else {
       setLoading(true);
 
@@ -334,7 +360,13 @@ function MyProfile() {
       token
     )
       .then((res) => {
-        toast({ type: "success", message: "Update frequency successful" });
+        toast({
+          type: "success",
+          message:
+            i18n.language === "en"
+              ? "Update alert frequency successful"
+              : "Cập nhập tần suất thông báo thành công"
+        });
       })
       .catch((err) => console.log(err));
   };
@@ -353,17 +385,23 @@ function MyProfile() {
       token
     )
       .then((res) => {
-        toast({ type: "success", message: "Update status successful" });
+        toast({
+          type: "success",
+          message:
+            i18n.language === "en"
+              ? "Update alert status successful"
+              : "Cập nhập trạng thái thông báo thành công"
+        });
       })
       .catch((err) => console.log(err));
   };
 
   const onDeleteSubcribe = () => {
     swal({
-      title: "Are you sure to delete jobs alert?",
-      text: "You'll not receive from us in the future!",
+      title:  i18n.language === "en" ? "Are you sure to delete jobs alert?" : "Bạn có chắc chắn muốn xóa thông báo công việc này?",
+      text: i18n.language === "en" ? "You'll not receive email from us in the future!" : "Bạn sẽ không nhận được email thông báo từ chúng tôi sau này",
       icon: "warning",
-      buttons: ["Cancel", "Delete"],
+      buttons: [t("profile.cancel"), t("profile.delete")],
       dangerMode: true
     })
       .then(async (willDelete) => {
@@ -373,14 +411,40 @@ function MyProfile() {
               setSubcribe(null);
               toast({
                 type: "success",
-                message: "Delete your jobs alert successful"
+                message: i18n.language === "en" ? "Delete your jobs alert successful" : "Xóa thông báo công việc thành công "
               });
             })
             .catch((err) => {
               console.log(err);
             });
-        } else {
-          swal("Jobs alert is working!");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const onDeleteProfile = () => {
+    swal({
+      title:  i18n.language === "en" ? "Are you sure to delete this resume?": "Bạn có chắc chắn muốn xóa sơ yếu lý lịch này?",
+      text: i18n.language === "en" ? "Employer maybe cannot find you!" : "Nhà tuyển dụng có lẽ sẽ không tìm thấy bạn",
+      icon: "warning",
+      buttons:  [t("profile.cancel"), t("profile.delete")],
+      dangerMode: true
+    })
+      .then(async (willDelete) => {
+        if (willDelete) {
+          await deleteResume(token)
+            .then((res) => {
+              setResume(null);
+              toast({
+                type: "success",
+                message: i18n.language === "en" ? "Delete your resume successful" : "Xóa sơ yếu lý lịch thành công"
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
       })
       .catch((err) => {
@@ -434,7 +498,6 @@ function MyProfile() {
     }
   }, []);
 
-  console.log("active", active);
   return (
     <div className="my-profile">
       <Loading loading={loading} />
@@ -451,14 +514,14 @@ function MyProfile() {
               onClick={toggleProFormEdit}
               className="my-profile__candidate__button"
             >
-              Edit personal details
+              {t("profile.editBtn")}
             </button>
 
             {profileForm && (
               <div className="col-sm-8 my-profile__candidate__edit edit-mode-container">
-                <h3 style={{ paddingLeft: "24px" }}>Edit personal details</h3>
+                <h3 style={{ paddingLeft: "24px" }}>{t("profile.edit")}</h3>
                 <h4 className="my-profile__candidate__edit__title">
-                  Email address
+                  {t("profile.email")}
                 </h4>
                 <span className="my-profile__candidate__edit__email">
                   {profile.email}
@@ -489,7 +552,7 @@ function MyProfile() {
                   ]}
                 >
                   <Form.Item
-                    label="Fullname"
+                    label={t("profile.fullName")}
                     name="fullName"
                     rules={[{ required: true }]}
                   >
@@ -498,7 +561,7 @@ function MyProfile() {
 
                   {/* Email */}
                   <Form.Item
-                    label="Phone"
+                    label={t("profile.phone")}
                     name="phone"
                     rules={[
                       { required: true },
@@ -516,7 +579,7 @@ function MyProfile() {
                     <Form.Item
                       className="col-sm"
                       name="dateOfBirth"
-                      label="Date of birth"
+                      label={t("profile.dateOfBirth")}
                       // defaultValue={moment(deadline)}
                       {...config}
                     >
@@ -534,19 +597,23 @@ function MyProfile() {
                         { required: true, message: "Please choose gender!" }
                       ]}
                       name="gender"
-                      label="Gender"
+                      label={t("profile.gender")}
                     >
                       <Radio.Group defaultValue={profile.gender}>
-                        <Radio value={true}>Male</Radio>
-                        <Radio value={false}>Female</Radio>
+                        <Radio value={true}>{t("profile.male")}</Radio>
+                        <Radio value={false}>{t("profile.female")}</Radio>
                       </Radio.Group>
                     </Form.Item>
                   </div>
 
-                  <Form.Item name="province_id" label=" Lives in">
+                  <Form.Item name="province_id" label={t("profile.live")}>
                     <Select
-                      defaultValue={defaultProvince(profile.provinceId)}
-                      options={provinces}
+                      defaultValue={
+                        i18n.language === "vi"
+                          ? defaultProvince(profile.provinceId)
+                          : defaultProvinceEn(profile.provinceId)
+                      }
+                      options={i18n.language === "en" ? provinceEn : provinces}
                       size="large"
                     />
                   </Form.Item>
@@ -556,13 +623,13 @@ function MyProfile() {
                       className="save-btn profile-button"
                       onClick={toggleProFormEdit}
                     >
-                      Save
+                      {t("profile.save")}
                     </button>
                     <button
                       className="profile-button-cancel"
                       onClick={() => setProfileForm(false)}
                     >
-                      Cancel
+                      {t("profile.cancel")}
                     </button>
                   </div>
                 </Form>
@@ -575,15 +642,13 @@ function MyProfile() {
       <div className="my-profile__resume container">
         <div className="my-profile__resume__upload row">
           <div className="my-profile__resume__upload__left">
-            <h4 className="profile-title">
-              Create a new resume from your FASTJOB Profile
-            </h4>
+            <h4 className="profile-title">{t("profile.title")}</h4>
             <div className="my-profile__resume__upload__left__btn-gr row">
               <button
                 className="my-profile__resume__upload__left__btn-gr__start"
                 onClick={() => resumeFormRef.current.scrollIntoView()}
               >
-                Upload your resume
+                {t("profile.uploadTitle")}
               </button>
             </div>
           </div>
@@ -613,7 +678,7 @@ function MyProfile() {
                     className="profile-title"
                     style={{ fontWeight: "700", marginBottom: "32px" }}
                   >
-                    Education
+                    {t("profile.edu")}
                   </h4>
                   <div
                     className={
@@ -638,14 +703,14 @@ function MyProfile() {
                       }
                       onClick={!eduForm ? toggleEduForm : handleSubmit}
                     >
-                      {!eduForm ? "Edit education" : "Save"}
+                      {!eduForm ? t("profile.editEdu") : t("profile.save")}
                     </button>
                     {eduForm && (
                       <button
                         className="profile-button-cancel"
                         onClick={cancelEdu}
                       >
-                        Cancel
+                        {t("profile.cancel")}
                       </button>
                     )}
                   </div>
@@ -659,22 +724,23 @@ function MyProfile() {
                     (exForm && "edit-mode-container")
                   }
                 >
-                  <h4 className="profile-title" style={{ fontWeight: "700" }}>
-                    Experience
-                  </h4>
                   <div className="wizard-page-children my-profile__resume__education__content">
-                    <div className="rv-content">
+                    <div className="rv-content" style={{ padding: "0" }}>
                       <div
                         className="custom"
                         style={{
                           display: "flex",
                           justifyContent: "space-between",
-                          alignItems: "center"
+                          alignItems: "center",
+                          paddingBottom: "22px"
                         }}
                       >
-                        <div className="heading-margin sg-heading3 title">
-                          Kinh nghiệm thực tế
-                        </div>
+                        <h4
+                          className="heading-margin sg-heading3 title profile-title"
+                          style={{ fontWeight: "700" }}
+                        >
+                          {t("profile.ex")}
+                        </h4>
 
                         <div>
                           <InputNumber
@@ -688,12 +754,19 @@ function MyProfile() {
                             }}
                           />
                           <span style={{ marginLeft: "10px" }}>
-                            tháng <span className="text-danger">*</span>
+                            {resume.months_of_experience > 1
+                              ? t("profile.months")
+                              : t("profile.month")}{" "}
+                            <span className="text-danger">*</span>
                           </span>
                         </div>
                       </div>
                       <div
-                        className={exForm && "wizard-page-children edit-mode"}
+                        className={
+                          exForm
+                            ? "wizard-page-children my-profile__resume__education__content-edit edit-mode"
+                            : "wizard-page-children my-profile__resume__education__content"
+                        }
                       >
                         <ContentEditable
                           html={resume.experiences} // innerHTML of the editable div
@@ -712,14 +785,14 @@ function MyProfile() {
                       }
                       onClick={!exForm ? toggleExForm : handleSubmit}
                     >
-                      {!exForm ? "Edit Experience" : "Save"}
+                      {!exForm ? t("profile.editEx") : t("profile.save")}
                     </button>
                     {exForm && (
                       <button
                         className="profile-button-cancel"
                         onClick={cancelEx}
                       >
-                        Cancel
+                        {t("profile.cancel")}
                       </button>
                     )}
                   </div>
@@ -736,7 +809,7 @@ function MyProfile() {
                     className="profile-title"
                     style={{ fontWeight: "700", marginBottom: "32px" }}
                   >
-                    Skills
+                    {t("profile.skill")}
                   </h4>
                   <div className="chip" style={{ marginTop: "20px" }}>
                     {skills &&
@@ -754,7 +827,7 @@ function MyProfile() {
 
                   {skillForm && (
                     <div className="my-profile__resume__skills__add__sub">
-                      Click add to add more skills help employers find you
+                      {t("profile.click")}
                     </div>
                   )}
                   <div
@@ -782,7 +855,7 @@ function MyProfile() {
                         icon={<PlusOutlined />}
                         onClick={onAddSkill}
                       >
-                        Add skill
+                        {t("profile.addSkill")}
                       </Button>
                     </div>
                   </div>
@@ -796,14 +869,14 @@ function MyProfile() {
                       }
                       onClick={!skillForm ? toggleSkillForm : handleSubmit}
                     >
-                      {!skillForm ? "Add skills" : "Save"}
+                      {!skillForm ? t("profile.addSkill") : t("profile.save")}
                     </button>
                     {skillForm && (
                       <button
                         className="profile-button-cancel"
                         onClick={onCancelSkills}
                       >
-                        Cancel
+                        {t("profile.cancel")}
                       </button>
                     )}
                   </div>
@@ -819,7 +892,7 @@ function MyProfile() {
                     className="profile-title"
                     style={{ fontWeight: "700", marginBottom: "32px" }}
                   >
-                    Soft Skills
+                    {t("profile.softSkill")}
                   </h4>
                   <div className="chip" style={{ marginTop: "20px" }}>
                     {softSkills &&
@@ -837,7 +910,7 @@ function MyProfile() {
 
                   {softSkillForm && (
                     <div className="my-profile__resume__skills__add__sub">
-                      Click add to add more soft skills help employers find you
+                      {t("profile.clickS")}
                     </div>
                   )}
                   <div
@@ -865,7 +938,7 @@ function MyProfile() {
                         icon={<PlusOutlined />}
                         onClick={onAddSoftSkill}
                       >
-                        Add skill
+                        {t("profile.addSkill")}
                       </Button>
                     </div>
                   </div>
@@ -883,7 +956,9 @@ function MyProfile() {
                         !softSkillForm ? toggleSoftSkillForm : handleSubmit
                       }
                     >
-                      {!softSkillForm ? "Add skills" : "Save"}
+                      {!softSkillForm
+                        ? t("profile.addSSkill")
+                        : t("profile.save")}
                     </button>
                     {softSkillForm && (
                       <button
@@ -907,7 +982,7 @@ function MyProfile() {
               }
             >
               <h4 className="profile-title" style={{ fontWeight: "700" }}>
-                Resume
+                {t("profile.resume")}
               </h4>
 
               {/* Resume exist */}
@@ -922,7 +997,7 @@ function MyProfile() {
 
                     <div className="my-profile__resume__info__row__left">
                       <div className="my-profile__resume__info__tag">
-                        Default
+                        {t("profile.default")}
                       </div>
 
                       <a
@@ -935,7 +1010,7 @@ function MyProfile() {
                         <DownloadOutlined className="cv-item__info__bottom__btn__icon" />
                       </a>
                       <div className="my-profile__resume__info__days">
-                        Added 2 days ago
+                        {t("profile.justAdded")}
                       </div>
                     </div>
                   </div>
@@ -951,7 +1026,7 @@ function MyProfile() {
                           }
                         >
                           <EyeOutlined className="cv-item__info__bottom__btn__icon" />
-                          Watch online
+                          {t("profile.watch")}
                         </button>
 
                         <a
@@ -959,16 +1034,16 @@ function MyProfile() {
                           className="cv-item__info__bottom__btn btn btn-sm btn-outline-secondary "
                         >
                           <DownloadOutlined className="cv-item__info__bottom__btn__icon" />
-                          Download
+                          {t("profile.download")}
                         </a>
 
                         <button
                           type="button"
                           className="cv-item__info__bottom__btn btn btn-sm  btn-outline-secondary"
-                          // onClick={handleDelete}
+                          onClick={onDeleteProfile}
                         >
                           <DeleteOutlined className="cv-item__info__bottom__btn__icon" />
-                          Delete
+                          {t("profile.delete")}
                         </button>
                       </div>
 
@@ -979,8 +1054,7 @@ function MyProfile() {
               ) : (
                 <div className="my-profile__resume__upload-file">
                   <p className="my-profile__resume__upload-file__note">
-                    Add 1 resume. Accepted file types: Microsoft Word (.doc or
-                    .docx) or Adobe PDF (.pdf)
+                    {t("profile.accept")}
                   </p>
                   <div
                     className="my-profile__resume__upload-file__box"
@@ -993,14 +1067,14 @@ function MyProfile() {
                       }}
                     />
                     <span className="my-profile__resume__upload-file__box__add">
-                      To add a resume, click here or simply browse for a file.
+                      {t("profile.addRe")}
                     </span>
                     <Button
                       // onClick={handleSelectFile}
                       icon={<UploadOutlined />}
                       className="my-profile__resume__upload-file__box__btn"
                     >
-                      Upload
+                      {t("profile.upload")}
                       <input
                         type="file"
                         name="CV"
@@ -1021,14 +1095,14 @@ function MyProfile() {
                       className="profile-button"
                       onClick={toggleResumeForm}
                     >
-                      About resume
+                      {t("profile.aboutRe")}
                     </button>
                   ) : (
                     <button
                       className="save-btn profile-button"
                       onClick={() => setResumeForm(false)}
                     >
-                      Done
+                      {t("profile.done")}
                     </button>
                   )}
                 </div>
@@ -1047,7 +1121,7 @@ function MyProfile() {
               <div className="my-profile__resume__right-info__top">
                 <div className="row my-profile__resume__right-info__group">
                   <h3 className="profile-title" style={{ fontSize: "20px" }}>
-                    Profile visibility
+                    {t("profileSetting.bigHeader")}
                   </h3>
                   <ProfileTwoTone
                     style={{
@@ -1059,28 +1133,25 @@ function MyProfile() {
                 </div>
 
                 <p className="my-profile__resume__right-info__subtitle">
-                  Your profile is the only one in the system, employers can
-                  approach you with job opportunities.
+                  {t("profileSetting.headerDetail")}
                 </p>
                 <p className="my-profile__resume__right-info__weight">
-                  Standard
+                  {t("profileSetting.standardHeader")}
                 </p>
                 <span className="my-profile__resume__right-info__last">
-                  For all information you provided, your Profile including any
-                  verified credentials will be sent to the employer with your
-                  applications.
+                  {t("profileSetting.standarđetail")}
                 </span>
               </div>
 
               <div className="my-profile__resume__right-info__bottom">
                 <div className="row my-profile__resume__right-info__group">
                   <h3 className="profile-title" style={{ fontSize: "20px" }}>
-                    Receive Job Invitationy
+                    {t("jobInvitation.bigHeader")}
                   </h3>
                 </div>
 
                 <p className="my-profile__resume__right-info__subtitle">
-                  Job Alert Email{" "}
+                  {t("jobInvitation.detailHeader")}{" "}
                   <RobotOutlined
                     style={{
                       fontSize: "20px",
@@ -1108,7 +1179,7 @@ function MyProfile() {
                         </span>{" "}
                         {subcribe.province_id && (
                           <>
-                            <span> in </span>
+                            <span> {t("jobInvitation.in")} </span>
                             <span
                               className="my-profile__resume__right-info__weight"
                               style={{ fontSize: "15px" }}
@@ -1136,15 +1207,11 @@ function MyProfile() {
                       className="my-profile__resume__right-info__last"
                       style={{ color: " #6f6f6f" }}
                     >
-                      {active ? "Active" : "Paused"}
+                      {active
+                        ? t("jobInvitation.active")
+                        : t("jobInvitation.paused")}
                     </p>
 
-                    <span
-                      className="my-profile__resume__right-info__last"
-                      style={{ marginRight: "15px" }}
-                    >
-                      Frequency:
-                    </span>
                     <Form
                       layout="vertical"
                       name="nest-messages"
@@ -1155,14 +1222,33 @@ function MyProfile() {
                           value: frequency
                         }
                       ]}
+                      style={{ display: "flex", alignItems: "center" }}
                     >
-                      <Form.Item className="col-sm" name="frequency">
+                      <span
+                        className="my-profile__resume__right-info__last"
+                        style={{ marginRight: "15px" }}
+                      >
+                        {t("jobInvitation.frequency")}:
+                      </span>
+                      <Form.Item
+                        className="col-sm"
+                        name="frequency"
+                        style={{
+                          width: "fit-content",
+                          marginBottom: "0",
+                          padding: i18n.language === "vi" && "0"
+                        }}
+                      >
                         <Radio.Group
                           defaultValue={subcribe?.frequency}
                           onChange={(e) => setValueRadio(e.target.value)}
                         >
-                          <Radio value={0}>Daily</Radio>
-                          <Radio value={1}>Weekly</Radio>
+                          <Radio value={0}>
+                            {t("jobInvitation.frequencyDetail.daily")}
+                          </Radio>
+                          <Radio value={1}>
+                            {t("jobInvitation.frequencyDetail.weekly")}
+                          </Radio>
                         </Radio.Group>
                       </Form.Item>
                     </Form>
@@ -1172,7 +1258,7 @@ function MyProfile() {
                         className="job-list-receiving__link"
                         style={{ color: "#1890FF" }}
                       >
-                        Get another topic
+                        {t("jobInvitation.another")}
                       </Link>
                       <div
                         style={{ color: "#DB183F", cursor: "pointer" }}
@@ -1182,7 +1268,7 @@ function MyProfile() {
                           twoToneColor="#DB183F"
                           style={{ marginRight: "3px" }}
                         />{" "}
-                        Delete this alert
+                        {t("jobInvitation.delete")}
                       </div>
                     </div>
                   </>
@@ -1196,7 +1282,7 @@ function MyProfile() {
                       className="job-list-receiving__link"
                       style={{ color: "#1890FF" }}
                     >
-                      Active email to receive more jobs from us
+                      {t("jobInvitation.mail")}
                     </Link>
                   </div>
                 )}

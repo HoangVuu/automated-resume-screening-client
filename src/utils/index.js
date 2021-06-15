@@ -54,6 +54,12 @@ export const formatProvince = (provinces, provinceId) => {
   return province && province.province_name;
 };
 
+export const formatProvinceEn = (provinces, provinceId) => {
+  const province = provinces.find((p) => p.province_id === provinceId);
+
+  return province && province.province_name_en;
+};
+
 export const formatProvinceName = (province) => {
   let name;
   if (province && province.includes("Thành phố ")) {
@@ -64,6 +70,17 @@ export const formatProvinceName = (province) => {
 
   return name && name.length && name[1];
 };
+
+// export const formatProvinceNameEn = (province) => {
+//   let name;
+//   if (province && province.includes(" province")) {
+//     name = province.split(" province");
+//   } else if (province && province.includes(" capital")) {
+//     name = province.split(" capital");
+//   }
+
+//   return name && name.length && name[0];
+// };
 
 export const formatProvinceNameBrief = (province) => {
   let provinceName = formatProvinceName(province);

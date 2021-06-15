@@ -6,14 +6,13 @@ import Select from "react-select";
 import { useSelector } from "react-redux";
 import history from "state/history";
 import qs from "query-string";
+import { useTranslation } from "react-i18next";
 
-const OPTIONS = [
-  { label: "Toàn thời gian", value: 0 },
-  { label: "Bán thời gian", value: 1 },
-  { label: "Thực tập", value: 2 }
-];
+
 
 function JobSearch() {
+  const { t } = useTranslation();
+
   const [jobTypeChecked, setJobTypeChecked] = useState(null);
   const [location, setLocation] = useState(null);
   const [job_title, setJobTile] = useState(null);
@@ -23,6 +22,12 @@ function JobSearch() {
     value: province_id,
     label: province_name
   }));
+
+  const OPTIONS = [
+    { label: t("home.jobSearch.full"), value: 0 },
+    { label: t("home.jobSearch.part"), value: 1 },
+    { label: t("home.jobSearch.internship"), value: 2 }
+  ];
 
   const onChange = (checkedValues) => setJobTypeChecked(checkedValues);
 
@@ -52,7 +57,7 @@ function JobSearch() {
                 type="text"
                 value={job_title}
                 onChange={(e) => setJobTile(e.target.value)}
-                placeholder="Please choose your role you want to apply"
+                placeholder={t("home.jobSearch.Please")}
                 className="form-control form-control-lg rounded-bottom-0 rounded-md-right-0 border-left-0 border-top-0"
               />
             </div>
@@ -61,7 +66,7 @@ function JobSearch() {
                 options={options}
                 value={location}
                 onChange={(value) => setLocation(value)}
-                placeholder="Location"
+                placeholder={t("home.location")}
                 menuPosition="fixed"
                 isClearable={true}
                 className="form-control form-control-lg rounded-0 border-left-0 border-right-0 border-top-0 align-item-center"

@@ -19,9 +19,11 @@ import ContentLoader from "react-content-loader";
 
 import { candidateJobSuggestProAction } from "state/actions/candidateJobAction";
 import { getSuggestJob } from "services/jobServices";
-import height from "../../../../../node_modules/dom-helpers/cjs/height";
+import { useTranslation } from "react-i18next";
 
 const FindJob = ({ history, hasResume }) => {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
@@ -201,13 +203,11 @@ const FindJob = ({ history, hasResume }) => {
         </div>
         <div className="container">
           <div className="find-job__greeting">
-            <strong>Hi there,&nbsp;</strong>
-            <span>
-              ready to explore advice and career options tailored to you?
-            </span>
+            <strong>{t("findJob.hi")},&nbsp;</strong>
+            <span>{t("findJob.ready")}</span>
             <PushpinOutlined className="find-job__greeting__pin" />
           </div>
-          <div className="find-job__title">Find the right job for me</div>
+          <div className="find-job__title">{t("findJob.find")}</div>
 
           <div
             className="find-job__not-role"
@@ -223,6 +223,8 @@ const FindJob = ({ history, hasResume }) => {
                   <div className="find-job__has-role">
                     <div className="find-job__has-role__greeting">
                       <div style={{ marginBottom: "20px" }}>
+                      {i18n.language === "en" ?
+                        <>
                         Great, you're interested in{" "}
                         <a
                           className="find-job__not-role__content__group"
@@ -232,10 +234,23 @@ const FindJob = ({ history, hasResume }) => {
                           <EditOutlined className="find-job__not-role__content__group__icon" />
                         </a>{" "}
                         roles.
+                        </>
+                         :
+                         <>
+                         Tuyệt vời, bạn đang quan tâm tới vị trí {" "}
+                         <a
+                           className="find-job__not-role__content__group"
+                           onClick={onClickRole}
+                         >
+                           {currentSelected && currentSelected.domain}{" "}
+                           <EditOutlined className="find-job__not-role__content__group__icon" />
+                         </a>
+                         </>
+                         }
                       </div>
 
                       <div>
-                        Find out the facts about this role and others like it in{" "}
+                        {t("findJobSignIn.location")}
                         <a
                           className="find-job__not-role__content__group"
                           onClick={onClickRole}
@@ -372,24 +387,25 @@ const FindJob = ({ history, hasResume }) => {
             ) : (
               <div>
                 <div className="find-job__not-role__content">
-                  Sign in or register a Profile to find the right job for you
+                  {t("findJob.noToken.signIn")}
                 </div>
                 <div
                   className="sign-direct__button"
                   style={{ marginTop: "30px" }}
                 >
                   <Link to="/sign-in" className="sign-direct__button__sign-in">
-                    Sign In
+                    {t("findJob.noToken.signInBtn")}
                   </Link>
-                  <p>or</p>
+                  <p> {t("findJob.noToken.or")}</p>
                   <Link to="/sign-up" className="sign-direct__button__register">
-                    Register
+                  {t("findJob.noToken.register")}
                   </Link>
                 </div>
               </div>
             )}
 
             <img
+            className="find-job__not-role__girlImg"
               src="https://www.seek.com.au/career-advice/assets/c3f39bdb.svg"
               alt="Career Advice"
               style={{
@@ -405,13 +421,13 @@ const FindJob = ({ history, hasResume }) => {
           <div className="find-job__overlay">
             <div className="container">
               <div className="find-job__overlay__group">
-                <p>Update your preferences</p>
+                <p>{t("findJobSignIn.update")}</p>
                 <button
                   onClick={() => setOverlay(false)}
                   type="submit"
                   className="btn btn-outline-primary "
                 >
-                  Close
+                  {t("matchedJobDetail.close")}
                 </button>
               </div>
             </div>

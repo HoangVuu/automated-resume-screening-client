@@ -14,10 +14,11 @@ import { candidateJobSimilarAction } from "state/actions/candidateJobAction";
 import { getDiffTime, toastErr, formatProvince } from "utils/index";
 import { useSelector } from "react-redux";
 import { format_date, toast } from "utils/index";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import JobSearchClick from "components/Forms/JobSearchClick/JobSearchClick";
 import { getJobDetail, saveJob } from "services/jobServices";
 import MissingSkill from "./MissingSkill";
+import { useTranslation } from "react-i18next";
 
 const DEFAULT = {
   apply: false,
@@ -25,6 +26,8 @@ const DEFAULT = {
 };
 
 const CandidateJobDetail = ({ history }) => {
+  const { t, i18n } = useTranslation();
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -32,6 +35,7 @@ const CandidateJobDetail = ({ history }) => {
   const [showModal, toggleShowModal] = useState(DEFAULT);
   const [loadingSave, setLoadingSave] = useState();
 
+  const profile = useSelector((state) => state.profile.candidateProfile);
   const provinceTotal = useSelector((state) => state.cv.provinces);
   const { token } = useSelector((state) => state.auth.candidate);
   const simJob = useSelector(
@@ -46,8 +50,6 @@ const CandidateJobDetail = ({ history }) => {
     }
   };
   const onCancel = () => toggleShowModal(DEFAULT);
-
-  const params = useLocation().search;
 
   const {
     job_title,
@@ -74,7 +76,13 @@ const CandidateJobDetail = ({ history }) => {
 
   const handleSaveJP = async () => {
     if (!token) {
-      toast({ type: "info", message: "Please login to save job" });
+      toast({
+        type: "info",
+        message:
+          i18n.language === "en"
+            ? "Please login to save job"
+            : "Vui lòng đăng nhập để lưu việc làm"
+      });
     } else {
       setLoadingSave(true);
 
@@ -108,6 +116,19 @@ const CandidateJobDetail = ({ history }) => {
       provinces &&
       provinces.map((p) => formatProvince(provinceTotal, p)).join(", ")
     );
+  };
+
+  const getDateDiff = (post) => {
+    let date =
+      getDiffTime(post) > 1
+        ? getDiffTime(post).toString() + t("jobList.days")
+        : getDiffTime(post).toString() + t("jobList.day");
+
+    if (getDiffTime(post) === 0) {
+      date = t("jobList.justAdd");
+    }
+
+    return date;
   };
 
   useEffect(() => {
@@ -184,12 +205,13 @@ const CandidateJobDetail = ({ history }) => {
                         {company_name}
                       </div>
                       <div className="text detail-page__province">
-                        {" "}
                         {getProvince()}
                       </div>
                     </div>
                     <div className="box">
-                      <a onClick={toggleModal}>Apply Now</a>
+                      <a style={{ fontSize: "17px" }} onClick={toggleModal}>
+                        {t("jobList.apply")}
+                      </a>
                       <span>
                         <button
                           className="state-picker-button"
@@ -231,20 +253,59 @@ const CandidateJobDetail = ({ history }) => {
                   </div>
 
                   <div className="JobDetail">
-                    {(diffTechSkills?.length || diffSoftSkills?.length) && (
+                    <div
+                      id="jobDetailsSection"
+                      className="job-detail-section-container"
+                      style={{
+                        paddingTop: "23px",
+                        marginLeft: "0",
+                        marginRight: "0"
+                      }}
+                    >
+                      <div className="job-detail-section-item">
+                        <div className="job-detail-section-itemKey text-bold">
+                          {t("jobList.deadline")}:
+                        </div>
+                        <span>{format_date(deadline)}</span>
+                      </div>
+                      <div className="job-detail-section-item">
+                        <div className="job-detail-section-itemKey text-bold">
+                          {t("jobList.salary")}:
+                        </div>
+                        <span>{salary}</span>
+                      </div>
+                      <div className="job-detail-section-item">
+                        <div className="job-detail-section-itemKey text-bold">
+                          {t("jobList.workType")}:
+                        </div>
+                        <span>{contract_type}</span>
+                      </div>
+                      <div className="job-detail-section-item">
+                        <div className="job-detail-section-itemKey text-bold">
+                          {t("jobList.amount")}:
+                        </div>
+                        <span>
+                          {amount === 0
+                            ? "Không giới hạn số lượng"
+                            : `${amount} ứng viên`}
+                        </span>
+                      </div>
+                    </div>
+                    {((diffTechSkills && diffTechSkills?.length) ||
+                      (diffSoftSkills && diffSoftSkills?.length)) && (
                       <div style={{ marginTop: "25px" }}>
                         <h2 className="jobSectionHeader">
                           <b style={{ fontSize: "1.125rem" }}>
-                            Resume insights
+                            {t("skillSuggest.insight")}
                           </b>
                         </h2>
                         <p className="detail-page__miss-sub">
-                          Here's how your resume aligns with the job description
+                          {t("skillSuggest.here")}
                         </p>
 
-                        {diffTechSkills?.length && (
+                        {diffTechSkills && diffTechSkills?.length && (
                           <MissingSkill
-                            title=" Your resume might be missing some technical skills"
+                            title={t("skillSuggest.your")}
                             skills={
                               diffTechSkills.length > 10
                                 ? diffTechSkills?.slice(0, 10)
@@ -252,9 +313,9 @@ const CandidateJobDetail = ({ history }) => {
                             }
                           />
                         )}
-                        {diffSoftSkills?.length && (
+                        {diffSoftSkills && diffSoftSkills?.length && (
                           <MissingSkill
-                            title="Your resume might be missing some soft skills"
+                            title={t("skillSuggest.yourS")}
                             skills={
                               diffSoftSkills.length > 10
                                 ? diffSoftSkills?.slice(0, 10)
@@ -265,25 +326,27 @@ const CandidateJobDetail = ({ history }) => {
 
                         <div className="detail-page__resume">
                           <span className="detail-page__resume__title">
-                            Make sure your resume is up to date
+                            {t("skillSuggest.make")}
                           </span>
                           <span className="detail-page__resume__sub-title">
-                            Changes may take some time to be reflected in the
-                            above message.
+                            {t("skillSuggest.change")}
                           </span>
 
                           <button className="detail-page__resume__button">
-                            <Link to="/profile">Update Resume</Link>
+                            <Link to="/profile">
+                              {t("skillSuggest.update")}
+                            </Link>
                           </button>
                         </div>
                       </div>
                     )}
 
                     <div className="JobDetail__wrapper">
-                      {/* <p>Develop Zalo for Work's features</p> */}
                       <div>
                         <h2 className="jobSectionHeader">
-                          <b style={{ fontSize: "1.125rem" }}>Description: </b>
+                          <b style={{ fontSize: "1.125rem" }}>
+                            {t("jobList.des")}:{" "}
+                          </b>
                         </h2>
                         <div
                           dangerouslySetInnerHTML={{ __html: description }}
@@ -291,7 +354,7 @@ const CandidateJobDetail = ({ history }) => {
 
                         <h2 className="jobSectionHeader">
                           <b style={{ fontSize: "1.125rem" }}>
-                            Role Requirements:{" "}
+                            {t("jobList.roleReq")}:{" "}
                           </b>
                         </h2>
                         <div
@@ -300,7 +363,7 @@ const CandidateJobDetail = ({ history }) => {
 
                         <h2 className="jobSectionHeader">
                           <b style={{ fontSize: "1.125rem" }}>
-                            Perks and Benefits:{" "}
+                            {t("jobList.benefit")}:{" "}
                           </b>
                         </h2>
                         <div dangerouslySetInnerHTML={{ __html: benefit }} />
@@ -308,20 +371,19 @@ const CandidateJobDetail = ({ history }) => {
                     </div>
 
                     <div className="jobsearch-JobMetadataFooter">
-                      <div className="icl-u-textColor--success">
+                      <strong className="icl-u-textColor--success">
                         {company_name}
-                      </div>
-                      <div>
-                        {getDiffTime(posted_in) > 1
-                          ? getDiffTime(posted_in).toString() + " days"
-                          : getDiffTime(posted_in).toString() + " day"}{" "}
-                        ago
+                      </strong>
+                      <div style={{ marginTop: "5px" }}>
+                        {getDateDiff(posted_in)}
                       </div>
                       <div
                         id="originalJobLinkContainer"
                         className="icl-u-lg-inline icl-us-xs-hide"
                       >
-                        <p>Original job</p>
+                        <p style={{ paddingTop: "5px" }}>
+                          {i18n.language === "en" && "Original job"}
+                        </p>
                       </div>
                       <div>
                         <div>
@@ -331,7 +393,7 @@ const CandidateJobDetail = ({ history }) => {
                               type="button"
                             >
                               <i className="fas fa-flag"></i>
-                              Report job
+                              {t("detail.report")}
                             </button>
                           </div>
                           <div className="mosaic-reportcontent-content"></div>
@@ -344,7 +406,7 @@ const CandidateJobDetail = ({ history }) => {
                   <div className="ComSidebar">
                     <div className="jobsearch-CompanyAvatar">
                       <div className="jobsearch-CompanyAvatar-card">
-                        <h2 className="right-title">Company Info</h2>
+                        <h2 className="right-title">{t("detail.company")}</h2>
                         <div className="body">
                           <div className="jobsearch-CompanyAvatar-form">
                             <div>
@@ -365,18 +427,14 @@ const CandidateJobDetail = ({ history }) => {
                                       className="icl-Button  right-button"
                                       type="button"
                                     >
-                                      Follow
+                                      {t("detail.follow")}
                                     </button>
                                   </div>
                                   <div className="jobsearch-CompanyAvatar-cta">
-                                    Get job updates from {company_name}
+                                    {t("detail.jobUpdate")} {company_name}
                                   </div>
                                   <div className="name-rating">
-                                    <a
-                                      className="jobsearch-CompanyAvatar-companyLink"
-                                      href=""
-                                      target="_blank"
-                                    >
+                                    <a className="jobsearch-CompanyAvatar-companyLink">
                                       {company_name}
                                     </a>
                                     <div className="rating">
@@ -385,7 +443,7 @@ const CandidateJobDetail = ({ history }) => {
                                           <div
                                             className="icl-Ratings-starsFilled"
                                             style={{
-                                              width: "61.80000114440918px"
+                                              width: "84.8px"
                                             }}
                                           ></div>
                                         </div>
@@ -413,22 +471,23 @@ const CandidateJobDetail = ({ history }) => {
                         className="jobsearch-CompanyAvatar-card"
                         style={{ width: "250px" }}
                       >
-                        <h2 className="right-title">Let employers find you</h2>
+                        <h2 className="right-title">{t("detail.let")}</h2>
                         <div className="body">
                           <div className="jobsearch-CompanyAvatar-form">
                             <div>
                               <div>
                                 <div className="jobsearch-CompanyAvatar-buttonContainer">
                                   <div className="jobsearch-CompanyAvatar-cta">
-                                    Thousands of employers search for candidates
-                                    on our website
+                                    {t("detail.thousand")}
                                   </div>
                                   <div className="jobsearch-CompanyAvatar-button">
                                     <Link
                                       className="icl-Button right-button"
                                       to="/profile"
                                     >
-                                      Upload your resume
+                                      {profile.isHaveResume
+                                        ? t("detail.update")
+                                        : t("detail.upload")}
                                     </Link>
                                   </div>
                                 </div>
@@ -444,9 +503,15 @@ const CandidateJobDetail = ({ history }) => {
             </div>
 
             <div className="container">
-              <h2 className="sim-name">Similar Job</h2>
+              <h2 className="sim-name">{t("detail.similar")}</h2>
               <p style={{ fontStyle: "italic" }}>
-                We found {simJob.length} similar jobs
+                {i18n.language === "en" ? "We found" : "Chúng tôi tìm thấy"}{" "}
+                {simJob.length}{" "}
+                {i18n.language === "en"
+                  ? simJob.length > 1
+                    ? "similar jobs"
+                    : "similar job"
+                  : "việc làm tương tự"}
               </p>
               <div className="row">
                 <div
@@ -489,7 +554,7 @@ const CandidateJobDetail = ({ history }) => {
                       }
                     )}
                   <div className="sim-name__more">
-                    <Link to="/find-jobs">See more jobs ... </Link>
+                    <Link to="/find-jobs">{t("detail.see")}... </Link>
                   </div>
                 </div>
               </div>

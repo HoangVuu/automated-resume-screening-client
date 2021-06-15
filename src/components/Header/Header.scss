@@ -17,18 +17,27 @@
   }
 
   &__navbar-brand {
-    width: 9.375rem;
+    // width: 9.375rem;
+    // height: 40px;
+    
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
 .navbar-brand {
+  padding-top: 10px;
   display: inline-block;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
   margin-right: 1rem;
   font-size: 1rem;
   line-height: inherit;
   white-space: nowrap;
+  
+  img{
+    width: 150px;
+  }
 
   h3 {
     font: normal 36px "Cookie", cursive;
@@ -40,9 +49,6 @@
 
 @media (min-width: 992px) {
   .navbar-expand-lg .header__navbar-brand {
-    padding-top: 1rem;
-    padding-bottom: 0.9375rem;
-    padding-right: 1rem;
   }
 }
 
@@ -68,7 +74,7 @@
       right: 0;
       left: auto;
       position: absolute;
-      top: 100%;
+      top: 130%;
       z-index: 1000;
       float: left;
       min-width: 160px;

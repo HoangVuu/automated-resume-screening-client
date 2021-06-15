@@ -2,7 +2,6 @@
 import Dropdown from "components/Dropdown/Dropdown";
 import JobSearchAdvance from "components/Forms/JobSearchAdvance/JobSearchAdvance";
 import JobItem from "components/JobItem/JobItem";
-import { CONTACTS, PAGE_SIZES, DATES } from "constants/index";
 import React, { useEffect, useState } from "react";
 import "./JobList.scss";
 import { Pagination, Select } from "antd";
@@ -18,6 +17,7 @@ import { Input } from "antd";
 import { toast } from "utils/index";
 import isEmpty from "lodash/isEmpty";
 import { getSubcribe } from "services/jobServices";
+import { useTranslation } from "react-i18next";
 
 const MyLoader = (props) => (
   <ContentLoader
@@ -48,6 +48,8 @@ const MyLoader = (props) => (
 );
 
 function CandidateJobList({ history }) {
+  const { t, i18n } = useTranslation();
+
   const [curSelect, setCurSelect] = useState(null);
   const [top, setTop] = useState(0);
   const [bottom, setBottom] = useState(-1);
@@ -70,6 +72,24 @@ function CandidateJobList({ history }) {
     max_salary: undefined,
     "job-domain": undefined
   });
+
+  const DATES = [
+    { value: 1, label: t("jobList.last24") },
+    { value: 3, label: t("jobList.last3") },
+    { value: 7, label: t("jobList.last7") }
+  ];
+
+  const CONTACTS = [
+    { value: 0, label: t("home.jobSearch.full") },
+    { value: 1, label: t("home.jobSearch.part") },
+    { value: 2, label: t("home.jobSearch.internship") }
+  ];
+
+  const PAGE_SIZES = [
+    { value: 10, label: t("jobList.10page") },
+    { value: 20, label: t("jobList.20page") },
+    { value: 50, label: t("jobList.50page") }
+  ];
 
   const token = useSelector((state) => state.auth.candidate.token);
   const profile = useSelector((state) => state.profile.candidateProfile);
@@ -110,11 +130,10 @@ function CandidateJobList({ history }) {
 
   const handleSubcribe = async () => {
     if (!token) {
-      toast({ type: "info", message: "Please login to receive jobs alert" });
+      toast({ type: "info", message: i18n.language === "en" ? "Please login to receive jobs alert" : "Vui lòng đăng nhập để nhận thông báo việc làm" });
     } else {
       // setLoadingSave(true);
 
-      // const status = save ? 0 : 1;
       let filter = qs.parse(params);
       let { q, location } = filter;
       console.log(q);
@@ -126,7 +145,7 @@ function CandidateJobList({ history }) {
             setIsActive(true);
             toast({
               type: "success",
-              message: "Send jobs alert successful"
+              message:  i18n.language === "en" ? "Send jobs alert successful" : "Gửi thông báo việc làm thành công"
             });
           })
           .catch((err) => toastErr(err));
@@ -134,7 +153,7 @@ function CandidateJobList({ history }) {
       } else {
         toast({
           type: "info",
-          message: "Job title is required to receive jobs alert"
+          message: i18n.language === "en" ? "Job title is required to receive jobs alert" : "Topic việc làm được yêu cầu để nhận thông báo việc làm"
         });
       }
     }
@@ -142,7 +161,7 @@ function CandidateJobList({ history }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    
+
     const searchHistory = JSON.parse(localStorage.getItem("search-history"));
     setSearchHistory(searchHistory);
 
@@ -226,7 +245,7 @@ function CandidateJobList({ history }) {
       await getSubcribe(token)
         .then(async (res) => {
           console.log(res.data.data.length);
-          res.data.data.length !==0 ? setIsActive(true) : setIsActive(false)
+          res.data.data.length !== 0 ? setIsActive(true) : setIsActive(false);
         })
         .catch((err) => console.log(err));
     };
@@ -286,31 +305,31 @@ function CandidateJobList({ history }) {
 
             <div className="filters">
               <Dropdown
-                title="Date posted"
+                title={t("jobList.date")}
                 options={DATES}
                 value={posted_date}
                 onChange={(value) => onFilterChange("posted_date", value)}
                 select
               />
               <Dropdown
-                title="Job types"
+                title={t("jobList.job")}
                 options={CONTACTS}
                 value={contract_type}
                 onChange={(value) => onFilterChange("contract_type", value)}
                 select
               />
               <Dropdown
-                title="Minimum salary"
+                title={t("jobList.minimum")}
                 value={min_salary}
                 onChange={(value) => onFilterChange("min_salary", value)}
               />
               <Dropdown
-                title="Maximum salary"
+                title={t("jobList.maximum")}
                 value={max_salary}
                 onChange={(value) => onFilterChange("max_salary", value)}
               />
               <Dropdown
-                title="Job domains"
+                title={t("jobList.domains")}
                 options={domains.map((d) => ({ value: d.id, label: d.name }))}
                 value={job_domain_id}
                 onChange={(value) => onFilterChange("job-domain", value)}
@@ -330,7 +349,7 @@ function CandidateJobList({ history }) {
                       <div className="resultsTop">
                         <div className="secondRow">
                           <div>
-                            Show:{" "}
+                            {t("jobList.show")}:{" "}
                             <span style={{ display: "inline-block" }}>
                               <Select
                                 style={{ width: 140 }}
@@ -343,7 +362,9 @@ function CandidateJobList({ history }) {
                             </span>
                           </div>
                           <div className="searchCountContainer">
-                            <div id="searchCountPages">Total {total} jobs</div>
+                            <div id="searchCountPages">
+                              {t("jobList.total")} {total} {t("jobList.jobs")}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -386,14 +407,14 @@ function CandidateJobList({ history }) {
                         <div id="jobalerts" className="open jaui">
                           <div className="jobalertlabel">
                             <div id="jobalertlabel" className="jobalerts_title">
-                              <div>Be the first to see new jobs via email</div>
+                              <div>{t("jobList.jobAlert.title")}</div>
                             </div>
                           </div>
                           <div id="jobalertform" className="jaform">
                             <span id="jobalertsending"></span>
                             <div id="jobalertmessage">
                               <label className="jobAlertFormLabel-contrast-color">
-                                Email address
+                                {t("jobList.jobAlert.email")}
                               </label>
                               <Input
                                 id="alertmail"
@@ -402,7 +423,7 @@ function CandidateJobList({ history }) {
                               />
                               <span className="serp-button">
                                 <span className="serp-button-inner">
-                                  {isActive ? (
+                                  {isActive && (
                                     <div
                                       style={{ marginTop: "15px" }}
                                       className="job-list-receiving"
@@ -411,28 +432,21 @@ function CandidateJobList({ history }) {
                                         to="/profile"
                                         className="job-list-receiving__link"
                                       >
-                                        You actived email to receive jobs alert from us via
-                                        email
+                                        {t("jobList.jobAlert.noti")}
                                       </Link>
                                     </div>
-                                  ) : (
-                                    <button
-                                      id="alertsubmit"
-                                      className="serp-button-label"
-                                      onClick={handleSubcribe}
-                                    >
-                                      Active
-                                    </button>
                                   )}
+                                  <button
+                                    id="alertsubmit"
+                                    className="serp-button-label"
+                                    onClick={handleSubcribe}
+                                  >
+                                    {t("jobList.jobAlert.active")}
+                                  </button>
                                 </span>
                               </span>
                               <div style={{ marginTop: "12px" }}>
-                                <span>
-                                  By creating a job alert, you agree to our
-                                  Terms. You can change your consent settings at
-                                  any time by unsubscribing or as detailed in
-                                  our terms.
-                                </span>
+                                <span>{t("jobList.jobAlert.by")}</span>
                               </div>
                             </div>
                           </div>
@@ -440,7 +454,7 @@ function CandidateJobList({ history }) {
                       </div>
                       {searchHistory && searchHistory.length && (
                         <div id="recentsearches" className="no-left-rail">
-                          <div className="rsh">My recent searches</div>
+                          <div className="rsh"> {t("jobList.mySearch")}</div>
                           <ul className="rsList">
                             {searchHistory.map(({ url, label }) => (
                               <li>
@@ -459,7 +473,7 @@ function CandidateJobList({ history }) {
                                 localStorage.removeItem("search-history");
                               }}
                             >
-                              » Clear searches
+                              {t("jobList.clear")}
                             </a>
                           </div>
                         </div>
@@ -479,25 +493,29 @@ function CandidateJobList({ history }) {
 
 export default CandidateJobList;
 
-const EmptyJob = () => (
-  <div style={{ backgroundColor: "white", marginTop: "1rem" }}>
-    <div className="text-center">
-      <img
-        src="/assets/svg/Empty.svg"
-        alt="empty icon"
-        style={{ width: "380px", height: "160px", margin: "50px auto" }}
-      />
-      <p style={{ paddingBottom: "20px" }}>No job vacancies! </p>
+const EmptyJob = () => {
+  const { t } = useTranslation();
+
+  return (
+    <div style={{ backgroundColor: "white", marginTop: "1rem" }}>
+      <div className="text-center">
+        <img
+          src="/assets/svg/Empty.svg"
+          alt="empty icon"
+          style={{ width: "380px", height: "160px", margin: "50px auto" }}
+        />
+        <p style={{ paddingBottom: "20px" }}>{t("jobList.emptyJob.no")}</p>
+      </div>
+      <div>
+        <p style={{ padding: "20px", color: "#555" }}>
+          <b>{t("jobList.emptyJob.search")}</b>
+          <ul style={{ paddingTop: "10px" }}>
+            <li>{t("jobList.emptyJob.try")}</li>
+            <li>{t("jobList.emptyJob.check")}</li>
+            <li>{t("jobList.emptyJob.replace")}</li>
+          </ul>
+        </p>
+      </div>
     </div>
-    <div>
-      <p style={{ padding: "20px", color: "#555" }}>
-        <b>Search suggestions:</b>
-        <ul style={{ paddingTop: "10px" }}>
-          <li>Try more general keywords</li>
-          <li>Check your spelling</li>
-          <li>Replace abbreviations with the entire word</li>
-        </ul>
-      </p>
-    </div>
-  </div>
-);
+  );
+};

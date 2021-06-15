@@ -6,6 +6,8 @@ import { loginCandidateProAction } from "state/actions/authenticationActions";
 import history from "state/history";
 import { checkCookie } from "utils/cookies";
 import "./CandidateSignIn.scss";
+import Header from "components/Header/Header";
+import { useTranslation } from "react-i18next";
 
 const validateMessages = {
   required: "Please enter ${label}",
@@ -16,6 +18,8 @@ const validateMessages = {
 };
 
 function CandidateSignIn() {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -44,6 +48,7 @@ function CandidateSignIn() {
     <Redirect to="/" />
   ) : (
     <div className="candidate-login">
+        <Header hasNavbar={false}/>
       <div className="candidate-login__container">
         {/* Login Form  */}
         <div className="candidate-login__container__left">
@@ -52,18 +57,15 @@ function CandidateSignIn() {
               to="/"
               className="candidate-login__container__left__logo__wrapper"
             >
-              <h3>
-                Automated&nbsp;<span>Screening</span>
-              </h3>
             </Link>
           </div>
 
           <Link to="/recruiter/sign-in" className="candidate-login__container__left__employer">
-            <span>Are you an employer?</span>
+            <span>{t("candidateSignIn.areYou")}</span>
           </Link>
 
           <span className="candidate-login__container__left__title">
-            Sign&nbsp;in
+          {t("candidateSignIn.signIn")}
           </span>
 
           <Form
@@ -75,25 +77,25 @@ function CandidateSignIn() {
           >
             {/* Email */}
             <Form.Item
-              label="Email address"
+              label={t("candidateSignIn.form.email")}
               name={["user", "email"]}
               rules={[{ type: "email", required: true }]}
             >
               <Input
                 className="candidate-login__container__left__form__input"
-                placeholder="Enter email..."
+                placeholder={t("candidateSignIn.form.enterEmail")}
               />
             </Form.Item>
 
             {/* Password  */}
             <Form.Item
-              label="Password"
+              label={t("candidateSignIn.form.password")}
               name={["user", "password"]}
               rules={[{ required: true }]}
             >
               <Input.Password
                 className="candidate-login__container__left__form__input"
-                placeholder="Enter password..."
+                placeholder={t("candidateSignIn.form.enterPassword")}
               />
             </Form.Item>
 
@@ -102,7 +104,7 @@ function CandidateSignIn() {
               htmlType="submit"
               className="candidate-login__container__left__form__btn"
             >
-              Sign in
+             {t("candidateSignIn.signIn")}
               {isLoading && <div className="dashed-loading"></div>}
             </button>
           </Form>
@@ -112,8 +114,7 @@ function CandidateSignIn() {
 
             <button className="candidate-login__container__left__form__social__item--register">
               <span>
-                {" "}
-                Don't have an account? <Link to="/sign-up">Register</Link>
+              {t("candidateSignIn.doNot")} <Link to="/sign-up">{t("candidateSignIn.register")}</Link>
               </span>
             </button>
           </div>

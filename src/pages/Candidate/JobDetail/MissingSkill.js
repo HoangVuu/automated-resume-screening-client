@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./JobDetail";
 import { QuestionOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 const MissingSkill = ({ title, skills }) => {
+  const { t, i18n } = useTranslation();
+
   const [showMore, setShowMore] = useState(skills?.slice(0, 4));
   const [toggle, setToggle] = useState(false);
 
@@ -46,11 +49,11 @@ const MissingSkill = ({ title, skills }) => {
         {skills?.length > 4 &&
           (!toggle ? (
             <span className="missing-skill__show__text" onClick={showMoreItem}>
-              +show more
+              {t("skillSuggest.more")}
             </span>
           ) : (
             <span className="missing-skill__show__text" onClick={showLessItem}>
-              -show less
+              {t("skillSuggest.less")}
             </span>
           ))}
       </div>

@@ -6,7 +6,7 @@
   &__title {
     position: relative;
     background-color: #0d3880;
-    height: 204px;
+    height: 220px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -222,6 +222,12 @@
     line-height: 20px;
     background-color: rgb(247, 248, 250);
 
+    &:hover{
+      color: #CD026B;
+      font-weight: 700;
+      background-color: #efefef;
+    }
+
     &__content {
       margin-right: 10px;
     }
@@ -236,6 +242,27 @@
       :hover {
         color: #085ff7;
       }
+    }
+  }
+}
+
+.match-none{
+  padding-bottom: 50px;
+
+  &__container{
+    background-color: rgb(247, 248, 250);
+    color: #1c1c1c;
+    text-align: center;
+    padding: 40px 40px 50px;
+
+    &__sorry{
+      font-weight: 700;
+      font-size: 20px;
+      padding-bottom: 13px;
+    }
+
+    &__self{
+      font-size: 17px;
     }
   }
 }
