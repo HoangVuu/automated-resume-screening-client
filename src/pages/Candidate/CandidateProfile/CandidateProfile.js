@@ -58,6 +58,7 @@ import { candidateProfileAction } from "state/actions/profileAction";
 import { updateProfileProAction } from "state/actions/profileAction";
 import { updateCVProfileAction } from "state/actions/index";
 import { Link } from "react-router-dom";
+import { deleteResume } from "services/uploadServices";
 
 const ACCEPTS = [
   "application/msword",
@@ -288,7 +289,13 @@ function MyProfile() {
     const file = e.target.files[0];
 
     if (!ACCEPTS.includes(file.type)) {
-      toast({ type: "error", message: "Định dạng tệp không hợp lệ" });
+      toast({
+        type: "error",
+        message:
+          i18n.language === "vi"
+            ? "Định dạng tệp không hợp lệ"
+            : "Invalid file format"
+      });
     } else {
       setLoading(true);
 
@@ -353,7 +360,13 @@ function MyProfile() {
       token
     )
       .then((res) => {
-        toast({ type: "success", message: "Update frequency successful" });
+        toast({
+          type: "success",
+          message:
+            i18n.language === "en"
+              ? "Update alert frequency successful"
+              : "Cập nhập tần suất thông báo thành công"
+        });
       })
       .catch((err) => console.log(err));
   };
@@ -372,17 +385,23 @@ function MyProfile() {
       token
     )
       .then((res) => {
-        toast({ type: "success", message: "Update status successful" });
+        toast({
+          type: "success",
+          message:
+            i18n.language === "en"
+              ? "Update alert status successful"
+              : "Cập nhập trạng thái thông báo thành công"
+        });
       })
       .catch((err) => console.log(err));
   };
 
   const onDeleteSubcribe = () => {
     swal({
-      title: "Are you sure to delete jobs alert?",
-      text: "You'll not receive from us in the future!",
+      title:  i18n.language === "en" ? "Are you sure to delete jobs alert?" : "Bạn có chắc chắn muốn xóa thông báo công việc này?",
+      text: i18n.language === "en" ? "You'll not receive email from us in the future!" : "Bạn sẽ không nhận được email thông báo từ chúng tôi sau này",
       icon: "warning",
-      buttons: ["Cancel", "Delete"],
+      buttons: [t("profile.cancel"), t("profile.delete")],
       dangerMode: true
     })
       .then(async (willDelete) => {
@@ -392,14 +411,40 @@ function MyProfile() {
               setSubcribe(null);
               toast({
                 type: "success",
-                message: "Delete your jobs alert successful"
+                message: i18n.language === "en" ? "Delete your jobs alert successful" : "Xóa thông báo công việc thành công "
               });
             })
             .catch((err) => {
               console.log(err);
             });
-        } else {
-          swal("Jobs alert is working!");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const onDeleteProfile = () => {
+    swal({
+      title:  i18n.language === "en" ? "Are you sure to delete this resume?": "Bạn có chắc chắn muốn xóa sơ yếu lý lịch này?",
+      text: i18n.language === "en" ? "Employer maybe cannot find you!" : "Nhà tuyển dụng có lẽ sẽ không tìm thấy bạn",
+      icon: "warning",
+      buttons:  [t("profile.cancel"), t("profile.delete")],
+      dangerMode: true
+    })
+      .then(async (willDelete) => {
+        if (willDelete) {
+          await deleteResume(token)
+            .then((res) => {
+              setResume(null);
+              toast({
+                type: "success",
+                message: i18n.language === "en" ? "Delete your resume successful" : "Xóa sơ yếu lý lịch thành công"
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
       })
       .catch((err) => {
@@ -453,7 +498,6 @@ function MyProfile() {
     }
   }, []);
 
-  console.log("active", active);
   return (
     <div className="my-profile">
       <Loading loading={loading} />
@@ -996,7 +1040,7 @@ function MyProfile() {
                         <button
                           type="button"
                           className="cv-item__info__bottom__btn btn btn-sm  btn-outline-secondary"
-                          // onClick={handleDelete}
+                          onClick={onDeleteProfile}
                         >
                           <DeleteOutlined className="cv-item__info__bottom__btn__icon" />
                           {t("profile.delete")}
@@ -1010,8 +1054,7 @@ function MyProfile() {
               ) : (
                 <div className="my-profile__resume__upload-file">
                   <p className="my-profile__resume__upload-file__note">
-                    Add 1 resume. Accepted file types: Microsoft Word (.doc or
-                    .docx) or Adobe PDF (.pdf)
+                    {t("profile.accept")}
                   </p>
                   <div
                     className="my-profile__resume__upload-file__box"
@@ -1024,14 +1067,14 @@ function MyProfile() {
                       }}
                     />
                     <span className="my-profile__resume__upload-file__box__add">
-                      To add a resume, click here or simply browse for a file.
+                      {t("profile.addRe")}
                     </span>
                     <Button
                       // onClick={handleSelectFile}
                       icon={<UploadOutlined />}
                       className="my-profile__resume__upload-file__box__btn"
                     >
-                      Upload
+                      {t("profile.upload")}
                       <input
                         type="file"
                         name="CV"
@@ -1239,7 +1282,7 @@ function MyProfile() {
                       className="job-list-receiving__link"
                       style={{ color: "#1890FF" }}
                     >
-                      Active email to receive more jobs from us
+                      {t("jobInvitation.mail")}
                     </Link>
                   </div>
                 )}

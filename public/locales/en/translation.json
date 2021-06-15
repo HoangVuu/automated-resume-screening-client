@@ -123,7 +123,7 @@
         "justAdd": "Just added",
         "apply": "Apply Now",
         "saveJob": "Save Job",
-        "deadline": "The deadline for submission",
+        "deadline": "Deadline for submission",
         "workType": "Work type",
         "amount": "Amount",
         "noLimit": "Unlimited",
@@ -219,7 +219,10 @@
         "days": "days",
         "day": "day",
         "justAdded": "Just added",
-        "done": "Done"
+        "done": "Done",
+        "upload": "Upload",
+        "addRe": "To add a resume, click here and simply browse for a file.",
+        "accept": "Add 1 resume. Accepted file types: Microsoft Word (.doc or .docx) or Adobe PDF (.pdf)"
     },
     "profileSetting": {
         "bigHeader": "Profile Visibility",
@@ -239,6 +242,42 @@
             "weekly": "Weekly"
         },
         "another": "Get another topic",
-        "delete": "Delete this alert"
+        "delete": "Delete this alert",
+        "mail": "Active email to receive more jobs from us"
+    },
+    "skillSuggest": {
+        "insight" : "Resume insights",
+        "here": "Here's how your resume aligns with the job description",
+        "make": "Make sure your resume is up to date",
+        "change": "Changes may take some time to be reflected in the above message.",
+        "update": "Update Resume",
+        "your": "Your resume might be missing some technical skills",
+        "yourS": "Your resume might be missing some soft skills",
+        "more": "+show more",
+        "less": "-show less"
+    },
+    "detail": {
+        "enter": "Enter job title, role, keywords...",
+        "location": "Enter work location...",
+        "similar": "Similar Job",
+        "report": "Report job",
+        "see": "See more jobs",
+        "find": "Find Jobs",
+        "company": "Company Info",
+        "follow": "Follow",
+        "jobUpdate": "Get job updates from",
+        "companyText:": "Whether it's helping a vulnerable child, making highways safer or restoring salmon habitat, the work that we do matters to the people of ...",
+        "let": "Let employers find you",
+        "thousand": "Thousands of employers search for candidates on our website",
+        "upload": "Upload your resume",
+        "update": "Update your resume"
+    },
+    "myJob": {
+        "saved": "Saved",
+        "applied": "Applied",
+        "job": "job",
+        "jobs": "jobs",
+        "addNote": "Add Notes",
+        "saveOn": "Saved job on"
     }
 }

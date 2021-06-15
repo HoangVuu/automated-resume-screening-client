@@ -59,7 +59,7 @@ function AddSkillSuggest({ handleAdd, isAdd, isCorner = false }) {
   const onSuggestionsClearRequested = () => setSuggestions([]);
 
   const onSuggestionSelected = (_, { suggestionValue }) => {
-    console.log("Selected: " + suggestionValue);
+    // console.log("Selected: " + suggestionValue);
   };
 
   // Autosuggest will pass through all these props to the input.
@@ -87,7 +87,6 @@ function AddSkillSuggest({ handleAdd, isAdd, isCorner = false }) {
     );
   }
 
-  console.log("isAdd", isAdd);
   if (isAdd) {
     value && setValue("");
   }

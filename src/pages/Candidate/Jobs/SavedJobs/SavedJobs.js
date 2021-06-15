@@ -16,8 +16,11 @@ import Loading from "components/Loading/Loading";
 import { Input } from "antd";
 import swal from "sweetalert";
 import { addJobNote, deleteJobNote } from "services/candidateServices";
+import { useTranslation } from "react-i18next";
 
 function CandidateSavedJobs() {
+  const { t, i18n } = useTranslation();
+
   const [jobs, setJobs] = useState([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
@@ -136,7 +139,9 @@ function CandidateSavedJobs() {
                 className="text-primary bold"
                 style={{ fontSize: 21, marginBottom: 0 }}
               >
-                {`Saved ${total} ${total > 1 ? "jobs" : "job"}`}
+                {`${t("myJob.saved")} ${total} ${
+                  total > 1 ? t("myJob.jobs") : t("myJob.job")
+                }`}
               </h1>
             </div>
           </div>
@@ -195,6 +200,8 @@ const Job = ({
   note,
   is_applied
 }) => {
+  const { t, i18n } = useTranslation();
+
   const { TextArea } = Input;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -203,10 +210,10 @@ const Job = ({
 
   const onDeleteNote = () => {
     swal({
-      title: "Are you sure to delete this note?",
-      text: "You'll delete note for this saved job!",
+      title: i18n.language === "en" ?  "Are you sure to delete this note?" : "Bạn có chắc chắn muốn xóa ghi chú này?",
+      text:  i18n.language === "en" ? "You'll delete note for this saved job!" : "Bạn sẽ xóa ghi chú của việc làm đã lưu này",
       icon: "warning",
-      buttons: ["Cancel", "Delete"],
+      buttons: [t("profile.cancel"), t("profile.delete")],
       dangerMode: true
     })
       .then(async (willDelete) => {
@@ -216,7 +223,7 @@ const Job = ({
               setCurrentNote(null);
               toast({
                 type: "success",
-                message: "Delete saved job's note successful"
+                message: i18n.language === "en" ? "Delete saved job's note successful!" : "Xóa ghi chú việc làm thành công!"
               });
             })
             .catch((err) => {
@@ -271,7 +278,7 @@ const Job = ({
                     paddingBottom: "5px"
                   }}
                 />
-                Add Notes
+                {t("myJob.addNote")}
               </div>
             )}
           </div>
@@ -288,7 +295,7 @@ const Job = ({
             </Link>
           </h4>
           <div className="row-company text_ellipsis">{company_name}</div>
-          <div>Saved job: {formatDateTime(created_on)}</div>
+          <div>{t("myJob.saveOn")}: {formatDateTime(created_on)}</div>
           <Tooltip placement="top" title={province}>
             <div
               className="address text_ellipsis"
@@ -394,7 +401,7 @@ const Job = ({
               className="view-apply-button saved-job__apply"
               onClick={toggleModal}
             >
-              Apply now
+             {t("jobList.apply")}
             </button>
           )}
           <div className="box-save-job">

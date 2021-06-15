@@ -20,6 +20,13 @@ function JobSearchAdvance({ handleSubmit }) {
     label: province_name
   }));
 
+  const optionsEn = useSelector((state) =>
+  state.cv.provinces.map(({ province_id, province_name_en }) => ({
+    value: province_id,
+    label: province_name_en
+  }))
+);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
@@ -36,7 +43,7 @@ function JobSearchAdvance({ handleSubmit }) {
             name="location"
             className="col-sm-6"
             placeholder={t("home.location")}
-            options={options}
+            options={i18n.language === "en" ? optionsEn : options}
             icon={<FontAwesomeIcon icon={faMapMarkerAlt} color="#555" />}
             isClearable={true}
           />

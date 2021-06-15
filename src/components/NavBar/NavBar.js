@@ -28,7 +28,6 @@ function NavBar() {
   const accessToken = useSelector((state) => state.auth.candidate.token);
   const profile = useSelector((state) => state.profile.candidateProfile);
 
-
   const [info, setInfo] = useState(false);
   const [clickItem, setClickItem] = useState(null);
 
@@ -44,7 +43,6 @@ function NavBar() {
   };
 
   const handleClick = (i) => {
-    console.log("i", i);
     setClickItem(i);
   };
 
@@ -53,7 +51,6 @@ function NavBar() {
       let n = profile.fullName.lastIndexOf(" ");
       var res = profile.fullName.substring(n);
     }
-    console.log(res);
     return res;
   };
 

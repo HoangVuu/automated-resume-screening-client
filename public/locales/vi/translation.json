@@ -219,7 +219,10 @@
         "days": "ngày trước",
         "day": "ngày trước",
         "justAdded": "Vừa mới thêm",
-        "done": "Xong"
+        "done": "Xong",
+        "upload": "Tải lên",
+        "addRe": "Để thêm một Sơ yếu lý lịch, nhấn vào đây để tìm một tập tin.",
+        "accept": "Thêm một Sơ yếu lý lịch. Chỉ chấp nhận các loại tệp: Microsoft Word (.doc or .docx) hoặc Adobe PDF (.pdf)"
     },
     "profileSetting": {
         "bigHeader": "Tầm nhìn hồ sơ",
@@ -239,6 +242,42 @@
             "weekly": "Hằng tuần"
         },
         "another": "Chọn chủ đề khác",
-        "delete": "Xoá thông báo"
+        "delete": "Xoá thông báo",
+        "mail": "Kích hoạt email để nhận thông báo về nhiều việc làm từ chúng tôi."
+    },
+    "skillSuggest": {
+        "insight": "Cái nhìn tổng quan về sơ yếu lý lịch",
+        "here": "Đây là cách sơ yếu lý lịch của bạn phù hợp thế nào với mô tả công việc",
+        "make": "Đảm bảo sơ yếu lý lịch của bạn được cập nhật",
+        "change": "Các thay đổi có thể mất một thời gian để được phản ánh lại trong thông báo trên.",
+        "update": "Cập nhập hồ sơ",
+        "your": "Hồ sơ của bạn có thể thiếu một số kỹ năng kỹ thuật",
+        "yourS": "Hồ sơ của bạn có thể thiếu một số kỹ năng mềm",
+        "more": "+Hiển thị thêm",
+        "less": "-Ẩn bớt"
+    },
+    "detail": {
+        "enter": "Nhập mô tả công việc, vị trí ứng tuyển, từ khóa...",
+        "location": "Nhập địa điểm làm việc...",
+        "similar": "Việc làm tương tự",
+        "report": "Báo cáo việc làm",
+        "see": "Xem thêm việc làm",
+        "find": "Tìm việc",
+        "company": "Thông tin công ty",
+        "follow": "Theo dõi",
+        "jobUpdate": "Nhận cập nhập việc làm từ",
+        "companyText:": "Whether it's helping a vulnerable child, making highways safer or restoring salmon habitat, the work that we do matters to the people of ...",
+        "let": "Hãy để nhà tuyển dụng tìm thấy bạn",
+        "thousand": "Hàng nghìn nhà tuyển dụng tìm kiếm ứng viên trên trang web của chúng tôi",
+        "upload": "Tải lên hồ sơ của bạn",
+        "update": "Cập nhập hồ sơ của bạn"
+    },
+    "myJob": {
+        "saved": "Đã lưu",
+        "applied": "Đã ứng tuyển",
+        "job": "việc làm",
+        "jobs": "việc làm",
+        "addNote": "Thêm ghi chú",
+        "saveOn": "Đã lưu vào"
     }
 }

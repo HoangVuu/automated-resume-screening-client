@@ -134,7 +134,11 @@ function JobDetail({ id, top, onChangeSelect, bottom }) {
 
   const getAmount = (amount) => {
     if (amount) {
-      if (amount === "Không giới hạn ứng viên" || amount === "Không giới hạn" || parseInt(amount) === 0) {
+      if (
+        amount === "Không giới hạn ứng viên" ||
+        amount === "Không giới hạn" ||
+        parseInt(amount) === 0
+      ) {
         amount = t("jobList.noLimit");
       } else if (parseInt(amount) === 1) {
         amount = `${amount} ${t("jobList.candidate")}`;
@@ -215,16 +219,16 @@ function JobDetail({ id, top, onChangeSelect, bottom }) {
                       <div style={{ marginTop: "5px" }}>
                         <h2 className="jobSectionHeader">
                           <b style={{ fontSize: "1.125rem" }}>
-                            Resume insights
+                            {t("skillSuggest.insight")}
                           </b>
                         </h2>
                         <p className="detail-page__miss-sub">
-                          Here's how your resume aligns with the job description
+                          {t("skillSuggest.here")}
                         </p>
 
                         {diffTechSkills && diffTechSkills?.length && (
                           <MissingSkillItem
-                            title=" Your resume might be missing some technical skills"
+                            title={t("skillSuggest.your")}
                             skills={
                               diffTechSkills.length > 10
                                 ? diffTechSkills?.slice(0, 10)
@@ -234,7 +238,7 @@ function JobDetail({ id, top, onChangeSelect, bottom }) {
                         )}
                         {diffSoftSkills && diffSoftSkills?.length && (
                           <MissingSkillItem
-                            title="Your resume might be missing some soft skills"
+                            title={t("skillSuggest.yourS")}
                             skills={
                               diffSoftSkills.length > 10
                                 ? diffSoftSkills?.slice(0, 10)
@@ -245,15 +249,14 @@ function JobDetail({ id, top, onChangeSelect, bottom }) {
 
                         <div className="detail-page__resume">
                           <span className="detail-page__resume__title">
-                            Make sure your resume is up to date
+                            {t("skillSuggest.make")}
                           </span>
                           <span className="detail-page__resume__sub-title">
-                            Changes may take some time to be reflected in the
-                            above message.
+                          {t("skillSuggest.change")}
                           </span>
 
                           <button className="detail-page__resume__button">
-                            <Link to="/profile">Update Resume</Link>
+                            <Link to="/profile">{t("skillSuggest.update")}</Link>
                           </button>
                         </div>
                       </div>
@@ -337,7 +340,13 @@ const Header = ({
 
   const handleSaveJP = async () => {
     if (!token) {
-      toast({ type: "info", message: "Please login to save job" });
+      toast({
+        type: "info",
+        message:
+          i18n.language === "en"
+            ? "Please login to save job"
+            : "Vui lòng đăng nhập để lưu việc làm"
+      });
     } else {
       setLoading(true);
       setSave(!save);
@@ -429,7 +438,7 @@ const Header = ({
                       style={{ fontSize: "18px", fontWeight: "700" }}
                       className="mr-5"
                     />
-                    Saved Job
+                    {i18n.language === "en" ? "Saved Job" : "Đã lưu"}
                   </>
                 )}
               </span>

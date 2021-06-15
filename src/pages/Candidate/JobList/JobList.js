@@ -48,7 +48,7 @@ const MyLoader = (props) => (
 );
 
 function CandidateJobList({ history }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [curSelect, setCurSelect] = useState(null);
   const [top, setTop] = useState(0);
@@ -130,7 +130,7 @@ function CandidateJobList({ history }) {
 
   const handleSubcribe = async () => {
     if (!token) {
-      toast({ type: "info", message: "Please login to receive jobs alert" });
+      toast({ type: "info", message: i18n.language === "en" ? "Please login to receive jobs alert" : "Vui lòng đăng nhập để nhận thông báo việc làm" });
     } else {
       // setLoadingSave(true);
 
@@ -145,7 +145,7 @@ function CandidateJobList({ history }) {
             setIsActive(true);
             toast({
               type: "success",
-              message: "Send jobs alert successful"
+              message:  i18n.language === "en" ? "Send jobs alert successful" : "Gửi thông báo việc làm thành công"
             });
           })
           .catch((err) => toastErr(err));
@@ -153,7 +153,7 @@ function CandidateJobList({ history }) {
       } else {
         toast({
           type: "info",
-          message: "Job title is required to receive jobs alert"
+          message: i18n.language === "en" ? "Job title is required to receive jobs alert" : "Topic việc làm được yêu cầu để nhận thông báo việc làm"
         });
       }
     }

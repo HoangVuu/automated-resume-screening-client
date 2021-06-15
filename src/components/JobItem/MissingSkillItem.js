@@ -3,8 +3,11 @@ import "./JobDetail";
 import "../../pages/Candidate/JobDetail/JobDetail";
 
 import { QuestionOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 const MissingSkillItem = ({ title, skills }) => {
+  const { t, i18n } = useTranslation();
+
   const [showMore, setShowMore] = useState();
   const [toggle, setToggle] = useState(false);
 
@@ -22,8 +25,7 @@ const MissingSkillItem = ({ title, skills }) => {
   };
 
   return (
-    <div className="missing-skill"
-    style={{paddingBottom: '0'}}>
+    <div className="missing-skill" style={{ paddingBottom: "0" }}>
       <div
         className="row"
         style={{
@@ -43,23 +45,23 @@ const MissingSkillItem = ({ title, skills }) => {
           {title} ({skills?.length})
         </span>
 
-        <div className="missing-skill__show" style={{ marginTop:"0", marginLeft: "10px"}}>
-        {!toggle ? (
-          <span className="missing-skill__show__text" onClick={showMoreItem}>
-            +show more
-          </span>
-        ) : (
-          <span
-            className="missing-skill__show__text"
-            onClick={showLessItem}
-          >
-            -show less
-          </span>
-        )}
-      </div>
+        <div
+          className="missing-skill__show"
+          style={{ marginTop: "0", marginLeft: "10px" }}
+        >
+          {!toggle ? (
+            <span className="missing-skill__show__text" onClick={showMoreItem}>
+              {t("skillSuggest.more")}
+            </span>
+          ) : (
+            <span className="missing-skill__show__text" onClick={showLessItem}>
+              {t("skillSuggest.less")}
+            </span>
+          )}
+        </div>
       </div>
 
-      <div className="missing-skill__items" style={{paddingBottom: '10px'}}>
+      <div className="missing-skill__items" style={{ paddingBottom: "10px" }}>
         {toggle &&
           showMore?.map((item, index) => {
             return <MissItem key={index} name={item} />;
@@ -72,7 +74,7 @@ const MissingSkillItem = ({ title, skills }) => {
 export default MissingSkillItem;
 
 const MissItem = ({ name }) => (
-  <div className="missing-skill__items__item" style={{marginTop: '0.5rem'}}>
+  <div className="missing-skill__items__item" style={{ marginTop: "0.5rem" }}>
     <QuestionOutlined
       style={{ color: "#844b17", fontSize: "18px", marginRight: "10px" }}
     />
