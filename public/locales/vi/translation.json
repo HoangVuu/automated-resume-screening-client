@@ -19,7 +19,18 @@
             "enterPassword": "Nhập mật khẩu..."
         },
         "doNot": "Không có tài khoản?",
-        "register": "Đăng ký"
+        "register": "Đăng ký",
+        "has": "Đã có tài khoản?",
+        "name": "Họ và tên",
+        "phone": "Số điện thoại",
+        "enterName": "Nhập họ và tên...",
+        "confirm": "Xác nhận mật khẩu...",
+        "enterPhone": "Nhập số điện thoại...",
+        "province": "Tỉnh/ Thành phố bạn sinh sống",
+        "provinPla": "Chọn tỉnh/thành sinh sống",
+        "date": "Ngày sinh",
+        "enterDate": "Chọn ngày sinh",
+        "gender": "Giới tính"
     },
     "home": {
         "Just": "Hãy khám phá và sau đó ứng tuyển",
@@ -189,7 +200,7 @@
         "phone": "Số điện thoại",
         "dateOfBirth": "Ngày sinh",
         "gender": "Giới tính",
-        "male": "Name",
+        "male": "Nam",
         "female": "Nữ",
         "live": "Sống tại",
         "save": "Lưu",
@@ -275,9 +286,27 @@
     "myJob": {
         "saved": "Đã lưu",
         "applied": "Đã ứng tuyển",
+        "apply": "Ứng tuyển",
         "job": "việc làm",
         "jobs": "việc làm",
         "addNote": "Thêm ghi chú",
-        "saveOn": "Đã lưu vào"
+        "saveOn": "Đã lưu vào",
+        "remove": "Xóa việc làm",
+        "note": "Ghi chú",
+        "only": "Chỉ bạn mới có thể thấy những ghi chú này",
+        "save": "Lưu",
+        "cancel":"Hủy",
+        "edit": "Chỉnh sửa",
+        "delete": "Xóa",
+        "applyOn": "Ứng tuyển vào"
+    },
+    "apply": {
+        "title": "Ứng tuyển việc làm",
+        "choose": "Chọn 1 CV để ứng tuyển",
+        "return": "Trở về",
+        "submit": "Nộp CV"
+    },
+    "role": {
+        
     }
 }

@@ -14,7 +14,6 @@ const MatchSkillCard = ({ id, name, logo, content, max, min }) => {
       role: name.toLowerCase().replaceAll(" ", "-")
     };
     const query = qs.stringify(filter, { skipNull: true });
-    console.log(query);
 
     window.location.replace(`/career-advice/${query}`);
   };

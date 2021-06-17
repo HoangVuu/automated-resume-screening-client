@@ -33,7 +33,6 @@ function RecruiterNavBar() {
   };
 
   const handleClick = (i) => {
-    console.log("i", i);
     setClickItem(i);
   };
 

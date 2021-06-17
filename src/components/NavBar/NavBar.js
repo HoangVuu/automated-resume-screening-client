@@ -17,7 +17,10 @@ import { logoutUserAction } from "state/actions/authenticationActions";
 import history from "state/history";
 import { checkCookie, setCookie } from "utils/cookies";
 import "./NavBar.scss";
-import { candidateProfileAction, resetProfile } from "state/actions/profileAction";
+import {
+  candidateProfileAction,
+  resetProfile
+} from "state/actions/profileAction";
 import isEmpty from "lodash/isEmpty";
 import { useTranslation } from "react-i18next";
 
@@ -30,6 +33,9 @@ function NavBar() {
 
   const [info, setInfo] = useState(false);
   const [clickItem, setClickItem] = useState(null);
+  let { pathname } = window.location;
+
+
 
   //Handle logout
   const logOut = () => {
@@ -56,13 +62,16 @@ function NavBar() {
 
   useEffect(() => {
     accessToken && dispatch(candidateProfileAction(accessToken));
-
-    const { pathname } = window.location;
-
-    pathname.startsWith("/find-jobs") && setClickItem(0);
-    pathname.startsWith("/profile") && setClickItem(1);
-    pathname.startsWith("/career-advice") && setClickItem(2);
-    pathname.startsWith("") && setClickItem(null);
+    if (pathname.startsWith("/find-jobs")) {
+      setClickItem(0);
+    } else if (pathname.startsWith("/profile")) {
+      setClickItem(1);
+    } else if (pathname.startsWith("/career-advice")) {
+      setClickItem(2);
+    } else {
+      // pathname.startsWith("")
+      setClickItem(null);
+    }
   }, [profile.fullName, accessToken]);
 
   return (
@@ -146,7 +155,7 @@ function NavBar() {
           size="large"
           onClick={() => history.push("/recruiter/home")}
         >
-         {t("header.employer")}
+          {t("header.employer")}
         </Button>
       </ul>
     </div>
@@ -181,7 +190,9 @@ const NavItem = ({
           onClick={linkClick}
         >
           {t(`header.${title}`)}
-          {isCareer && <StarTwoTone className="nav-link__icon" twoToneColor="#F57C00" />}
+          {isCareer && (
+            <StarTwoTone className="nav-link__icon" twoToneColor="#F57C00" />
+          )}
         </Link>
       )}
       {button && (

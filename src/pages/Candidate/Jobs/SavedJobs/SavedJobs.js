@@ -27,6 +27,10 @@ function CandidateSavedJobs() {
   const [unsaved, setUnsaved] = useState(0);
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [currentId, setCurrentId] = useState();
+  const [currentProvince, setCurrentProvince] = useState();
+  const [currentCompany, setCurrentCompany] = useState();
+  const [currentJob, setCurrentJob] = useState();
 
   const { token } = useSelector((state) => state.auth.candidate);
   const province_list = useSelector((state) => state.cv.provinces);
@@ -35,7 +39,25 @@ function CandidateSavedJobs() {
     setPage(page);
   };
 
-  const toggleModal = () => setShow(!show);
+  const toggleModal = (
+    jpId,
+    provinceName,
+    provinceNameEn,
+    companyName,
+    jobTitle
+  ) => {
+    setCurrentId(jpId);
+    setCurrentProvince(i18n.language === "vi" ? provinceName : provinceNameEn);
+    setCurrentCompany(companyName);
+    setCurrentJob(jobTitle);
+
+    setShow(!show);
+  };
+
+  const onSubmitModal = (isSubmit) => {
+    setUnsaved(unsaved + 1);
+    console.log(isSubmit);
+  };
 
   const mapResponseToState = (data) =>
     data.map(
@@ -60,6 +82,11 @@ function CandidateSavedJobs() {
           return p ? p.province_name : "";
         });
 
+        const province_names_en = provinces.map((id) => {
+          const p = province_list.find((p) => p.province_id === id);
+          return p ? p.province_name_en : "";
+        });
+
         return {
           id,
           job_title,
@@ -72,7 +99,8 @@ function CandidateSavedJobs() {
           job_id,
           description,
           note,
-          is_applied
+          is_applied,
+          provinceEn: province_names_en.join(", ")
         };
       }
     );
@@ -103,10 +131,16 @@ function CandidateSavedJobs() {
 
   const handleUnsaved = async (job_id) => {
     swal({
-      title: "Are you sure unsave this job?",
-      text: "You'll delete this job from saved jobs list!",
+      title:
+        i18n.language === "en"
+          ? "Are you sure unsave this job?"
+          : "Bạn có chắc chắn muốn hủy lưu việc làm này",
+      text:
+        i18n.language === "en"
+          ? "You'll delete this job from saved jobs list!"
+          : "Bạn sẽ xóa việc làm này ra khỏi danh sách việc làm làm đã lưu",
       icon: "warning",
-      buttons: ["Cancel", "Delete"],
+      buttons: [t("profile.cancel"), t("profile.delete")],
       dangerMode: true
     })
       .then(async (willDelete) => {
@@ -116,7 +150,10 @@ function CandidateSavedJobs() {
               setUnsaved(unsaved + 1);
               toast({
                 type: "success",
-                message: "Unsave job successful"
+                message:
+                  i18n.language === "en"
+                    ? "Unsave job successful"
+                    : "Hủy lưu thành công"
               });
             })
             .catch((err) => {
@@ -175,6 +212,17 @@ function CandidateSavedJobs() {
           )}
         </div>
       </div>
+
+      <ApplyModal
+        visible={show}
+        onCancel={toggleModal}
+        company_name={currentCompany}
+        job_title={currentJob}
+        location={currentProvince}
+        token={token}
+        jp_id={currentId}
+        onSubmitModal={onSubmitModal}
+      />
     </div>
     // </div>
   );
@@ -189,6 +237,7 @@ const Job = ({
   salary,
   deadline,
   province,
+  provinceEn,
   company_logo,
   lastChild,
   toggleModal,
@@ -208,10 +257,34 @@ const Job = ({
   const [noteValue, setNoteValue] = useState();
   const [currentNote, setCurrentNote] = useState(note);
 
+  const getLangSalary = (salary) => {
+    if (salary) {
+      if (salary === "Thoả thuận") {
+        salary = i18n.language === "vi" ? "Thoả thuận" : "Wage agreement";
+      } else if (salary.includes("Lên đến")) {
+        salary =
+          i18n.language === "vi"
+            ? salary
+            : salary.replaceAll("Lên đến", "Up to ");
+      } else if (salary.includes("Từ")) {
+        salary =
+          i18n.language === "vi" ? salary : salary.replaceAll("Từ", "From ");
+      }
+    }
+
+    return salary;
+  };
+
   const onDeleteNote = () => {
     swal({
-      title: i18n.language === "en" ?  "Are you sure to delete this note?" : "Bạn có chắc chắn muốn xóa ghi chú này?",
-      text:  i18n.language === "en" ? "You'll delete note for this saved job!" : "Bạn sẽ xóa ghi chú của việc làm đã lưu này",
+      title:
+        i18n.language === "en"
+          ? "Are you sure to delete this note?"
+          : "Bạn có chắc chắn muốn xóa ghi chú này?",
+      text:
+        i18n.language === "en"
+          ? "You'll delete note for this job!"
+          : "Bạn sẽ xóa ghi chú của việc làm này!",
       icon: "warning",
       buttons: [t("profile.cancel"), t("profile.delete")],
       dangerMode: true
@@ -223,7 +296,10 @@ const Job = ({
               setCurrentNote(null);
               toast({
                 type: "success",
-                message: i18n.language === "en" ? "Delete saved job's note successful!" : "Xóa ghi chú việc làm thành công!"
+                message:
+                  i18n.language === "en"
+                    ? "Delete saved job's note successful!"
+                    : "Xóa ghi chú việc làm thành công!"
               });
             })
             .catch((err) => {
@@ -243,7 +319,12 @@ const Job = ({
       .then((res) => {
         console.log("note", res.data.data.note);
 
-        toast({ message: "Add Notes successfull" });
+        toast({
+          message:
+            i18n.language === "en"
+              ? "Add Notes successfull"
+              : "Thêm ghi chú thành công"
+        });
         setCurrentNote(res.data.data.note);
         setIsOpen(false);
       })
@@ -295,8 +376,13 @@ const Job = ({
             </Link>
           </h4>
           <div className="row-company text_ellipsis">{company_name}</div>
-          <div>{t("myJob.saveOn")}: {formatDateTime(created_on)}</div>
-          <Tooltip placement="top" title={province}>
+          <div>
+            {t("myJob.saveOn")}: {formatDateTime(created_on)}
+          </div>
+          <Tooltip
+            placement="top"
+            title={i18n.language === "vi" ? province : provinceEn}
+          >
             <div
               className="address text_ellipsis"
               style={{ marginTop: "10px", color: "rgba(28,28,28,.63)" }}
@@ -305,7 +391,7 @@ const Job = ({
                 className="fas fa-map-marker-alt mr-5"
                 style={{ fontSize: 16, color: "#2557a7" }}
               ></i>
-              {province}
+              {i18n.language === "vi" ? province : provinceEn}
             </div>
           </Tooltip>
           <div
@@ -322,7 +408,7 @@ const Job = ({
                   color: "#2557a7"
                 }}
               />
-              {salary}
+              {getLangSalary(salary)}
             </div>
             <div className="deadline col-sm-5" style={{ fontSize: "16px" }}>
               <ClockCircleOutlined
@@ -340,29 +426,27 @@ const Job = ({
           <div className="note-job__content">
             {isOpen ? (
               <>
-                <strong style={{ fontSize: "16px" }}>Notes</strong>
+                <strong style={{ fontSize: "16px" }}>{t("myJob.note")}</strong>
                 <TextArea
                   className="note-job__content__area"
                   defaultValue={currentNote}
                   rows={4}
                   onChange={(e) => setNoteValue(e.target.value)}
                 />
-                <p className="note-job__content__only">
-                  Only you can see these notes
-                </p>
+                <p className="note-job__content__only">{t("myJob.only")}</p>
 
                 <div className="note-job__content__button">
                   <div
                     className="note-job__content__button__save"
                     onClick={onSaveNote}
                   >
-                    Save
+                    {t("myJob.save")}
                   </div>
                   <div
                     className="note-job__content__button__text"
                     onClick={() => setIsOpen(false)}
                   >
-                    Cancel
+                    {t("myJob.cancel")}
                   </div>
                 </div>
               </>
@@ -370,18 +454,20 @@ const Job = ({
               currentNote && (
                 <>
                   <div className="note-job__content__edit">
-                    <strong style={{ fontSize: "16px" }}>Notes</strong>
+                    <strong style={{ fontSize: "16px" }}>
+                      {t("myJob.note")}
+                    </strong>
                     <div
                       className="note-job__content__button__text"
                       onClick={() => setIsOpen(true)}
                     >
-                      Edit
+                      {t("myJob.edit")}
                     </div>
                     <div
                       className="note-job__content__button__text"
                       onClick={onDeleteNote}
                     >
-                      Delete
+                      {t("myJob.delete")}
                     </div>
                   </div>
                   <div className="note-job__content__saved">{currentNote}</div>
@@ -394,14 +480,22 @@ const Job = ({
         <div className="col-sm-2 job-button-group">
           {is_applied ? (
             <button className="view-apply-button saved-job__apply applied">
-              Applied
+              {t("myJob.applied")}
             </button>
           ) : (
             <button
               className="view-apply-button saved-job__apply"
-              onClick={toggleModal}
+              onClick={() => {
+                toggleModal(
+                  job_id,
+                  province,
+                  provinceEn,
+                  company_name,
+                  job_title
+                );
+              }}
             >
-             {t("jobList.apply")}
+              {t("myJob.apply")}
             </button>
           )}
           <div className="box-save-job">
@@ -416,33 +510,32 @@ const Job = ({
               onClick={() => handleUnsaved(job_id)}
             >
               <i className="fa fa-trash mr-10"></i>
-              Remove job
+              {t("myJob.remove")}
             </button>
           </div>
         </div>
-
-        <ApplyModal
-          visible={show}
-          onCancel={toggleModal}
-          company_name={company_name}
-          job_title={job_title}
-          token={token}
-          jp_id={job_id}
-        />
       </div>
     </>
   );
 };
 
-const EmptyJob = () => (
-  <>
-    <div className="text-center">
-      <img
-        src="/assets/svg/Empty.svg"
-        alt="empty icon"
-        style={{ width: "380px", height: "160px", margin: "50px auto" }}
-      />
-      <p style={{ paddingBottom: "80px" }}>Bạn chưa lưu tin tuyển dụng nào!</p>
-    </div>
-  </>
-);
+const EmptyJob = () => {
+  const { t, i18n } = useTranslation();
+
+  return (
+    <>
+      <div className="text-center">
+        <img
+          src="/assets/svg/Empty.svg"
+          alt="empty icon"
+          style={{ width: "380px", height: "160px", margin: "50px auto" }}
+        />
+        <p style={{ paddingBottom: "80px" }}>
+          {i18n.language === "vi"
+            ? "Bạn chưa lưu tin tuyển dụng nào!"
+            : "You haven't saved any job postings yet!"}
+        </p>
+      </div>
+    </>
+  );
+};

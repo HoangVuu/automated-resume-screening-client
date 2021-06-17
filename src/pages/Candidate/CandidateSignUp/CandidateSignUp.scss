@@ -71,8 +71,15 @@
 
         &__group {
           display: flex;
-          justify-content: space-between;
           align-items: center;
+
+          &__date{
+            width: 50%;
+            margin-right: 30px;
+          }
+
+          &__gender{
+          }
         }
 
         &__btn {
@@ -87,14 +94,7 @@
           border-radius: 10px;
           color: $c-white;
           text-transform: uppercase;
-          background-image: linear-gradient(
-            to right,
-            $primary,
-            #3853de 22%,
-            #9c75e3 50%,
-            #3853de 78%,
-            $primary 100%
-          );
+          background-image: linear-gradient(to right, $primary, #3853de 22%, #9c75e3 50%, #3853de 78%, $primary 100%);
           transition: all 0.3s ease;
           background-size: 200% auto;
 
@@ -241,5 +241,11 @@
 
   .candidate-login__container__left__form__title {
     font-size: 22px;
+  }
+}
+
+.signup-label {
+  label {
+    font-size: 16px;
   }
 }

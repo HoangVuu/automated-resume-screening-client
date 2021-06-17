@@ -19,7 +19,19 @@
             "enterPassword": "Enter password..."
         },
         "doNot": "Don't have an account?",
-        "register": "Register"
+        "register": "Register",
+        "has": "Already have an account?",
+        "name": "Fullname",
+        "phone": "Phone number",
+        "enterName": "Enter fullname...",
+        "confirm": "Confirm password...",
+        "enterPhone": "Enter phone number...",
+        "province": "Province/ Capital you live in",
+        "provinPla": "Select where you live in",
+        "date": "Date of birth",
+        "enterDate": "Select date",
+        "gender": "Gender"
+
     },
     "home": {
         "Just": "Just explore then apply",
@@ -275,9 +287,27 @@
     "myJob": {
         "saved": "Saved",
         "applied": "Applied",
+        "apply": "Apply Now",
         "job": "job",
         "jobs": "jobs",
         "addNote": "Add Notes",
-        "saveOn": "Saved job on"
+        "saveOn": "Saved job on",
+        "remove": "Remove job",
+        "note": "Notes",
+        "only": "Only you can see these notes",
+        "save": "Save",
+        "cancel":"Cancel",
+        "edit": "Edit",
+        "delete": "Delete",
+        "applyOn": "Apply on"
+    },
+    "apply": {
+        "title": "Apply for a job",
+        "choose": "Select 1 resume to apply for",
+        "return": "Return",
+        "submit": "Submit"
+    },
+    "role" : {
+        
     }
 }

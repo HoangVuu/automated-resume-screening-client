@@ -49,7 +49,6 @@ function SearchSuggest({ handleSubmit }) {
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   const onSuggestionsFetchRequested = ({ value }) => {
-    console.log(value);
     setValue(value);
     setSuggestions(getSuggestions(value));
   };
@@ -58,7 +57,7 @@ function SearchSuggest({ handleSubmit }) {
   const onSuggestionsClearRequested = () => setSuggestions([]);
 
   const onSuggestionSelected = (_, { suggestionValue }) => {
-    console.log("Selected: " + suggestionValue);
+    // console.log("Selected: " + suggestionValue);
   };
 
   // Autosuggest will pass through all these props to the input.
@@ -99,7 +98,6 @@ function SearchSuggest({ handleSubmit }) {
         await getJobSkill()
           .then((res) => {
             setSkills(res.data.data);
-            console.log("data", res);
           })
           .catch((err) => {
             toastErr(err);
