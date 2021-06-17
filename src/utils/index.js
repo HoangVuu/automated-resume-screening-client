@@ -66,6 +66,8 @@ export const formatProvinceName = (province) => {
     name = province.split("Thành phố ");
   } else if (province && province.includes("Tỉnh ")) {
     name = province.split("Tỉnh ");
+  } else if (province && province.includes("Thủ đô ")) {
+    name = province.split("Thủ đô ");
   }
 
   return name && name.length && name[1];
@@ -84,7 +86,7 @@ export const formatProvinceName = (province) => {
 
 export const formatProvinceNameBrief = (province) => {
   let provinceName = formatProvinceName(province);
-
+  console.log("province====: ",provinceName && provinceName)
   return provinceName
     ? provinceName
         .split(/\s/)

@@ -308,6 +308,19 @@
         "submit": "Submit"
     },
     "role" : {
-        
+        "explore": "Explore careers",
+        "salary": "Salary",
+        "whatCan": "What can I earn as a ",
+        "task": "Tasks and duties",
+        "skill": "Skills and experience employers are looking for",
+        "see": "See some main skills of ",
+        "lastest": "Lastest job posts",
+        "newPost": " new job post",
+        "newPosts": " new job posts",
+        "of": "of ",
+        "most": "most common annual salary",
+        "vn": "Viet Nam",
+        "in": "in"
+
     }
 }

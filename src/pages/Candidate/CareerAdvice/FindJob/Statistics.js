@@ -1,5 +1,4 @@
 import {
-  StarTwoTone,
   StarFilled,
   CaretUpOutlined,
   StockOutlined
@@ -29,7 +28,7 @@ const Statistics = ({ total, min, max }) => {
             </>
           ) : (
             <>
-              Công việc hiện có trên <strong>FASTJOB</strong> <br/> ngay bây giờ
+              Các việc làm hiện có trên <strong>FASTJOB</strong> <br/> ngay bây giờ
             </>
           )}
         </div>

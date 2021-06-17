@@ -306,7 +306,20 @@
         "return": "Trở về",
         "submit": "Nộp CV"
     },
-    "role": {
-        
+    "role" : {
+        "explore": "Khám phá cơ hội việc làm",
+        "salary": "Mức lương",
+        "whatCan": "Tôi có thể kiếm được bao nhiêu với vai trò là một ",
+        "task": "Các công việc và nhiệm vụ",
+        "skill": "Các kỹ năng và kinh nghiệm nhà tuyển dụng đang tìm kiếm",
+        "see": "Xem một vài kĩ năng chính của ",
+        "lastest": "Các bài đăng việc làm mới nhất",
+        "newPost": " việc làm mới nhất",
+        "newPosts": " việc làm mới nhất",
+        "of": "của ",
+        "most": "Mức lương phổ biến nhất hàng năm",
+        "vn": "Việt Nam",
+        "in": "tại"
+
     }
 }
