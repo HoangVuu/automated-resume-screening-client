@@ -73,7 +73,8 @@ const CareerRole = (props) => {
                 {domainData.domain.name}
               </h2>
               <p className="career-role__header__sub-title">
-                Create user–friendly websites and multimedia content
+                {i18n.language === "en" ? "Explore more detail about this role to understand and see what you'll do in the future" : "Xem chi tiết nhiều hơn về vị trí này để hiểu rõ hơn và thấy những gì bạn sẽ làm trong thời gian tới" }
+                {/* Create user–friendly websites and multimedia content */}
               </p>
             </div>
           </div>
@@ -179,7 +180,7 @@ const CareerRole = (props) => {
                 ?
               </h2>
               <p className="career-role__detail__description">
-                {domainData.domain.content.split("\\n")[0]}
+                {i18n.language === "en" ? domainData.domain.content.split("\\n")[0] : domainData.domain.content_vn.split("\\n")[0]}
               </p>
 
               <div className="career-role__detail__poster">
@@ -190,12 +191,12 @@ const CareerRole = (props) => {
                 {domainData.domain.tasks.length &&
                   domainData.domain.tasks.map((item) => (
                     <li className="career-role__detail__list__item">
-                      {item.name}
+                      {i18n.language === "en" ? item.name : item.name_vn}
                     </li>
                   ))}
               </ul>
               <p className="career-role__detail__text">
-                {domainData.domain.content.split("\\n")[1]}
+                {i18n.language === "en" ? domainData.domain.content.split("\\n")[1] : domainData.domain.content_vn.split("\\n")[1]}
               </p>
             </div>
 
@@ -268,7 +269,7 @@ const CareerRole = (props) => {
                 {domainData.domain.name}
               </p>
               <div className="career-role__skills__container">
-                {domainData.mainSkills.length &&
+                {domainData?.mainSkills.length &&
                   domainData.mainSkills
                     .map((item) => item.name)
                     .map((skill) => <SkillItem name={skill} />)}

@@ -26,8 +26,9 @@ import {
 } from "state/actions/index";
 import history from "state/history";
 import { setCookie } from "utils/cookies";
-import { toast, toastErr } from "utils/index";
+import { toast, toastErr, getMessage } from "utils/index";
 import jwt_decode from "jwt-decode";
+import i18n from "i18next";
 
 export function* registerCandidateSaga({ payload }) {
   try {
@@ -36,7 +37,7 @@ export function* registerCandidateSaga({ payload }) {
 
     yield [put({ type: REGISTER_USER_SUCCESS, response })];
 
-    yield toast({ message });
+    yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") })
 
     yield history.push("/confirm-mail");
   } catch (err) {
@@ -66,7 +67,7 @@ export function* verifyCandidateSaga({ payload }) {
 
     yield [put({ type: VERIFY_USER_SUCCESS, response })];
 
-    yield toast({ message });
+    yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") });
   } catch (err) {
     yield toastErr(err);
   }
@@ -103,7 +104,7 @@ export function* loginCandidatePromiseSaga(action) {
       email
     });
 
-    yield toast({ message });
+    yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") });
 
     yield call(resolvePromiseAction, action);
   } catch (err) {

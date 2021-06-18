@@ -7,7 +7,8 @@
         "appliedJob": "Applied Jobs",
         "logOut": "Logout",
         "logIn": "Login",
-        "employer": "Employer"
+        "employer": "Employer",
+        "employee": "Employee"
     },
     "candidateSignIn": {
         "areYou": "Are you an employer?",
@@ -320,7 +321,25 @@
         "of": "of ",
         "most": "most common annual salary",
         "vn": "Viet Nam",
-        "in": "in"
-
+        "in": "in",
+        "for": "for a",
+        "is": "is between",
+        "and": " and "
+    },
+    "skill": {
+        "acc": "Acquiring this skill can open up more career directions for you",
+        "explore": "Explore careers",
+        "career": "Career directions",
+        "roles": " roles where this skill is commonly valued by employers",
+        "role": " role where this skill is commonly valued by employers",
+        "found": " found ",
+        "where": " where this skill is valued by employers",
+        "no": "There is no job opportunities for",
+        "try":"Try again another time or ",
+        "ex": "explore",
+        "other": "other job opportunity categories",
+        "orEx": "Or explore opportunities on",
+        "too": "to see where you can find jobs",
+        "all": "All"
     }
 }

@@ -1,6 +1,7 @@
 import Toaster from "components/Toastify/Toaster";
 import React from "react";
 import { toast as toaster } from "react-toastify";
+import i18n from "i18next";
 
 export function toast({ type = "success", message = "" }) {
   return toaster(<Toaster type={type} message={message} />);
@@ -86,7 +87,7 @@ export const formatProvinceName = (province) => {
 
 export const formatProvinceNameBrief = (province) => {
   let provinceName = formatProvinceName(province);
-  console.log("province====: ",provinceName && provinceName)
+  console.log("province====: ", provinceName && provinceName);
   return provinceName
     ? provinceName
         .split(/\s/)
@@ -138,4 +139,20 @@ export const getIndexArray = (arr) => {
 
 export const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+export const formatCurrency = (value) => {
+  return value && value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+};
+
+export const getMessage = (mess, lang) => {
+  let result = mess && mess.split("|");
+
+  if (lang === "en") {
+    result = result[0];
+  } else {
+    result = result[1];
+  }
+
+  return result;
 };

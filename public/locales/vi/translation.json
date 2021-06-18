@@ -7,7 +7,8 @@
         "appliedJob": "Việc làm đã ứng tuyến",
         "logOut": "Đăng xuất",
         "logIn": "Đăng nhập",
-        "employer": "Nhà tuyển dụng"
+        "employer": "Nhà tuyển dụng",
+        "employee": "Ứng viên"
     },
     "candidateSignIn": {
         "areYou": "Bạn là nhà tuyển dụng?",
@@ -154,7 +155,7 @@
         "matchedTitle": "Các cơ hội việc làm phù hợp",
         "mostMatches": "Phù hợp hầu hết các kĩ năng",
         "goodSkill": "Những cơ hội tốt với bạn",
-        "enjoy": "Những cơ hội bạn thích",
+        "enjoy": "Những cơ hội có thể bạn thích",
         "lookingBigTitle": "Bạn đang tìm kiếm một vai trò hoặc kỹ năng cụ thể?",
         "lookingSmallTitle": "Tìm hiểu thêm về vai trò hoặc kỹ năng mà bạn quan tâm",
         "lookingByRole": "Bạn muốn tham gia với vai trò nào?",
@@ -319,7 +320,25 @@
         "of": "của ",
         "most": "Mức lương phổ biến nhất hàng năm",
         "vn": "Việt Nam",
-        "in": "tại"
-
+        "in": "tại",
+        "for": "cho một",
+        "is": "là giữa khoảng",
+        "and": " và "
+    },
+    "skill": {
+        "acc": "Có được kỹ năng này có thể mở ra nhiều định hướng nghề nghiệp hơn cho bạn",
+        "explore": "Khám phá cơ hội việc làm",
+        "career": "Hướng nghiệp",
+        "roles": " vị trí việc làm mà kỹ năng này thường được các nhà tuyển dụng đánh giá cao",
+        "role": " vị trí việc làm mà kỹ năng này thường được các nhà tuyển dụng đánh giá cao",
+        "found": " được tìm thấy ",
+        "where": " khi kỹ năng này được nhà tuyển dụng đánh giá cao",
+        "no": "Không có cơ hội việc làm cho",
+        "try":"Hãy thử lại lần khác hoặc ",
+        "ex": "khám phá",
+        "other": "các danh mục cơ hội việc làm khác",
+        "orEx": "Hoặc khám phá các cơ hội khác trên",
+        "too": "để xem nơi bạn có thể tìm ra việc làm",
+        "all": "Tất cả"
     }
 }

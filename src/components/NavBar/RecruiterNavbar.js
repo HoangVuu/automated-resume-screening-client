@@ -15,8 +15,13 @@ import {
   CheckCircleTwoTone,
   LikeTwoTone
 } from "@ant-design/icons";
+import history from "state/history";
+import { Button } from "antd";
+import { useTranslation } from "react-i18next";
 
 function RecruiterNavBar() {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.auth.recruiter.token);
   const [info, setInfo] = useState(false);
@@ -105,13 +110,14 @@ function RecruiterNavBar() {
           />
         )}
         {/* <span className="nav-separator nav-separator--grey"></span> */}
-        {/* <Button
+        <span className="nav-separator nav-separator--grey"></span>
+        <Button
           type="primary"
           size="large"
-          onClick={() => history.push("/recruiter")}
+          onClick={() => history.push("/")}
         >
-          Nhà tuyển dụng
-        </Button> */}
+          {t("header.employee")}
+        </Button>
       </ul>
     </div>
   );

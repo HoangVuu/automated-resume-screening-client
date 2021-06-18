@@ -9,7 +9,6 @@ import "./CandidateSignIn.scss";
 import Header from "components/Header/Header";
 import { useTranslation } from "react-i18next";
 
-
 function CandidateSignIn() {
   const { t,i18n } = useTranslation();
 

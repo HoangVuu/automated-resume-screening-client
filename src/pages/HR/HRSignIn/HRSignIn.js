@@ -53,9 +53,7 @@ function HRSignIn() {
               to="/recruiter/home"
               className="hr-login__container__left__logo__wrapper"
             >
-              <h3>
-                Automated&nbsp;<span>Screening</span>
-              </h3>
+              <img src="/assets/img/main-logo.jpg" />
             </Link>
           </div>
 
