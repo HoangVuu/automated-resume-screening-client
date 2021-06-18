@@ -136,12 +136,10 @@ function CandidateJobList({ history }) {
 
       let filter = qs.parse(params);
       let { q, location } = filter;
-      console.log(q);
 
       if (q) {
         await subcribe(q, location, token)
           .then((res) => {
-            console.log(res);
             setIsActive(true);
             toast({
               type: "success",
@@ -244,7 +242,6 @@ function CandidateJobList({ history }) {
 
       await getSubcribe(token)
         .then(async (res) => {
-          console.log(res.data.data.length);
           res.data.data.length !== 0 ? setIsActive(true) : setIsActive(false);
         })
         .catch((err) => console.log(err));

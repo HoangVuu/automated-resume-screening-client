@@ -9,18 +9,17 @@ import { Tabs, Tab } from "react-bootstrap";
 import HasNoJob from "./HasNoJob";
 import MatchSkillCard from "components/MatchSkill/MatchSkillCard/MatchSkillCard";
 
-import { numberToArray } from "utils/index";
+import { formatProvinceEn, numberToArray } from "utils/index";
 import { getCareerSkillProAction } from "state/actions/careerAction";
 import isEmpty from "lodash/isEmpty";
 import Loading from "components/Loading/Loading";
-import {
-  formatProvince,
-  formatProvinceName,
-  formatProvinceNameBrief
-} from "utils/index";
+import { formatProvince, formatProvinceNameBrief } from "utils/index";
 import SimJob from "components/SimJob/SimJob";
+import { useTranslation } from "react-i18next";
 
 const CareerDirection = () => {
+  const { t, i18n } = useTranslation();
+
   const { skill } = useParams();
   const dispatch = useDispatch();
   const skillData = useSelector((state) => state.jobDomain.careerSkill);
@@ -52,15 +51,13 @@ const CareerDirection = () => {
       <div className="career-role__header">
         <div className="container">
           <h2 className="career-role__header__title uppercase">{param}</h2>
-          <p className="career-role__header__sub-title">
-            Acquiring this skill can open up more career directions for you
-          </p>
+          <p className="career-role__header__sub-title">{t("skill.acc")}</p>
         </div>
       </div>
       <div className="container">
         <Link to="/career-advice" className="career-role__back row">
           <LeftOutlined className="career-role__back__icon" />
-          <span>Explore careers</span>
+          <span>{t("skill.explore")}</span>
         </Link>
         {skillData.domain_matched &&
         skillData.domain_matched.length !== 0 &&
@@ -69,12 +66,16 @@ const CareerDirection = () => {
           <>
             <section className="css-jp3yaf css-w7terr css-16ul3l9">
               <div className="css-qsdgf9 css-7b1cf9">
-                <h2 className="career-direction__title">Career directions</h2>
+                <h2 className="career-direction__title">{t("skill.career")}</h2>
               </div>
               <div className="css-qsdgf9">
                 <p className="css-1tpa9ur career-direction__sub-title">
-                  {skillData.domain_matched && skillData.domain_matched.length}{" "}
-                  roles where this skill is commonly valued by employers
+                  {skillData?.domain_matched &&
+                    skillData.domain_matched?.length}
+                  {skillData?.domain_matched &&
+                    (skillData.domain_matched?.length > 1
+                      ? t("skill.roles")
+                      : t("skill.role"))}
                 </p>
                 <div
                   className={
@@ -86,31 +87,16 @@ const CareerDirection = () => {
                   {!isEmpty(skillData) &&
                     skillData.domain_matched &&
                     skillData.domain_matched.length &&
-                    skillData.domain_matched.map((item, index) =>
-                      skillData.domain_matched.length < 3 ? (
-                        <div className="career-direction__list__item">
-                          <MatchSkillCard
-                            key={index}
-                            name={item.domain.name}
-                            logo={item.domain.logo}
-                            content={item.domain.content}
-                            min={item.salary.min}
-                            max={item.salary.max}
-                          />
-                        </div>
-                      ) : (
-                        <MatchSkillCard
-                          key={index}
-                          name={item.domain.name}
-                          logo={item.domain.logo}
-                          content={item.domain.content}
-                          min={item.salary.min}
-                          max={item.salary.max}
-                        />
-                      )
-                    )}
-                  {/* <MatchSkillCard  className="career-direction__list__item" /> */}
-                  {/* <MatchSkillCard className="career-direction__list__item"/> */}
+                    skillData.domain_matched.map((item, index) => (
+                      <MatchSkillCard
+                        key={index}
+                        name={item.domain.name}
+                        logo={item.domain.logo}
+                        content={item.domain.content}
+                        min={item.salary.min}
+                        max={item.salary.max}
+                      />
+                    ))}
                 </div>
               </div>
             </section>
@@ -118,7 +104,11 @@ const CareerDirection = () => {
             {/* Tabs earn in role */}
             {!isEmpty(skillData) && skillData.jobs_in_hot_province && (
               <div className="career-role__container">
-                <h2 className="career-direction__title">Jobs on FASTJOB</h2>
+                <h2 className="career-direction__title">
+                  {i18n.language === "en"
+                    ? "Jobs on FASTJOB"
+                    : "Việc làm trên FASTJOB"}
+                </h2>
 
                 <Tabs
                   className="career-role__tabs"
@@ -143,8 +133,22 @@ const CareerDirection = () => {
                               style={{ marginBottom: "40px" }}
                             >
                               {item.jobs.length}{" "}
-                              {item.jobs.length > 1 ? "jobs" : "job"} found
-                              where this skill is valued by employers
+                              {i18n.language === "en" ? "jobs" : "việc làm"}
+                              {t("skill.found")}
+                              {t("role.in")}{" "}
+                              <strong>
+                                {" "}
+                                {(i18n.language === "vi"
+                                  ? formatProvince(
+                                      provinces,
+                                      String(item.province_id)
+                                    )
+                                  : formatProvinceEn(
+                                      provinces,
+                                      String(item.province_id)
+                                    )) || t("role.vn")}
+                              </strong>
+                              {t("skill.where")}
                             </p>
 
                             <div>
@@ -184,10 +188,17 @@ const CareerDirection = () => {
                           <>
                             <HasNoJob
                               name={param}
-                              location={formatProvince(
-                                provinces,
-                                String(item.province_id)
-                              )}
+                              location={
+                                i18n.language === "vi"
+                                  ? formatProvince(
+                                      provinces,
+                                      String(item.province_id)
+                                    )
+                                  : formatProvinceEn(
+                                      provinces,
+                                      String(item.province_id)
+                                    )
+                              }
                             />
                           </>
                         )}

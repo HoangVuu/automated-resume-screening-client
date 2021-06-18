@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { candidateApplyAction } from "state/actions/hrJobAction";
 import Loading from "components/Loading/Loading";
 import { toast } from "utils/index";
+import { useTranslation } from "react-i18next";
 
 function ApplyModal({
   visible,
@@ -14,16 +15,20 @@ function ApplyModal({
   job_title,
   token,
   jp_id,
-  location
+  location,
+  onSubmitModal
 }) {
+  const { t, i18n } = useTranslation();
+
   const [selected, setSelected] = useState(null);
   const [resumes, setResumes] = useState([]);
   const [loading, setLoading] = useState(false);
+  // const [clickSubmit, setClickSubmit] = useState(false);
+
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-
     const fetchResumes = async () => {
       await candidateGetResumes(token).then((res) => {
         setResumes(res.data.data);
@@ -38,13 +43,13 @@ function ApplyModal({
   const handleSubmit = () => {
     console.log('id', jp_id);
     console.log(location)
-    console.log("==================")
     setLoading(true);
     dispatch(candidateApplyAction({ jp_id: jp_id, resume_id: selected, token }))
       .then(() => {
         onCancel();
+        onSubmitModal(true)
       })
-      .catch(() => toast({ type: "error", message: "Please select a resume to apply" }))
+      .catch(() => !selected && toast({ type: "error", message: i18n.language === "en" ? "Please select a resume to apply" : "Vui lòng chọn hồ sơ để ứng tuyển" }))
       .finally(() => {
         setLoading(false);
       });
@@ -52,11 +57,11 @@ function ApplyModal({
 
   return (
     <Modal
-      title={"Ứng tuyển việc làm"}
+      title={t("apply.title")}
       visible={visible}
       onCancel={onCancel}
-      okText="Nộp CV"
-      cancelText="Trở về"
+      okText={t("apply.submit")}
+      cancelText={t("apply.return")}
       onOk={handleSubmit}
     >
       <div>
@@ -75,7 +80,7 @@ function ApplyModal({
         </div>
         <div>
           <div style={{ marginBottom: "1.5rem" }}>
-            <div className="resumeSelector-title">Chọn 1 CV để ứng tuyển:</div>
+            <div className="resumeSelector-title">{t("apply.choose")}:</div>
             {resumes.map((resume) => (
               <Resume
                 key={resume.id}

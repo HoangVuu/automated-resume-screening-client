@@ -7,7 +7,8 @@
         "appliedJob": "Applied Jobs",
         "logOut": "Logout",
         "logIn": "Login",
-        "employer": "Employer"
+        "employer": "Employer",
+        "employee": "Employee"
     },
     "candidateSignIn": {
         "areYou": "Are you an employer?",
@@ -19,7 +20,19 @@
             "enterPassword": "Enter password..."
         },
         "doNot": "Don't have an account?",
-        "register": "Register"
+        "register": "Register",
+        "has": "Already have an account?",
+        "name": "Fullname",
+        "phone": "Phone number",
+        "enterName": "Enter fullname...",
+        "confirm": "Confirm password...",
+        "enterPhone": "Enter phone number...",
+        "province": "Province/ Capital you live in",
+        "provinPla": "Select where you live in",
+        "date": "Date of birth",
+        "enterDate": "Select date",
+        "gender": "Gender"
+
     },
     "home": {
         "Just": "Just explore then apply",
@@ -275,9 +288,58 @@
     "myJob": {
         "saved": "Saved",
         "applied": "Applied",
+        "apply": "Apply Now",
         "job": "job",
         "jobs": "jobs",
         "addNote": "Add Notes",
-        "saveOn": "Saved job on"
+        "saveOn": "Saved job on",
+        "remove": "Remove job",
+        "note": "Notes",
+        "only": "Only you can see these notes",
+        "save": "Save",
+        "cancel":"Cancel",
+        "edit": "Edit",
+        "delete": "Delete",
+        "applyOn": "Apply on"
+    },
+    "apply": {
+        "title": "Apply for a job",
+        "choose": "Select 1 resume to apply for",
+        "return": "Return",
+        "submit": "Submit"
+    },
+    "role" : {
+        "explore": "Explore careers",
+        "salary": "Salary",
+        "whatCan": "What can I earn as a ",
+        "task": "Tasks and duties",
+        "skill": "Skills and experience employers are looking for",
+        "see": "See some main skills of ",
+        "lastest": "Lastest job posts",
+        "newPost": " new job post",
+        "newPosts": " new job posts",
+        "of": "of ",
+        "most": "most common annual salary",
+        "vn": "Viet Nam",
+        "in": "in",
+        "for": "for a",
+        "is": "is between",
+        "and": " and "
+    },
+    "skill": {
+        "acc": "Acquiring this skill can open up more career directions for you",
+        "explore": "Explore careers",
+        "career": "Career directions",
+        "roles": " roles where this skill is commonly valued by employers",
+        "role": " role where this skill is commonly valued by employers",
+        "found": " found ",
+        "where": " where this skill is valued by employers",
+        "no": "There is no job opportunities for",
+        "try":"Try again another time or ",
+        "ex": "explore",
+        "other": "other job opportunity categories",
+        "orEx": "Or explore opportunities on",
+        "too": "to see where you can find jobs",
+        "all": "All"
     }
 }

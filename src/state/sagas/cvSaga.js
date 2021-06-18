@@ -5,13 +5,14 @@ import {
   updateCVProfileAction
 } from "state/actions/index";
 import history from "state/history";
-import { toast, toastErr } from "utils/index";
+import { toast, toastErr,getMessage } from "utils/index";
 import {
   rejectPromiseAction,
   resolvePromiseAction
 } from "@adobe/redux-saga-promise";
 import { updateCV, uploadFile } from "services/uploadServices";
 import { UPLOAD_CV_SUCCESS } from "state/reducers/cvReducer";
+import i18n from "i18next";
 
 export function* uploadCVSaga(action) {
   try {
@@ -52,7 +53,7 @@ export function* updateResumeSaga(action) {
     const result = yield call(updateCV, data, token);
     const { message } = result.data;
 
-    yield toast({ message });
+    yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") })
 
     yield history.push("/profile");
 
@@ -88,7 +89,7 @@ export function* updateCVProfileSaga(action) {
     const result = yield call(updateCV, data, token);
     const { message } = result.data;
 
-    yield toast({ message });
+    yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") })
 
     yield call(resolvePromiseAction, action);
   } catch (err) {

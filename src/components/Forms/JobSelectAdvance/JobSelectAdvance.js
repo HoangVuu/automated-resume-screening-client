@@ -13,7 +13,7 @@ import { GET_JOB_DOMAIN } from "state/reducers/jobDomainReducer";
 import { useTranslation } from "react-i18next";
  
 function JobSelectAdvance({ handleSubmit }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [state, setState] = useState({
     loading: false,
@@ -30,6 +30,11 @@ function JobSelectAdvance({ handleSubmit }) {
   const options = provinces.map(({ province_id, province_name }) => ({
     value: province_id,
     label: province_name
+  }));
+
+  const optionsEn = provinces.map(({ province_id, province_name_en }) => ({
+    value: province_id,
+    label: province_name_en
   }));
 
   useEffect(() => {
@@ -73,7 +78,7 @@ function JobSelectAdvance({ handleSubmit }) {
             name="location"
             className="col-sm-6"
             placeholder={t("findJobSignIn.findLocation")}
-            options={options}
+            options={i18n.language === "vi" ? options : optionsEn}
             icon={<FontAwesomeIcon icon={faMapMarkerAlt} color="#555" />}
             isClearable={true}
           />
@@ -85,7 +90,7 @@ function JobSelectAdvance({ handleSubmit }) {
             style={{ fontWeight: 700 }}
           >
             <SearchOutlined style={{ marginRight: "10px" }} />
-            Find Jobs
+            {t("jobList.jobSearchAdvance.find")}
           </button>
         </div>
       </div>

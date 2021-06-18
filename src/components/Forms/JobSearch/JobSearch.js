@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 
 function JobSearch() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [jobTypeChecked, setJobTypeChecked] = useState(null);
   const [location, setLocation] = useState(null);
@@ -22,6 +22,13 @@ function JobSearch() {
     value: province_id,
     label: province_name
   }));
+
+  const optionsEn = useSelector((state) =>
+  state.cv.provinces.map(({ province_id, province_name_en }) => ({
+    value: province_id,
+    label: province_name_en
+  }))
+);
 
   const OPTIONS = [
     { label: t("home.jobSearch.full"), value: 0 },
@@ -63,7 +70,7 @@ function JobSearch() {
             </div>
             <div className="col-md-5">
               <Select
-                options={options}
+                options={i18n.language === "en" ? optionsEn :  options}
                 value={location}
                 onChange={(value) => setLocation(value)}
                 placeholder={t("home.location")}

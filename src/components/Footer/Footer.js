@@ -8,7 +8,7 @@ function Footer() {
       <div className="container">
         <div className="footer-left">
           <h3>
-            Automated&nbsp;<span>Screening</span>
+          <img src="/assets/img/main-logo.jpg" />
           </h3>
           <p className="footer-links">
             <Link to="/" className="mr-5">
@@ -30,7 +30,7 @@ function Footer() {
         </div>
         <div className="footer-center">
           <div>
-            <i className="fa fa-map-marker" />
+            <i className="fas fa-map-marker-alt" />
             <p>
               <span>KP6, Linh Trung, Thủ Đức</span>
               Thành phồ Hồ Chí Minh

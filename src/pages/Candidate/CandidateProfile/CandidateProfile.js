@@ -372,7 +372,6 @@ function MyProfile() {
   };
 
   const onSelect = async (value) => {
-    console.log("select", value);
     setActive(!active);
 
     const status = value ? 1 : 0;

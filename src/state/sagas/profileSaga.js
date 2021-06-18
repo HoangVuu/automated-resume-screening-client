@@ -12,8 +12,9 @@ import {
   rejectPromiseAction,
   resolvePromiseAction
 } from "@adobe/redux-saga-promise";
-import { toast } from "utils/index";
+import { toast, getMessage } from "utils/index";
 import { updateProfileProAction } from "state/actions/profileAction";
+import i18n from "i18next";
 
 export function* getCandidateProfileSaga({ payload }) {
   try {
@@ -37,7 +38,7 @@ export function* updateProfileSaga(action) {
     
     const { message } = result.data;
 
-    yield toast({ message });
+    yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") })
 
     yield call(resolvePromiseAction, action);
   } catch (err) {

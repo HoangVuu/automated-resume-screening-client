@@ -53,7 +53,6 @@ function JobDetail({ id, top, onChangeSelect, bottom }) {
               res.data.data.cand_technical_skills?.split("|") || null,
             saved: res.data.data.saved_date
           });
-          console.log("save", res.data.data.saved_date);
         })
         .catch((err) => {
           toastErr(err);
@@ -98,7 +97,6 @@ function JobDetail({ id, top, onChangeSelect, bottom }) {
     soft_skills &&
     candSoftSkill?.length &&
     soft_skills?.split("|").filter((value) => !candSoftSkill?.includes(value));
-  console.log("filter", diffSoftSkills);
 
   const getLangSalary = (salary) => {
     if (salary) {
@@ -354,7 +352,7 @@ const Header = ({
 
       await saveJob(id, status, token)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
         })
         .catch((err) => toastErr(err))
         .finally(() => setLoading(false));

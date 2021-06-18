@@ -11,7 +11,7 @@ import { HeartOutlined, HeartFilled, LoadingOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import ContentLoader from "react-content-loader";
 import { candidateJobSimilarAction } from "state/actions/candidateJobAction";
-import { getDiffTime, toastErr, formatProvince } from "utils/index";
+import { getDiffTime, toastErr, formatProvince, formatProvinceEn } from "utils/index";
 import { useSelector } from "react-redux";
 import { format_date, toast } from "utils/index";
 import { Link } from "react-router-dom";
@@ -109,13 +109,71 @@ const CandidateJobDetail = ({ history }) => {
     soft_skills &&
     candSoftSkill?.length &&
     soft_skills?.split("|").filter((value) => !candSoftSkill?.includes(value));
-  console.log("filter", diffSoftSkills);
 
   const getProvince = () => {
-    return (
-      provinces &&
-      provinces.map((p) => formatProvince(provinceTotal, p)).join(", ")
-    );
+    let result = "";
+
+    if (i18n.language === "vi") {
+      result =
+        provinces &&
+        provinces.map((p) => formatProvince(provinceTotal, p)).join(", ");
+    } else {
+      result =
+        provinces &&
+        provinces.map((p) => formatProvinceEn(provinceTotal, p)).join(", ");
+    }
+
+    return result;
+  };
+
+  const getLangSalary = (salary) => {
+    if (salary) {
+      if (salary === "Thoả thuận") {
+        salary = i18n.language === "vi" ? "Thoả thuận" : "Wage agreement";
+      } else if (salary.includes("Lên đến")) {
+        salary =
+          i18n.language === "vi"
+            ? salary
+            : salary.replaceAll("Lên đến", "Up to ");
+      } else if (salary.includes("Từ")) {
+        salary =
+          i18n.language === "vi" ? salary : salary.replaceAll("Từ", "From ");
+      }
+    }
+
+    return salary;
+  };
+
+  const getAmount = (amount) => {
+    if (amount) {
+      if (
+        amount === "Không giới hạn ứng viên" ||
+        amount === "Không giới hạn" ||
+        parseInt(amount) === 0
+      ) {
+        amount = t("jobList.noLimit");
+      } else if (parseInt(amount) === 1) {
+        amount = `${amount} ${t("jobList.candidate")}`;
+      } else if (parseInt(amount) > 1) {
+        amount = `${amount} ${t("jobList.candidates")}`;
+      }
+    }
+
+    return amount;
+  };
+  
+  const getLangContractType = (type) => {
+    if (type) {
+      if (type === "Toàn thời gian") {
+        type = i18n.language === "vi" ? "Toàn thời gian" : "Fulltime";
+      } else if (type === "Bán thời gian") {
+        type = i18n.language === "vi" ? "Bán thời gian" : "Parttime";
+      } else if (type === "Thực tập") {
+        type = i18n.language === "vi" ? "Thực tập" : "Internship";
+      }
+    }
+
+    return type;
   };
 
   const getDateDiff = (post) => {
@@ -272,22 +330,20 @@ const CandidateJobDetail = ({ history }) => {
                         <div className="job-detail-section-itemKey text-bold">
                           {t("jobList.salary")}:
                         </div>
-                        <span>{salary}</span>
+                        <span>{getLangSalary(salary)}</span>
                       </div>
                       <div className="job-detail-section-item">
                         <div className="job-detail-section-itemKey text-bold">
                           {t("jobList.workType")}:
                         </div>
-                        <span>{contract_type}</span>
+                        <span>{getLangContractType(contract_type)}</span>
                       </div>
                       <div className="job-detail-section-item">
                         <div className="job-detail-section-itemKey text-bold">
                           {t("jobList.amount")}:
                         </div>
                         <span>
-                          {amount === 0
-                            ? "Không giới hạn số lượng"
-                            : `${amount} ứng viên`}
+                          {getAmount(amount)}
                         </span>
                       </div>
                     </div>

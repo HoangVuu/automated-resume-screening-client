@@ -7,7 +7,8 @@
         "appliedJob": "Việc làm đã ứng tuyến",
         "logOut": "Đăng xuất",
         "logIn": "Đăng nhập",
-        "employer": "Nhà tuyển dụng"
+        "employer": "Nhà tuyển dụng",
+        "employee": "Ứng viên"
     },
     "candidateSignIn": {
         "areYou": "Bạn là nhà tuyển dụng?",
@@ -19,7 +20,18 @@
             "enterPassword": "Nhập mật khẩu..."
         },
         "doNot": "Không có tài khoản?",
-        "register": "Đăng ký"
+        "register": "Đăng ký",
+        "has": "Đã có tài khoản?",
+        "name": "Họ và tên",
+        "phone": "Số điện thoại",
+        "enterName": "Nhập họ và tên...",
+        "confirm": "Xác nhận mật khẩu...",
+        "enterPhone": "Nhập số điện thoại...",
+        "province": "Tỉnh/ Thành phố bạn sinh sống",
+        "provinPla": "Chọn tỉnh/thành sinh sống",
+        "date": "Ngày sinh",
+        "enterDate": "Chọn ngày sinh",
+        "gender": "Giới tính"
     },
     "home": {
         "Just": "Hãy khám phá và sau đó ứng tuyển",
@@ -143,7 +155,7 @@
         "matchedTitle": "Các cơ hội việc làm phù hợp",
         "mostMatches": "Phù hợp hầu hết các kĩ năng",
         "goodSkill": "Những cơ hội tốt với bạn",
-        "enjoy": "Những cơ hội bạn thích",
+        "enjoy": "Những cơ hội có thể bạn thích",
         "lookingBigTitle": "Bạn đang tìm kiếm một vai trò hoặc kỹ năng cụ thể?",
         "lookingSmallTitle": "Tìm hiểu thêm về vai trò hoặc kỹ năng mà bạn quan tâm",
         "lookingByRole": "Bạn muốn tham gia với vai trò nào?",
@@ -189,7 +201,7 @@
         "phone": "Số điện thoại",
         "dateOfBirth": "Ngày sinh",
         "gender": "Giới tính",
-        "male": "Name",
+        "male": "Nam",
         "female": "Nữ",
         "live": "Sống tại",
         "save": "Lưu",
@@ -275,9 +287,58 @@
     "myJob": {
         "saved": "Đã lưu",
         "applied": "Đã ứng tuyển",
+        "apply": "Ứng tuyển",
         "job": "việc làm",
         "jobs": "việc làm",
         "addNote": "Thêm ghi chú",
-        "saveOn": "Đã lưu vào"
+        "saveOn": "Đã lưu vào",
+        "remove": "Xóa việc làm",
+        "note": "Ghi chú",
+        "only": "Chỉ bạn mới có thể thấy những ghi chú này",
+        "save": "Lưu",
+        "cancel":"Hủy",
+        "edit": "Chỉnh sửa",
+        "delete": "Xóa",
+        "applyOn": "Ứng tuyển vào"
+    },
+    "apply": {
+        "title": "Ứng tuyển việc làm",
+        "choose": "Chọn 1 CV để ứng tuyển",
+        "return": "Trở về",
+        "submit": "Nộp CV"
+    },
+    "role" : {
+        "explore": "Khám phá cơ hội việc làm",
+        "salary": "Mức lương",
+        "whatCan": "Tôi có thể kiếm được bao nhiêu với vai trò là một ",
+        "task": "Các công việc và nhiệm vụ",
+        "skill": "Các kỹ năng và kinh nghiệm nhà tuyển dụng đang tìm kiếm",
+        "see": "Xem một vài kĩ năng chính của ",
+        "lastest": "Các bài đăng việc làm mới nhất",
+        "newPost": " việc làm mới nhất",
+        "newPosts": " việc làm mới nhất",
+        "of": "của ",
+        "most": "Mức lương phổ biến nhất hàng năm",
+        "vn": "Việt Nam",
+        "in": "tại",
+        "for": "cho một",
+        "is": "là giữa khoảng",
+        "and": " và "
+    },
+    "skill": {
+        "acc": "Có được kỹ năng này có thể mở ra nhiều định hướng nghề nghiệp hơn cho bạn",
+        "explore": "Khám phá cơ hội việc làm",
+        "career": "Hướng nghiệp",
+        "roles": " vị trí việc làm mà kỹ năng này thường được các nhà tuyển dụng đánh giá cao",
+        "role": " vị trí việc làm mà kỹ năng này thường được các nhà tuyển dụng đánh giá cao",
+        "found": " được tìm thấy ",
+        "where": " khi kỹ năng này được nhà tuyển dụng đánh giá cao",
+        "no": "Không có cơ hội việc làm cho",
+        "try":"Hãy thử lại lần khác hoặc ",
+        "ex": "khám phá",
+        "other": "các danh mục cơ hội việc làm khác",
+        "orEx": "Hoặc khám phá các cơ hội khác trên",
+        "too": "để xem nơi bạn có thể tìm ra việc làm",
+        "all": "Tất cả"
     }
 }

@@ -251,6 +251,8 @@
         align-items: center;
         padding-left: 30px;
         font-weight: 600;
+        display: flex;
+        justify-content: space-between;
 
         text-transform: capitalize;
       }

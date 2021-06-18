@@ -51,7 +51,6 @@ function CandidateCareerAdvice({ history }) {
       role: role.label.toLowerCase().replaceAll(" ", "-")
     };
     const query = qs.stringify(filter, { skipNull: true });
-    console.log(query);
 
     window.location.replace(`/career-advice/${query}`);
   };
@@ -59,8 +58,6 @@ function CandidateCareerAdvice({ history }) {
   const submit = (value) => {
     window.location.replace(`/career-advice/skill=${value.replaceAll(" ", "-")}`);
   };
-
-  console.log("resume", !isEmpty(resume));
 
   useEffect(() => {
     setState("explore");

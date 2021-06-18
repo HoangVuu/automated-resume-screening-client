@@ -1,25 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./CareerDirection.scss";
+import { useTranslation } from "react-i18next";
 
 const HasNoJob = ({ name, location }) => {
+  const { t, i18n } = useTranslation();
+
   return (
     <div className="no-job">
       <div className="no-job__title">
-        There is no job opportunities for <b className="uppercase">{name}</b> in{" "}
+       {t("skill.no")} <b className="uppercase">{name}</b> {t("role.in")} {" "}
         {location || "your preferred location"}
       </div>
 
       <div className="no-job__title">
-        Try again another time or{" "}
+        {t("skill.try")}
         <Link to="/career-advice" className="no-job__title__link">
-          <u>explore</u>
+          <u>{t("skill.ex")}</u>
         </Link>{" "}
-        other job opportunity categories
+        {t("skill.other")}
       </div>
 
       <div className="no-job__title">
-        Or explore opportunities on <b>FASTJOB</b> to see where you can help
+      {t("skill.orEx")} <b>FASTJOB</b> {t("skill.too")}
       </div>
     </div>
   );

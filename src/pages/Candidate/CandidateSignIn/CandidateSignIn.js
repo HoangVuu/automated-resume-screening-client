@@ -9,21 +9,19 @@ import "./CandidateSignIn.scss";
 import Header from "components/Header/Header";
 import { useTranslation } from "react-i18next";
 
-const validateMessages = {
-  required: "Please enter ${label}",
-  types: {
-    email: "Email not valid",
-    password: "Password"
-  }
-};
-
 function CandidateSignIn() {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
 
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  // const accessToken = useSelector((state) => state.login.token);
+  const validateMessages = {
+    required: i18n.language === "en" ?  "Please enter ${label}" : "Vui lòng nhập ${label}",
+    types: {
+      email: i18n.language === "en" ? "Email not valid" : "Email không hợp lệ",
+      password: "Password"
+    }
+  };
 
   //Handle submit Login
   const onFinish = (values) => {
@@ -53,16 +51,13 @@ function CandidateSignIn() {
         {/* Login Form  */}
         <div className="candidate-login__container__left">
           <div className="candidate-login__container__left__logo">
-            <Link
-              to="/"
-              className="candidate-login__container__left__logo__wrapper"
-            >
-            </Link>
           </div>
 
-          <Link to="/recruiter/sign-in" className="candidate-login__container__left__employer">
-            <span>{t("candidateSignIn.areYou")}</span>
-          </Link>
+          <div
+            className="candidate-login__container__left__employer"
+          >
+            <Link to="/recruiter/sign-in">{t("candidateSignIn.areYou")}</Link>
+          </div>
 
           <span className="candidate-login__container__left__title">
           {t("candidateSignIn.signIn")}
