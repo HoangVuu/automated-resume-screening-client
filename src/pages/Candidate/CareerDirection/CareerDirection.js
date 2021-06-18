@@ -29,17 +29,14 @@ const CareerDirection = () => {
 
   const param = skill && skill.replaceAll("-", " ");
 
-  console.log("param", param);
-
   useEffect(() => {
-    console.log("skill", skillData && isEmpty(skillData));
     if (isEmpty(skillData)) {
       setLoading(true);
 
       param &&
         dispatch(getCareerSkillProAction({ skill: param }))
           .then((res) => setLoading(false))
-          .catch((err) => console.log("err", err));
+          .catch();
     }
   }, []);
 
@@ -95,6 +92,7 @@ const CareerDirection = () => {
                         content={item.domain.content}
                         min={item.salary.min}
                         max={item.salary.max}
+                        id={item.domain.id}
                       />
                     ))}
                 </div>

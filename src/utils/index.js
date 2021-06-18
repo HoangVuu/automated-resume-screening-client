@@ -87,7 +87,7 @@ export const formatProvinceName = (province) => {
 
 export const formatProvinceNameBrief = (province) => {
   let provinceName = formatProvinceName(province);
-  console.log("province====: ", provinceName && provinceName);
+
   return provinceName
     ? provinceName
         .split(/\s/)
