@@ -31,8 +31,8 @@
         "provinPla": "Select where you live in",
         "date": "Date of birth",
         "enterDate": "Select date",
-        "gender": "Gender"
-
+        "gender": "Gender",
+        "title": "Login or Register to apply the job!"
     },
     "home": {
         "Just": "Just explore then apply",
