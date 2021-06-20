@@ -4,16 +4,19 @@ import ProgressBar from "components/ProgressBar/ProgressBar";
 import EducationForm from "components/Forms/ReviewForm/EducationForm";
 import ExperienceForm from "components/Forms/ReviewForm/ExperienceForm";
 import SkillForm from "components/Forms/ReviewForm/SkillForm";
+import { useTranslation } from "react-i18next";
 
 function CandidateReviewCV() {
+  const { t, i18n } = useTranslation();
+
   const [visible, setVisible] = useState(false);
   const [curStep, setStep] = useState(1);
   const [progress, setProgress] = useState(0);
 
   const STEPS = [
-    { step: 1, label: "Education" },
-    { step: 2, label: "Experience" },
-    { step: 3, label: "Skills" }
+    { step: 1, label: i18n.language === "en" ? "Education" : "Học vấn" },
+    { step: 2, label: i18n.language === "en" ? "Experience" : "Kinh nghiệm thực tế" },
+    { step: 3, label: i18n.language === "en" ? "Skills" : "Các kĩ năng" }
   ];
 
   const handleChangeStep = (step) => {

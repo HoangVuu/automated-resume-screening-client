@@ -4,8 +4,11 @@ import { Button } from "antd";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { UPDATE_CV_VALUES } from "state/reducers/cvReducer";
 import { InputNumber } from "antd";
+import { useTranslation } from "react-i18next";
 
 function ExperienceForm({ curStep, handleChangeStep, hideBtn = false }) {
+  const { t, i18n } = useTranslation();
+
   const experience = useSelector((state) => state.cv.experience, shallowEqual);
   const dispatch = useDispatch();
   const [month, setMonth] = useState(0);
@@ -29,7 +32,10 @@ function ExperienceForm({ curStep, handleChangeStep, hideBtn = false }) {
   return (
     <>
       <div className="panel panel--light">
-        <div className="panel-body"  style={{paddingTop: "10px", paddingBottom: "40px"}}>
+        <div
+          className="panel-body"
+          style={{ paddingTop: "10px", paddingBottom: "40px" }}
+        >
           <div className="rv-content">
             <div
               className="container-fluid custom"
@@ -40,8 +46,9 @@ function ExperienceForm({ curStep, handleChangeStep, hideBtn = false }) {
               }}
             >
               <div className="heading-margin sg-heading3 title">
-                {/* Kinh nghiệm thực tế */}
-                Review your experience
+                {i18n.language === "en"
+                  ? "Experiences"
+                  : "Kinh nghiệm thực tế "}
               </div>
 
               <div>
@@ -74,8 +81,7 @@ function ExperienceForm({ curStep, handleChangeStep, hideBtn = false }) {
           className={"form-complete " + (hideBtn && "hide-btn")}
           onClick={handleSubmit}
         >
-          {/* Tới trang sau */}
-          Next
+          {t("review.next")}
         </Button>
         {curStep > 1 && (
           <Button
@@ -83,8 +89,7 @@ function ExperienceForm({ curStep, handleChangeStep, hideBtn = false }) {
             style={{ margin: "0 8px" }}
             onClick={() => handleChangeStep(curStep - 1)}
           >
-            {/* Quay lại */}
-            Previous step
+            {t("review.back")}
           </Button>
         )}
       </div>

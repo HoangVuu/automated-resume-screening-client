@@ -341,5 +341,12 @@
         "orEx": "Or explore opportunities on",
         "too": "to see where you can find jobs",
         "all": "All"
+    },
+    "review": {
+        "next": "Next",
+        "back": "Previous step",
+        "title": "Review your resume",
+        "check": "Check for mistakes we might have made",
+        "refine": "Refine using personalized tips"
     }
 }

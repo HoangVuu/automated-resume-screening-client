@@ -66,28 +66,28 @@ const ACCEPTS = [
   "application/pdf"
 ];
 
-const config = {
-  rules: [
-    {
-      type: "object",
-      required: true,
-      message: "Please choose your date of birth!"
-    }
-  ]
-};
-
-const validateMessages = {
-  required: "Please enter ${label}!",
-  types: {
-    // fullName: "Email không hợp lệ",
-    // password: "Mật khẩu"
-  }
-};
-
 function MyProfile() {
   const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
+
+  const validateMessages = {
+    required: i18n.language === "en" ?  "Please enter ${label}!" : "Vui lòng nhập ${label}!",
+    types: {
+      // fullName: "Email không hợp lệ",
+      // password: "Mật khẩu"
+    }
+  };
+
+  const config = {
+    rules: [
+      {
+        type: "object",
+        required: true,
+        message:  i18n.language === "en" ? "Please choose your date of birth!" : "Vui lòng chọn ngày sinh của bạn!"
+      }
+    ]
+  };
 
   // ref
   const inputRef = useRef();

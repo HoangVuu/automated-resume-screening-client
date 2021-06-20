@@ -340,5 +340,12 @@
         "orEx": "Hoặc khám phá các cơ hội khác trên",
         "too": "để xem nơi bạn có thể tìm ra việc làm",
         "all": "Tất cả"
+    },
+    "review": {
+        "next": "Tới trang sau",
+        "back": "Quay lại",
+        "title": "Xem lại hồ sơ của bạn",
+        "check": "Kiểm tra một vài lỗi mà chúng tôi có thể tạo ra",
+        "refine": "Tinh chỉnh lại CV của bạn"
     }
 }
