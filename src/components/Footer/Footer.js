@@ -46,7 +46,7 @@ function Footer() {
         <div className="footer-right">
           <p className="footer-company-about">
             <span>Về FASTJOB</span>
-            Đây là sản phẩm khoá luận tốt nghiệp của nhóm sinh viên: <br/>
+            Đây là sản phẩm khoá luận tốt nghiệp của nhóm sinh viên Khoa CNPM: <br/> 
             <strong>Lê Nguyễn Hoàng Vũ - Trần Hữu Lộc</strong>
           </p>
           <div className="footer-icons">
