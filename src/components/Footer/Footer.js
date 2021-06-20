@@ -8,7 +8,7 @@ function Footer() {
       <div className="container">
         <div className="footer-left">
           <h3>
-          <img src="/assets/img/main-logo.jpg" />
+            <img src="/assets/img/main-logo.jpg" />
           </h3>
           <p className="footer-links">
             <Link to="/" className="mr-5">
@@ -31,10 +31,7 @@ function Footer() {
         <div className="footer-center">
           <div>
             <i className="fas fa-map-marker-alt" />
-            <p>
-              <span>KP6, Linh Trung, Thủ Đức</span>
-              Thành phồ Hồ Chí Minh
-            </p>
+            <p>Đại học Công nghệ thông tin, ĐHQG TP HCM <br/> Khu phố 6, Linh Trung, Thủ Đức Thành phồ Hồ Chí Minh</p>
           </div>
           <div>
             <i className="fa fa-phone" />
@@ -42,29 +39,27 @@ function Footer() {
           </div>
           <div>
             <i className="fa fa-envelope" />
-            <a href="mailto:17521270@gm.uit.eud.vn">17521270@gm.uit.eud.vn</a>
+           <a href="mailto:17521270@gm.uit.edu.vn">17521270@gm.uit.edu.vn</a>  <span>-</span> <a href="mailto:17520700@gm.uit.edu.vn">17520700@gm.uit.edu.vn</a>
           </div>
-          <div>
-            <i className="fa fa-envelope" />
-            <a href="mailto:17520700@gm.uit.eud.vn">17520700@gm.uit.eud.vn</a>
-          </div>
+        
         </div>
         <div className="footer-right">
           <p className="footer-company-about">
-            <span>Về Automated Screening</span>
-            Đây là sản phẩm khoá luận tốt nghiệp của nhóm sinh viên Lê Nguyễn Hoàng Vũ - Trần Hữu Lộc
+            <span>Về FASTJOB</span>
+            Đây là sản phẩm khoá luận tốt nghiệp của nhóm sinh viên: <br/>
+            <strong>Lê Nguyễn Hoàng Vũ - Trần Hữu Lộc</strong>
           </p>
           <div className="footer-icons">
-            <a href="#" target="_blank">
+            <a href="https://www.facebook.com/vule2703/" target="_blank">
               <i className="fab fa-facebook-f"></i>
             </a>
-            <a href="#" target="_blank">
+            <a href="#" target="_blank" style={{marginLeft:'5px'}}>
               <i className="fab fa-twitter" />
             </a>
-            <a href="#" target="_blank">
+            <a href="#" target="_blank" style={{marginLeft:'5px'}}>
               <i className="fab fa-linkedin-in" />
             </a>
-            <a href="#" target="_blank">
+            <a href="https://github.com/HoangVuu" target="_blank" style={{marginLeft:'5px'}}>
               <i className="fab fa-github" />
             </a>
           </div>
