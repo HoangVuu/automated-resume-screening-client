@@ -37,7 +37,8 @@
   .nav-tabs > a.active:hover {
     cursor: default;
     background-color: #fff;
-    border: 1px solid #ddd;
+    font-weight: 700;
+    border: 2px solid #F50E85;
     border-bottom-color: transparent;
   }
 
@@ -50,8 +51,9 @@
   }
 
   .text-note {
-    font-size: 15px;
     font-weight: 700;
-    margin-bottom: 15px;
+    margin-bottom: 26px;
+    font-size: 18px;
+    margin-top: 10px;
   }
 }
