@@ -31,6 +31,7 @@ function RecruiterNavBar() {
   const logOut = () => {
     setCookie("recruiter_token", accessToken, 0);
     dispatch(logoutUserAction("recruiter"));
+    history.push("/recruiter/home");
   };
 
   const toggleInfo = () => {
@@ -58,48 +59,10 @@ function RecruiterNavBar() {
           );
         })}
         {checkCookie("recruiter_token") ? (
-          <div className="header__navbar__info" onClick={toggleInfo}>
-            <span className="header__navbar__info__name">Name</span>
-            {info ? (
-              <UpOutlined className="header__navbar__info__icon" />
-            ) : (
-              <DownOutlined className="header__navbar__info__icon" />
-            )}
-            {info && (
-              <div className="header__navbar__info__group">
-                <div className="header__navbar__info__group__item">
-                  <span>Profile</span>
-                  <SmileTwoTone />
-                </div>
-
-                <div className="header__navbar__info__group__item">
-                  <span>Saved Jobs</span>
-                  <HeartTwoTone twoToneColor="#eb2f96" />
-                </div>
-
-                <div className="header__navbar__info__group__item">
-                  <span>Applied Jobs</span>
-                  <CheckCircleTwoTone twoToneColor="#52c41a" />
-                </div>
-
-                <div className="header__navbar__info__group__item">
-                  <span>Recommend Jobs</span>
-                  <LikeTwoTone twoToneColor="#81B677" />
-                </div>
-
-                <div className="header__navbar__info__group__item">
-                  <span>Setting</span>
-                </div>
-
-                <div
-                  className="header__navbar__info__group__item"
-                  onClick={logOut}
-                >
-                  <span>Logout</span>
-                </div>
-              </div>
-            )}
-          </div>
+          <NavItem
+            btnClick={logOut}
+            {...{ title: "Đăng xuất", url: "/recruiter/home", button: true }}
+          />
         ) : (
           <NavItem
             {...{
@@ -111,11 +74,7 @@ function RecruiterNavBar() {
         )}
         {/* <span className="nav-separator nav-separator--grey"></span> */}
         <span className="nav-separator nav-separator--grey"></span>
-        <Button
-          type="primary"
-          size="large"
-          onClick={() => history.push("/")}
-        >
+        <Button type="primary" size="large" onClick={() => history.push("/")}>
           {t("header.employee")}
         </Button>
       </ul>

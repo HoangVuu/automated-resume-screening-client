@@ -1,8 +1,11 @@
 import React from "react";
 import "./ProgressBar.scss";
 import { Checked } from "constants/svg";
+import { useTranslation } from "react-i18next";
 
 function ProgressBar({ steps, curStep = 1, handleChangeStep, progress }) {
+  const { t, i18n } = useTranslation();
+
   return (
     <>
       <div className="barPadding">
@@ -26,7 +29,7 @@ function ProgressBar({ steps, curStep = 1, handleChangeStep, progress }) {
           </div>
         </div>
       </div>
-      <div className="barLabel">
+      <div className={i18n.language === "vi" ? "barLabelVn" : "barLabel "}>
         {steps.map(({ step, label }) => (
           <Label key={step} step={step} curStep={curStep} label={label} />
         ))}

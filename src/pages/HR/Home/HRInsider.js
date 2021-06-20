@@ -38,7 +38,7 @@ function HRInsider() {
   return (
     <div className="panel panel-default panel-dashboard panel-stats">
       <div className="panel-body">
-        <div className="row header">HR Insider</div>
+        <div style={{fontSize: '22px', color: "#333333"}} >HR Insider</div>
         <div className="row">
           <div className="border"></div>
         </div>

@@ -8,8 +8,11 @@ import { GET_JOB_DOMAIN } from "state/reducers/jobDomainReducer";
 import Loading from "components/Loading/Loading";
 import AddSkillSuggest from "components/AddSkillSuggest/AddSkillSuggest";
 import AddSoftSkillSuggest from "components/AddSoftSkillSuggest/AddSoftSkillSuggest";
+import { useTranslation } from "react-i18next";
 
 function SkillForm({ curStep, handleChangeStep }) {
+  const { t, i18n } = useTranslation();
+
   const [loading, setLoading] = useState(false);
   const [isAdd, setIsAdd] = useState(false);
   const [isSoftAdd, setIsSoftAdd] = useState(false);
@@ -107,7 +110,9 @@ function SkillForm({ curStep, handleChangeStep }) {
             <div className="container-fluid">
               {/* <div className="heading-margin sg-heading3 title">Kỹ năng</div> */}
               <div className="heading-margin sg-heading3 title">
-                Highlight your technical skills
+                {i18n.language === "en"
+                  ? "Highlight your technical skills"
+                  : "Làm nổi bật các kỹ năng kỹ thuật của bạn"}
               </div>
             </div>
             <div
@@ -130,7 +135,9 @@ function SkillForm({ curStep, handleChangeStep }) {
                       className="TextInput-labelWrapper"
                       style={{ marginTop: "40px" }}
                     >
-                      <label className="TextInput-label">Add skill</label>
+                      <label className="TextInput-label">
+                        {t("explore.addSkill")}
+                      </label>
                       <p className="TextInput-helpText">
                         ex: Javascript, Kotlin,...
                       </p>
@@ -152,7 +159,7 @@ function SkillForm({ curStep, handleChangeStep }) {
                     icon={<PlusOutlined />}
                     onClick={onAddSkill}
                   >
-                    Add
+                    {i18n.language === "en" ? "Add" : "Thêm"}
                   </Button>
                 </div>
               </div>
@@ -170,7 +177,9 @@ function SkillForm({ curStep, handleChangeStep }) {
             <div className="container-fluid">
               {/* <div className="heading-margin sg-heading3 title">Kỹ năng</div> */}
               <div className="heading-margin sg-heading3 title">
-                Highlight your soft skills
+                {i18n.language === "en"
+                  ? "Highlight your soft skills"
+                  : "Làm nổi bật các kỹ năng mềm của bạn"}
               </div>
             </div>
             <div
@@ -201,7 +210,9 @@ function SkillForm({ curStep, handleChangeStep }) {
                       className="TextInput-labelWrapper"
                       style={{ marginTop: "30px" }}
                     >
-                      <label className="TextInput-label">Add soft skill</label>
+                      <label className="TextInput-label">
+                        {t("profile.addSSkill")}
+                      </label>
                       <p className="TextInput-helpText">
                         ex: Communication, Presentation...
                       </p>
@@ -223,7 +234,7 @@ function SkillForm({ curStep, handleChangeStep }) {
                     icon={<PlusOutlined />}
                     onClick={onAddSoftSkill}
                   >
-                    Add
+                    {i18n.language === "en" ? "Add" : "Thêm"}
                   </Button>
                 </div>
               </div>
@@ -234,8 +245,7 @@ function SkillForm({ curStep, handleChangeStep }) {
 
       <div style={{ marginTop: "30px" }}>
         <Button className="form-complete" onClick={handleSubmit}>
-          {/* Hoàn tất */}
-          Next
+          {t("review.next")}
         </Button>
         {curStep > 1 && (
           <Button
@@ -243,8 +253,7 @@ function SkillForm({ curStep, handleChangeStep }) {
             style={{ margin: "0 8px" }}
             onClick={() => handleChangeStep(curStep - 1)}
           >
-            {/* Quay lại */}
-            Previous step
+            {t("review.back")}
           </Button>
         )}
       </div>

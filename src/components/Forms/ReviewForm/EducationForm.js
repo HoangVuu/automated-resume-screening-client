@@ -4,8 +4,11 @@ import { Button } from "antd";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { UPDATE_CV_VALUES } from "state/reducers/cvReducer";
 import "./ReviewForm.scss";
+import { useTranslation } from "react-i18next";
 
 function EducationForm({ curStep, handleChangeStep, hideBtn = false }) {
+  const { t, i18n } = useTranslation();
+
   const education = useSelector((state) => state.cv.education, shallowEqual);
   const dispatch = useDispatch();
 
@@ -23,12 +26,18 @@ function EducationForm({ curStep, handleChangeStep, hideBtn = false }) {
   return (
     <>
       <div className="panel panel--light">
-        <div className="panel-body" style={{paddingTop: "10px", paddingBottom: "40px"}}>
+        <div
+          className="panel-body"
+          style={{ paddingTop: "10px", paddingBottom: "40px" }}
+        >
           <div className="rv-content">
             <div className="container-fluid">
               {/* <div className="heading-margin sg-heading3 title">Học vấn</div> */}
-              <div className="heading-margin sg-heading3 title">Review your education</div>
-
+              <div className="heading-margin sg-heading3 title">
+                {i18n.language === "en"
+                  ? "Review your education"
+                  : "Xem lại học vấn của bạn"}
+              </div>
             </div>
             <div className="wizard-page-children container-fluid">
               <ContentEditable
@@ -45,7 +54,7 @@ function EducationForm({ curStep, handleChangeStep, hideBtn = false }) {
           className={"form-complete " + (hideBtn && "hide-btn")}
           onClick={handleSubmit}
         >
-          Tới trang sau
+          {t("review.next")}
         </Button>
         {curStep > 1 && (
           <Button
@@ -53,7 +62,7 @@ function EducationForm({ curStep, handleChangeStep, hideBtn = false }) {
             style={{ margin: "0 8px" }}
             onClick={() => handleChangeStep(curStep - 1)}
           >
-            Quay lại
+            {t("review.back")}
           </Button>
         )}
       </div>
