@@ -17,9 +17,11 @@ import { Input } from "antd";
 import swal from "sweetalert";
 import { addJobNote, deleteJobNote } from "services/candidateServices";
 import { useTranslation } from "react-i18next";
+import { useTitle } from "utils/index";
 
 function CandidateSavedJobs() {
   const { t, i18n } = useTranslation();
+  useTitle(i18n.language === "en" ? "FASTJOB | Saved Jobs" : "FASTJOB | Việc làm đã lưu")
 
   const [jobs, setJobs] = useState([]);
   const [page, setPage] = useState(1);

@@ -21,9 +21,11 @@ import {
   candidateUnapply
 } from "services/candidateServices";
 import { useTranslation } from "react-i18next";
+import { useTitle } from "utils/index";
 
 function CandidateAppliedJobs() {
   const { t, i18n } = useTranslation();
+  useTitle(i18n.language === "en" ? "FASTJOB | Applied Jobs" : "FASTJOB | Việc làm đã ứng tuyển")
 
   const [jobs, setJobs] = useState([]);
   const [total, setTotal] = useState(0);

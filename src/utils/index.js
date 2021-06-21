@@ -1,7 +1,6 @@
 import Toaster from "components/Toastify/Toaster";
-import React from "react";
 import { toast as toaster } from "react-toastify";
-import i18n from "i18next";
+import React, { useEffect } from "react";
 
 export function toast({ type = "success", message = "" }) {
   return toaster(<Toaster type={type} message={message} />);
@@ -156,3 +155,15 @@ export const getMessage = (mess, lang) => {
 
   return result;
 };
+
+
+export const useTitle=(title) => {
+  useEffect(() => {
+    const prevTitle = document.title
+    document.title = title
+    
+    return () => {
+      document.title = prevTitle
+    }
+  })
+}

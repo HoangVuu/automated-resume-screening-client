@@ -18,6 +18,7 @@ import { toast } from "utils/index";
 import isEmpty from "lodash/isEmpty";
 import { getSubcribe } from "services/jobServices";
 import { useTranslation } from "react-i18next";
+import { useTitle } from "utils/index";
 
 const MyLoader = (props) => (
   <ContentLoader
@@ -49,6 +50,7 @@ const MyLoader = (props) => (
 
 function CandidateJobList({ history }) {
   const { t, i18n } = useTranslation();
+  useTitle(i18n.language === "en" ? "FASTJOB | Top jobs right now" : "FASTJOB | Top các việc làm hiện tại")
 
   const [curSelect, setCurSelect] = useState(null);
   const [top, setTop] = useState(0);
