@@ -59,6 +59,7 @@ import { updateProfileProAction } from "state/actions/profileAction";
 import { updateCVProfileAction } from "state/actions/index";
 import { Link } from "react-router-dom";
 import { deleteResume } from "services/uploadServices";
+import { useTitle } from "utils/index";
 
 const ACCEPTS = [
   "application/msword",
@@ -68,6 +69,7 @@ const ACCEPTS = [
 
 function MyProfile() {
   const { t, i18n } = useTranslation();
+  useTitle(i18n.language === "en" ? "FASTJOB | My Profile" : "FASTJOB | Thông tin cá nhân của tôi")
 
   const dispatch = useDispatch();
 

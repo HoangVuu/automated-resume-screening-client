@@ -20,7 +20,7 @@ function HRSignUp() {
 
   //Handle submit Login
   const onFinish = (value) => {
-    dispatch(registerHrAction(value));
+    // dispatch(registerHrAction(value));
   };
 
   return checkCookie("recruiter_token") ? (

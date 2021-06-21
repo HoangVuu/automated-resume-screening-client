@@ -8,9 +8,11 @@ import { checkCookie } from "utils/cookies";
 import "./CandidateSignIn.scss";
 import Header from "components/Header/Header";
 import { useTranslation } from "react-i18next";
+import { useTitle } from "utils/index";
 
 function CandidateSignIn() {
   const { t,i18n } = useTranslation();
+  useTitle(i18n.language === "en" ? "Candidate Sign in | FASTJOB" : "Ứng viên đăng nhập | FASTJOB")
 
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);

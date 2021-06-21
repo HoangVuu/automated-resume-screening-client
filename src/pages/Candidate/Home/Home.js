@@ -4,9 +4,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Home.scss";
 import { useTranslation } from "react-i18next";
+import { useTitle } from "utils/index";
 
 function CandidateHome() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  useTitle(i18n.language === "en" ? "FASTJOB | Find the fast jobs by your way" : "FASTJOB | Tìm việc làm nhanh nhất theo cách của bạn")
 
   const { domains } = useSelector((state) => state.jobDomain);
 

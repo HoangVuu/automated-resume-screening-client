@@ -9,6 +9,7 @@ import { checkCookie } from "utils/cookies";
 import "./CandidateSignUp.scss";
 import Header from "components/Header/Header";
 import { useTranslation } from "react-i18next";
+import { useTitle } from "utils/index";
 
 const config = {
   rules: [
@@ -18,6 +19,7 @@ const config = {
 
 function CandidateSignUp() {
   const { t, i18n } = useTranslation();
+  useTitle(i18n.language === "en" ? "Register with FASTJOB, Never miss an opportunity | FASTJOB" : "Đăng ký tài khoản, đừng bao giờ bỏ lỡ cơ hội | FASTJOB")
 
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);

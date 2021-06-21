@@ -19,9 +19,11 @@ import Select from "react-select";
 import { SearchOutlined } from "@ant-design/icons";
 import SearchSuggest from "components/SearchSuggest/SearchSuggest";
 import { useTranslation } from "react-i18next";
+import { useTitle } from "utils/index";
 
 function CandidateCareerAdvice({ history }) {
   const { t, i18n } = useTranslation();
+  useTitle(i18n.language === "en" ? "FASTJOB | Career Advice" : "FASTJOB | Lời khuyên nghề nghiệp")
 
   const dispatch = useDispatch();
   // const profile = useSelector((state) => state.profile.candidateProfile);
