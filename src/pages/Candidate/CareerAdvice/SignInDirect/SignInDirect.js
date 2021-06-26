@@ -48,7 +48,7 @@ const SignInDirect = ({ isNeedCV = false }) => {
       </div>
 
       <div className="sign-direct__img">
-        <img src="https://www.seek.com.au/career-advice/assets/9d11997f.svg" />
+        <img src="/assets/svg/lady-at-road.svg" alt="lady" />
       </div>
     </div>
   );

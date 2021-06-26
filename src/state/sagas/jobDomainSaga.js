@@ -15,7 +15,7 @@ import {
   GET_CAREER_ROLE_SUCCESS,
   GET_CAREER_SKILL_SUCCESS
 } from "state/reducers/jobDomainReducer";
-import { toastErr } from "utils/index";
+import { toastErr, getMessage } from "utils/index";
 import {
   rejectPromiseAction,
   resolvePromiseAction
@@ -24,6 +24,7 @@ import {
   getCareerRoleProAction,
   getCareerSkillProAction
 } from "state/actions/careerAction";
+import i18n from "i18next";
 
 export function* getJobDomainSaga() {
   try {
@@ -32,7 +33,7 @@ export function* getJobDomainSaga() {
 
     yield put({ type: GET_JOB_DOMAIN_SUCCESS, response });
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
   }
 }
 
@@ -43,7 +44,7 @@ export function* getJobSkillSaga() {
 
     yield put({ type: GET_JOB_SKILL_SUCCESS, response });
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
   }
 }
 
@@ -54,7 +55,7 @@ export function* getSoftSkillSaga() {
 
     yield put({ type: GET_SOFT_SKILL_SUCCESS, response });
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
   }
 }
 
@@ -70,7 +71,7 @@ export function* getCareerRoleProSaga(action) {
 
     yield call(resolvePromiseAction, action);
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
     yield call(rejectPromiseAction, action);
   }
 }
@@ -87,7 +88,7 @@ export function* getCareerSkillProSaga(action) {
 
     yield call(resolvePromiseAction, action);
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
     yield call(rejectPromiseAction, action);
   }
 }

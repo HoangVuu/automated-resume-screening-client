@@ -31,7 +31,7 @@ const MatchSkillSubModal = ({
       <Modal.Body>
         <div className="row skills-modal__header-text">
           <img
-            src="https://www.seek.com.au/career-advice/assets/801328b9.svg"
+            src="/assets/svg/icon-overlap.svg" 
             alt="icon match"
           />
           <span>
@@ -62,7 +62,7 @@ const MatchSkillSubModal = ({
 
         <Link className="row skills-modal__learn">
           <img
-            src="https://www.seek.com.au/career-advice/assets/a9c6382f.svg"
+            src="/assets/svg/icon-career.svg" 
             alt="arrow right"
           />
           <span>{t("matchedJobDetail.moreAboutCareer")}</span>
@@ -81,7 +81,7 @@ const SkillMatched = ({ name, isMatch = true }) => {
     <div className={`row skill-matched ${!isMatch && "skill-matched-not"}`}>
       <span style={{ textTransform: "capitalize" }}>{name}</span>
       {isMatch && (
-        <img src="https://www.seek.com.au/career-advice/assets/801328b9.svg" />
+        <img src="/assets/svg/icon-overlap.svg"  alt="overlap icon"/>
       )}
     </div>
   );
