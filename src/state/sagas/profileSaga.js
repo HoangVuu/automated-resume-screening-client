@@ -42,7 +42,7 @@ export function* updateProfileSaga(action) {
 
     yield call(resolvePromiseAction, action);
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
     yield call(rejectPromiseAction, action);
   }
 }

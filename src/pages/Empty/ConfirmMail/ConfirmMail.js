@@ -7,9 +7,15 @@ import {
   verifyHrAction
 } from "state/actions/authenticationActions";
 import "./ConfirmMail.scss";
+import { useTitle } from "utils/index";
+import { useTranslation } from "react-i18next";
 
 const ConfirmMail = (props) => {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
+  useTitle(i18n.language === "en" ? "FASTJOB | Confirm Email" : "FASTJOB | Xác nhận Email")
+
   const emailVerify = useSelector((state) => state.auth.email);
 
   const query = new URLSearchParams(props.location.search);

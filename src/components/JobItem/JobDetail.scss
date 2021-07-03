@@ -8,10 +8,28 @@
   margin: 1rem 0 0 -0.5rem;
   transition: opacity 150ms ease-in-out;
   z-index: 1;
-  width: calc(100vw - 525px);
+  width: calc(100vw - 850px);
   position: absolute;
   top: 12px;
   height: calc(100% - 125px);
+  left: 533px;
+
+  @media screen and (min-width: 1440px) {
+    width: calc(100vw - 850px);
+  }
+
+  @media screen and (max-width: 2560px) {
+    width: 595px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    width: 520px;
+    left: 433px;
+  }
+
+  @media screen and (max-width: 992px) {
+    display: none;
+  }
 
   #vjs-header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -166,8 +184,7 @@
   margin-right: 0;
 }
 
-.vjs-detail{
-
+.vjs-detail {
 }
 
 #vjs-content {

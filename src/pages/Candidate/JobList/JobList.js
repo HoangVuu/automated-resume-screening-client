@@ -242,14 +242,24 @@ function CandidateJobList({ history }) {
           setLoading(false);
         });
 
-      await getSubcribe(token)
+     if(token){
+        await getSubcribe(token)
         .then(async (res) => {
           res.data.data.length !== 0 ? setIsActive(true) : setIsActive(false);
         })
         .catch((err) => console.log(err));
+     }
     };
 
     fetchJobs();
+
+    function getScroll() {
+      setTop(window.scrollY)
+    }
+    window.addEventListener("scroll", getScroll);
+
+    return () => window.removeEventListener("scroll", getScroll);
+    
   }, [params, token]);
 
   const handleSubmit = async () => {
@@ -379,8 +389,6 @@ function CandidateJobList({ history }) {
                           key={job.jobId}
                           curSelect={curSelect}
                           onChangeSelect={onChangeSelect}
-                          top={top}
-                          bottom={bottom}
                           provinces={provinces}
                         />
                       ))
@@ -401,8 +409,9 @@ function CandidateJobList({ history }) {
                     ) : null}
                   </td>
                   {curSelect === null && (
-                    <td role="region" id="auxCol">
-                      <div id="jobalertswrapper">
+                    <td role="region" id="auxCol" >
+                      <div style={{position: top > 245 && 'fixed', top: top > 245 && '10px'}}>
+                      <div id="jobalertswrapper" style={{width: top >245 && '350px'}}>
                         <div id="jobalerts" className="open jaui">
                           <div className="jobalertlabel">
                             <div id="jobalertlabel" className="jobalerts_title">
@@ -452,7 +461,7 @@ function CandidateJobList({ history }) {
                         </div>
                       </div>
                       {searchHistory && searchHistory.length && (
-                        <div id="recentsearches" className="no-left-rail">
+                        <div id="recentsearches" className="no-left-rail" style={{display: top > 2886 && 'none'}}>
                           <div className="rsh"> {t("jobList.mySearch")}</div>
                           <ul className="rsList">
                             {searchHistory.map(({ url, label }) => (
@@ -477,6 +486,7 @@ function CandidateJobList({ history }) {
                           </div>
                         </div>
                       )}
+                      </div>
                     </td>
                   )}
                   <td id="applyCol"></td>

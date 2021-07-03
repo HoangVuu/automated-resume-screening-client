@@ -41,7 +41,7 @@ export function* registerCandidateSaga({ payload }) {
 
     yield history.push("/confirm-mail");
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
   }
 }
 
@@ -52,11 +52,11 @@ export function* registerHrSaga({ payload }) {
 
     yield [put({ type: REGISTER_USER_SUCCESS, response })];
 
-    yield toast({ message });
+    yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") });
 
     yield history.push("/confirm-mail");
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
   }
 }
 
@@ -69,7 +69,7 @@ export function* verifyCandidateSaga({ payload }) {
 
     yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") });
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
   }
 }
 
@@ -80,9 +80,9 @@ export function* verifyHrSaga({ payload }) {
 
     yield [put({ type: VERIFY_USER_SUCCESS, response })];
 
-    yield toast({ message });
+    yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") });
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
   }
 }
 
@@ -108,7 +108,7 @@ export function* loginCandidatePromiseSaga(action) {
 
     yield call(resolvePromiseAction, action);
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
     yield call(rejectPromiseAction, action);
   }
 }
@@ -131,11 +131,11 @@ export function* loginHrPromiseSaga(action) {
       email
     });
 
-    yield toast({ message });
+    yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") });
 
     yield call(resolvePromiseAction, action);
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
     yield call(rejectPromiseAction, action);
   }
 }

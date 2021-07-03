@@ -119,7 +119,6 @@ export function* updateJobSaga(action) {
 export function* candidateApplySaga(action) {
   try {
     const { jp_id, resume_id, token } = action.payload;
-    console.log('saga', jp_id)
     const result = yield call(candidateApply, jp_id, resume_id, token);
     const { message } = result.data;
 

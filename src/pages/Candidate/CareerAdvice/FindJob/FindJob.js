@@ -361,26 +361,18 @@ const FindJob = ({ history, hasResume }) => {
               ) : (
                 <>
                   <div className="find-job__not-role__content">
-                    You need to have an resume to explore the <br /> right jobs
-                    which are waiting to you
+                    {i18n.language === "en" ? "You need to have an resume to explore the" : "Bạn cần có một sơ yếu lý lịch để tiềm hiểu"} <br /> {i18n.language === "en" ? "right jobs which are waiting to you" : "công việc phù hợp đang chờ đợi bạn"}
                   </div>
                   <div
                     className="sign-direct__button"
                     style={{ marginTop: "50px" }}
                   >
                     <Link
-                      to="/sign-in"
+                      to="/profile"
                       className="sign-direct__button__sign-in"
                     >
-                      Get started
+                       {i18n.language === "en" ? "Upload your resume" : "Tải lên hồ sơ của bạn"}
                     </Link>
-                    <p>or</p>
-                    <Link
-                      to="/sign-up"
-                      className="sign-direct__button__register"
-                    >
-                      Upload your resume
-                    </Link>{" "}
                   </div>
                 </>
               )
@@ -406,7 +398,7 @@ const FindJob = ({ history, hasResume }) => {
 
             <img
             className="find-job__not-role__girlImg"
-              src="https://www.seek.com.au/career-advice/assets/c3f39bdb.svg"
+            src="/assets/svg/no-signal.svg"
               alt="Career Advice"
               style={{
                 position: !hasResume && "absolute",
