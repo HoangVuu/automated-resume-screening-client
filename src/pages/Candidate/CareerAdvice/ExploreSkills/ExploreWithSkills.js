@@ -177,7 +177,7 @@ const ExploreWithSkills = ({ profile }) => {
         <div className="container">
           <h1
             className="explore__title__big"
-            style={{ width: "80%", lineHeight: "1.08" }}
+            style={{ lineHeight: "1.08" }}
           >
             {t("careerAdvice.titleBig")}
           </h1>
