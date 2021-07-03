@@ -139,7 +139,7 @@ function SkillForm({ curStep, handleChangeStep }) {
                         {t("explore.addSkill")}
                       </label>
                       <p className="TextInput-helpText">
-                        ex: Javascript, Kotlin,...
+                      {i18n.language === "en" ? "ex" : "Ví dụ"}: Javascript, Kotlin,...
                       </p>
                     </div>
                     <div className="TextInput-wrapper">
@@ -214,7 +214,7 @@ function SkillForm({ curStep, handleChangeStep }) {
                         {t("profile.addSSkill")}
                       </label>
                       <p className="TextInput-helpText">
-                        ex: Communication, Presentation...
+                        {i18n.language === "en" ? "ex" : "Ví dụ"}: Communication, Presentation...
                       </p>
                     </div>
                     <div className="TextInput-wrapper">
@@ -245,7 +245,7 @@ function SkillForm({ curStep, handleChangeStep }) {
 
       <div style={{ marginTop: "30px" }}>
         <Button className="form-complete" onClick={handleSubmit}>
-          {t("review.next")}
+          {i18n.language === "vi" ? "Hoàn tất" : "Done"}
         </Button>
         {curStep > 1 && (
           <Button

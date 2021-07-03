@@ -6,7 +6,7 @@ import {
   GET_JOB_SUGGEST_SUCCESS,
   EXPLORE_SKILLS_SUCCESS
 } from "state/reducers/candidateJobReducer";
-import { toastErr } from "utils/index";
+import { toastErr, getMessage } from "utils/index";
 import {
   rejectPromiseAction,
   resolvePromiseAction
@@ -17,6 +17,7 @@ import {
   exploreSkillsProAction
 } from "state/actions/candidateJobAction";
 import { exploreSkills } from "services/careerService";
+import i18n from "i18next";
 
 export function* getSimilarJobSaga({ payload }) {
   try {
@@ -26,7 +27,7 @@ export function* getSimilarJobSaga({ payload }) {
 
     yield put({ type: GET_JOB_SIMILAR_SUCCESS, response });
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
   }
 }
 
@@ -69,7 +70,7 @@ export function* exploreSkillsProSaga(action) {
 
     yield call(resolvePromiseAction, action);
   } catch (err) {
-    yield toastErr(err);
+    yield toastErr({ err: i18n.language === "vi" ? getMessage(err, "vi") : getMessage(err, "en") });
     yield call(rejectPromiseAction, action);
   }
 }

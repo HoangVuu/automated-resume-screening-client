@@ -153,9 +153,6 @@ function JobDetail({ id, top, onChangeSelect, bottom }) {
       <div
         id="vjs-container"
         tabIndex="-1"
-        style={{
-          left: `450px`
-        }}
       >
         {!loading ? (
           <>

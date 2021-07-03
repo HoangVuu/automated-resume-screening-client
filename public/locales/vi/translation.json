@@ -48,7 +48,7 @@
         "location": "Địa điểm làm việc..."
     },
     "careerAdvice": {
-        "tab1": "Khám phá việc làm có thể phù hợp với các kĩ năng của tôi",
+        "tab1": "Khám phá việc làm có thể phù hợp với các kỹ năng của tôi",
         "tab2": "Tìm công việc phù hợp cho tôi",
         "titleBig": "Làm thế nào để chọn các kỹ năng của bạn cho công việc?",
         "titleSmall": "Khám phá các vị trí có thể phù hợp với bạn dựa trên kỹ năng và kinh nghiệm của bạn",
@@ -150,11 +150,11 @@
     },
     "explore": {
         "smallTitle": "Sử dụng các kỹ năng đã được liệt kê trong hồ sơ, chúng tôi sẽ giúp bạn khám phá các cơ hội nghề nghiệp.",
-        "addSkill": "Thêm kĩ năng",
-        "addASkill": "Thêm một kĩ năng...",
+        "addSkill": "Thêm kỹ năng",
+        "addASkill": "Thêm một kỹ năng...",
         "Save": "Tìm kiếm phù hợp",
         "matchedTitle": "Các cơ hội việc làm phù hợp",
-        "mostMatches": "Phù hợp hầu hết các kĩ năng",
+        "mostMatches": "Phù hợp hầu hết các kỹ năng",
         "goodSkill": "Những cơ hội tốt với bạn",
         "enjoy": "Những cơ hội có thể bạn thích",
         "lookingBigTitle": "Bạn đang tìm kiếm một vai trò hoặc kỹ năng cụ thể?",
@@ -168,7 +168,7 @@
         "maximum": "Mức lương chung tối đa"
     },
     "matchedJob": {
-        "matchSkills": "Những kĩ năng của bạn phù hợp",
+        "matchSkills": "Những kỹ năng của bạn phù hợp",
         "numberSkillMatch": "Xem bạn phù hợp thế nào"
     },
     "matchedJobDetail": {
@@ -219,8 +219,8 @@
         "addSkill": "Thêm kỹ năng",
         "addSkillPlace": "Thêm một kỹ năng mềm...",
         "addSSkill": "Thêm kỹ năng mềm",
-        "click": "Nhấn để nhiều kĩ năng để giúp nhà tuyển dụng tìm bạn.",
-        "clickS": "Nhấn để thêm nhiều kĩ năng mềm để giúp nhà tuyển dụng tìm bạn.",
+        "click": "Nhấn để nhiều kỹ năng để giúp nhà tuyển dụng tìm bạn.",
+        "clickS": "Nhấn để thêm nhiều kỹ năng mềm để giúp nhà tuyển dụng tìm bạn.",
         "softSkill": "Kỹ năng mềm",
         "resume": "Sơ yếu lý lịch",
         "aboutRe": "Về sơ yếu lý lịch",
@@ -314,7 +314,7 @@
         "whatCan": "Tôi có thể kiếm được bao nhiêu với vai trò là một ",
         "task": "Các công việc và nhiệm vụ",
         "skill": "Các kỹ năng và kinh nghiệm nhà tuyển dụng đang tìm kiếm",
-        "see": "Xem một vài kĩ năng chính của ",
+        "see": "Xem một vài kỹ năng chính của ",
         "lastest": "Các bài đăng việc làm mới nhất",
         "newPost": " việc làm mới nhất",
         "newPosts": " việc làm mới nhất",
