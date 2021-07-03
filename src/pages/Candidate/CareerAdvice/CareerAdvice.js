@@ -139,7 +139,7 @@ function CandidateCareerAdvice({ history }) {
               <div className="explore">
                 <div className="explore__title">
                   <div className="container">
-                    <h1 className="explore__title__big" style={{width: '80%', lineHeight: '1.08'}}>
+                    <h1 className="explore__title__big" style={{ lineHeight: '1.08'}}>
                       {t("careerAdvice.titleBig")}
                     </h1>
                     <p className="explore__title__small">
