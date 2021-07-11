@@ -7,7 +7,7 @@ function Footer() {
     <footer id="footer">
       <div className="container">
         <div className="footer-left">
-          <h3>
+          <h3 className="footer-logo">
             <img src="/assets/img/main-logo.jpg" />
           </h3>
           <p className="footer-links">
