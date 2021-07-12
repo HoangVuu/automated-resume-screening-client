@@ -495,21 +495,10 @@ const HRLandingPage = () => {
             <div className="FYwKg _3VCZm _1uk_1 _3Ve9Z">
               <div className="FYwKg _1GAuD _3gJU3_4 _2JU1c_4 hLznC_4 _2Bz3E rNAgI _1tfFt">
                 <div className="FYwKg d7v3r UJoTY_4">
-                  <div className="FYwKg _6Gmbl_4">
-                    <svg
-                      id="prefix__Layer_1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="100%"
-                      height="100%"
-                      viewBox="0 0 405 48"
-                      aria-labelledby="bannerText"
-                    >
-                      <title id="prefix__bannerText">
-                        { i18n.language === "en" ? 
+                  <div className="FYwKg _6Gmbl_4" style={{fontSize: '23px', fontWeight: '900'}}>
+                  { i18n.language === "en" ? 
                           "Get helpful advice and resources to support your business through COVID-19" : "Nhận lời khuyên hữu ích và tài nguyên để hỗ trợ doanh nghiệp của bạn thông qua COVID-19"
                         }
-                      </title>
-                      <style />
                       <g id="prefix__Page-1">
                         <g id="prefix__Employer-banner">
                           <g className="prefix__background">
@@ -528,7 +517,6 @@ const HRLandingPage = () => {
                           </g>
                         </g>
                       </g>
-                    </svg>
                   </div>
                   <div className="FYwKg _6Gmbl_4">
                     <div className="FYwKg _3ftyQ _3i7ia _1d5GB_4">
