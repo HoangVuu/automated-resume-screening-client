@@ -23,7 +23,11 @@ import { useTitle } from "utils/index";
 
 function CandidateCareerAdvice({ history }) {
   const { t, i18n } = useTranslation();
-  useTitle(i18n.language === "en" ? "FASTJOB | Career Advice" : "FASTJOB | Lời khuyên nghề nghiệp")
+  useTitle(
+    i18n.language === "en"
+      ? "FASTJOB | Career Advice"
+      : "FASTJOB | Lời khuyên nghề nghiệp"
+  );
 
   const dispatch = useDispatch();
   // const profile = useSelector((state) => state.profile.candidateProfile);
@@ -58,7 +62,9 @@ function CandidateCareerAdvice({ history }) {
   };
 
   const submit = (value) => {
-    window.location.replace(`/career-advice/skill=${value.replaceAll(" ", "-")}`);
+    window.location.replace(
+      `/career-advice/skill=${value.replaceAll(" ", "-")}`
+    );
   };
 
   useEffect(() => {
@@ -123,27 +129,45 @@ function CandidateCareerAdvice({ history }) {
               !isEmpty(resume) ? (
                 <ExploreWithSkills profile={resume} />
               ) : (
-                <div className="container">
-                  <div className="explore__content">
-                    <h2 className="explore__content__title">
-                    {t("careerAdvice.contentTitle")}
-                    </h2>
-                    <div className="explore__content__key">
-                      <p>{t("careerAdvice.contentKey")}</p>
+                <>
+                  <div className="explore__title">
+                    <div className="container">
+                      <h1
+                        className="explore__title__big"
+                        style={{ lineHeight: "1.08" }}
+                      >
+                        {t("careerAdvice.titleBig")}
+                      </h1>
+                      <p className="explore__title__small">
+                        {t("careerAdvice.titleSmall")}
+                      </p>
                     </div>
-                    <SignInDirect isNeedCV={true} />
                   </div>
-                </div>
+                  <div className="container">
+                    <div className="explore__content">
+                      <h2 className="explore__content__title">
+                        {t("careerAdvice.contentTitle")}
+                      </h2>
+                      <div className="explore__content__key">
+                        <p>{t("careerAdvice.contentKey")}</p>
+                      </div>
+                      <SignInDirect isNeedCV={true} />
+                    </div>
+                  </div>
+                </>
               )
             ) : (
               <div className="explore">
                 <div className="explore__title">
                   <div className="container">
-                    <h1 className="explore__title__big" style={{ lineHeight: '1.08'}}>
+                    <h1
+                      className="explore__title__big"
+                      style={{ lineHeight: "1.08" }}
+                    >
                       {t("careerAdvice.titleBig")}
                     </h1>
                     <p className="explore__title__small">
-                    {t("careerAdvice.titleSmall")}
+                      {t("careerAdvice.titleSmall")}
                     </p>
                   </div>
                 </div>
@@ -151,7 +175,7 @@ function CandidateCareerAdvice({ history }) {
                 <div className="container">
                   <div className="explore__content">
                     <h2 className="explore__content__title">
-                     {t("careerAdvice.contentTitle")}
+                      {t("careerAdvice.contentTitle")}
                     </h2>
                     <div className="explore__content__key">
                       <p>{t("careerAdvice.contentKey")}</p>
@@ -167,11 +191,11 @@ function CandidateCareerAdvice({ history }) {
               {t("careerAdvice.lookingFor")}
             </h2>
             <div className="explore__title-sub">
-            {t("careerAdvice.findOut")}
+              {t("careerAdvice.findOut")}
             </div>
             <div className="explore-look">
               <h2 className="explore-look__title">
-              {t("careerAdvice.whatRole")}
+                {t("careerAdvice.whatRole")}
               </h2>
 
               <form>
