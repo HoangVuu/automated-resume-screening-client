@@ -4,8 +4,11 @@ import React, { useEffect, useState } from "react";
 import "./LandingPage.scss";
 import { Table } from "antd";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const HRLandingPage = () => {
+  const { t, i18n } = useTranslation();
+
   const [left, setLeft] = useState(window.innerWidth * 0.95);
   const [hiddenLang, setHiddenLang] = useState(true);
   useEffect(() => {
@@ -23,13 +26,13 @@ const HRLandingPage = () => {
             <div className="hire-hero--text-body">
               <div className="hire-hero--text">
                 <h1 className="">
-                  Let's make your next great hire. <em>Fast.</em>
+                  {i18n.language === "en" ?  "Let's make your next great hire." : "Cùng bắt đầu với cuộc tuyển dụng tuyệt vời tiếp theo của bạn." } <em>{i18n.language === "en" ? "Fast." : "Nhanh chóng"}</em>
                 </h1>
                 <div className="subtitle hire-hero-subtitle en-subtitle">
                   <p className="lead single-row">
-                    You know who you're looking for.
+                  {i18n.language === "en" ? "You know who you're looking for." :  "Bạn biết người bạn đang tìm kiếm."}
                     <br />
-                    We'll help you find them.
+                    {i18n.language === "en" ? "We'll help you find them." : "Chúng tôi sẽ giúp bạn tìm ra họ." }
                   </p>
                 </div>
                 <div className="hire-hero-button-container">
@@ -41,7 +44,7 @@ const HRLandingPage = () => {
                     data-shield="hire-hero-post-job-button"
                     type="button"
                   >
-                    Post a job
+                   {i18n.language === "en" ?  "Post a job" : "Đăng một việc làm" }
                   </button>
                 </div>
               </div>
@@ -54,13 +57,12 @@ const HRLandingPage = () => {
                 </div>
                 <div className="hire-hero-card-body">
                   <h4>
-                    Create your
+                  {i18n.language === "en" ? "Create your" : "Tạo"}
                     <br />
-                    free account
+                    {i18n.language === "en" ? "free account" : "tài khoản miễn phí"}
                   </h4>
                   <p>
-                    All you need is your email address to create an account and
-                    start building your job post.
+                  {i18n.language === "en" ? "All you need is your email address to create an account and start building your job post." : "Tất cả những gì bạn cần là địa chỉ email để tạo tài khoản và bắt đầu xây dựng bài đăng tuyển dụng của mình." } 
                   </p>
                 </div>
               </div>
@@ -70,13 +72,12 @@ const HRLandingPage = () => {
                 </div>
                 <div className="hire-hero-card-body">
                   <h4>
-                    Build your
+                  {i18n.language === "en" ? "Build your" : "Xây dựng"}
                     <br />
-                    job post
+                    {i18n.language === "en" ? "job post" : "bài tuyển dụng" }
                   </h4>
                   <p>
-                    Then just add a title, description, and location to your job
-                    post, and you're ready to go.
+                  {i18n.language === "en" ?  "Then just add a title, description, and location to your job post, and you're ready to go." : "Sau đó, chỉ cần thêm tiêu đề, mô tả và vị trí vào tin tuyển dụng của bạn và bạn đã sẵn sàng." }
                   </p>
                 </div>
               </div>
@@ -86,13 +87,12 @@ const HRLandingPage = () => {
                 </div>
                 <div className="hire-hero-card-body">
                   <h4>
-                    Post
+                  {i18n.language === "en" ? "Post" : "Đăng" }
                     <br />
-                    your job
+                  {i18n.language === "en" ? "your job" : "việc làm của bạn" }
                   </h4>
                   <p>
-                    After you post your job use our state of the art tools to
-                    help you find dream talent.
+                  {i18n.language === "en" ? "After you post your job use our state of the art tools to help you find dream talent." : "Sau khi bạn đăng tuyển dụng, hãy sử dụng các công cụ hiện đại của chúng tôi để giúp bạn tìm thấy tài năng trong mơ. " }
                   </p>
                 </div>
               </div>
@@ -101,13 +101,13 @@ const HRLandingPage = () => {
           <div className="_1HNvZ">
             <div className="FYwKg d7v3r _1QKvi_4">
               <div className="FYwKg _7dJpR_4">
-                <div className="FYwKg b1Kg1">
+                <div className="FYwKg b1Kg1 ">
                   <h2 className="FYwKg C6ZIU_4 _3nVJR_4 _1H36Y_4 _2DNlq_4 _1NXQv_4">
-                    We make it quicker and easier to find the right people
+                  {i18n.language === "en" ?  "We make it quicker and easier to find the right people" : "Chúng tôi giúp tìm đúng người nhanh hơn và dễ dàng hơn" }
                   </h2>
                 </div>
               </div>
-              <div className="FYwKg _7dJpR_4">
+              <div className="FYwKg _7dJpR_4 container">
                 <div className="FYwKg _2Bz3E _2II51_4 _1lyEa IC4bo_4 _3ucB1_4">
                   <div className="FYwKg _3VCZm _1uk_1 _3Ve9Z">
                     <div className="FYwKg _1GAuD _7dJpR_4 _2JU1c_4 hLznC_4 _2Bz3E rNAgI _1tfFt">
@@ -145,8 +145,7 @@ const HRLandingPage = () => {
                           </div>
                           <div className="FYwKg _6Gmbl_4">
                             <span className="FYwKg _2Bz3E C6ZIU_4 _6ufcS_4 _3KSG8_4 _29m7__4 _2WTa0_4">
-                              Attract the best people with tips and guidance to
-                              help you write a great job ad.
+                          {i18n.language === "en" ?  "Attract the best people with tips and guidance to help you write a great job ad." : "Thu hút những người giỏi nhất bằng các mẹo và hướng dẫn để giúp bạn viết một quảng cáo tuyển dụng tuyệt vời." }
                             </span>
                           </div>
                         </div>
@@ -184,8 +183,7 @@ const HRLandingPage = () => {
                           </div>
                           <div className="FYwKg _6Gmbl_4">
                             <span className="FYwKg _2Bz3E C6ZIU_4 _6ufcS_4 _3KSG8_4 _29m7__4 _2WTa0_4">
-                              Connect with relevant people from our talent
-                              database.
+                            {i18n.language === "en" ? "Connect with relevant people from our talent database." :  "Kết nối với những người có liên quan từ tài năng của chúng tôi cơ sở dữ liệu."}
                             </span>
                           </div>
                         </div>
@@ -249,8 +247,7 @@ const HRLandingPage = () => {
                           </div>
                           <div className="FYwKg _6Gmbl_4">
                             <span className="FYwKg _2Bz3E C6ZIU_4 _6ufcS_4 _3KSG8_4 _29m7__4 _2WTa0_4">
-                              Quality candidates are listed first so you can
-                              contact them sooner.
+                            {i18n.language === "en" ? "Quality candidates are listed first so you can contact them sooner." :  "Các ứng viên chất lượng được liệt kê đầu tiên để bạn có thể liên hệ với họ sớm hơn."}
                             </span>
                           </div>
                         </div>
@@ -267,7 +264,7 @@ const HRLandingPage = () => {
                         className="FYwKg _1uk_1 _3RtnC_4 _37N5v_4 _2Bz3E rNAgI"
                         style={{ marginBottom: "50px" }}
                       >
-                        <button className="_btn111">Create a job ad</button>
+                        <button className="_btn111"> {i18n.language === "en" ? "Create a job ad" : "Tạo một quảng cáo việc làm" }</button>
                       </div>
                     </div>
                   </div>
@@ -278,11 +275,9 @@ const HRLandingPage = () => {
         </header>
         <section className="hire-features">
           <div className="container" style={{paddingBottom: '0'}}>
-            <h2>Save time and effort in your hiring journey.</h2>
+            <h2>{i18n.language === "en" ? "Save time and effort in your hiring journey." : "Tiết kiệm thời gian và công sức trong hành trình tuyển dụng của bạn."}</h2>
             <p className="lead">
-              Finding the best fit for the job shouldn’t be a full-time job.
-              Indeed’s simple and powerful tools let you source, screen, and
-              hire faster.
+            {i18n.language === "en" ?  "Finding the best fit for the job shouldn’t be a full-time job. FASTJOB's simple and powerful tools let you source, screen, and hire faster." : "Tìm kiếm sự phù hợp nhất cho công việc không phải là một công việc toàn thời gian. Các công cụ đơn giản và mạnh mẽ của FASTJOB cho phép bạn tìm nguồn, sàng lọc và thuê nhanh hơn."}
             </p>
           </div>
           <div className="hire-features-card-wrapper">
@@ -297,7 +292,7 @@ const HRLandingPage = () => {
                     />
                   </div>
                   <div className="hire-features-card-body card-body-en">
-                    <h4>Get more visibility</h4>
+                    <h4>{i18n.language === "en" ? "Get more visibility" : "Tăng khả năng hiển thị"}</h4>
                     <p>
                       <span>
                         <a
@@ -306,9 +301,9 @@ const HRLandingPage = () => {
                           data-tn-element="sponsorYourJob"
                           data-shield="sponsor-your-job"
                         >
-                          Sponsor your job
+                        {i18n.language === "en" ?  "Sponsor your job" : "Tài trợ cho công việc của bạn" }
                         </a>{" "}
-                        to ensure it gets seen by the right people.
+                        {i18n.language === "en" ?   "to ensure it gets seen by the right people." : "để đảm bảo nó được nhìn thấy bởi những người phù hợp."}
                       </span>
                     </p>
                   </div>
@@ -322,10 +317,9 @@ const HRLandingPage = () => {
                     />
                   </div>
                   <div className="hire-features-card-body card-body-en">
-                    <h4>Find quality applicants</h4>
+                    <h4> {i18n.language === "en" ?  "Find quality applicants" : "Tìm ứng viên chất lượng"}</h4>
                     <p>
-                      List your required skills for the job so relevant
-                      candidates apply.
+                    {i18n.language === "en" ?  "List your required skills for the job so relevant candidates apply." : "Liệt kê các kỹ năng cần thiết của bạn cho công việc để các ứng viên có liên quan áp dụng."}
                     </p>
                   </div>
                 </div>
@@ -340,10 +334,9 @@ const HRLandingPage = () => {
                     />
                   </div>
                   <div className="hire-features-card-body card-body-en">
-                    <h4>Verify their abilities</h4>
+                    <h4> {i18n.language === "en" ? "Verify their abilities" : "Xác minh khả năng của họ"}</h4>
                     <p>
-                      Add screener questions and assessments to test applicants’
-                      skills.
+                    {i18n.language === "en" ?  "Add screener questions and assessments to test applicants’skills." : "Thêm các câu hỏi và bài đánh giá của người sàng lọc để kiểm tra kỹ năng của người nộp đơn."}
                     </p>
                   </div>
                 </div>
@@ -356,10 +349,9 @@ const HRLandingPage = () => {
                     />
                   </div>
                   <div className="hire-features-card-body card-body-en">
-                    <h4>Organize your candidates</h4>
+                    <h4>{i18n.language === "en" ? "Organize your candidates" : "Tổ chức các ứng cử viên của bạn"}</h4>
                     <p>
-                      View and sort resumes, send messages, and schedule
-                      interviews—all on Indeed.
+                    {i18n.language === "en" ? "View and sort resumes, send messages, and schedule interviews—all on FASTJOB." : "Xem và sắp xếp hồ sơ, gửi tin nhắn và lên lịch phỏng vấn — tất cả đều có trên FASTJOB."}
                     </p>
                   </div>
                 </div>
@@ -373,12 +365,12 @@ const HRLandingPage = () => {
                   data-shield="hire-feature-post-job-button"
                   type="button"
                 >
-                  Get started
+                    {i18n.language === "en" ?  "Get started" : "Bắt đầu"}
                 </button>
                 <p className="hire-features-footer-text">
                   <span>
-                    You control your posts 24/7—edit, add, pause, or close them
-                    whenever you want.{" "}
+                  {i18n.language === "en" ?  "You control your posts 24/7—edit, add, pause, or close them whenever you want." : "Bạn kiểm soát bài đăng của mình 24/7 — chỉnh sửa, thêm, tạm dừng hoặc đóng chúng bất cứ khi nào bạn muốn."}
+                   {" "}
                     <a
                       href="/hire/post-job?hl=en&amp;co=VN"
                       data-tn-element="learnMoreAboutPosting"
@@ -386,7 +378,7 @@ const HRLandingPage = () => {
                       data-shield="learn-more-about-posting"
                       id="skbltfy4c6m"
                     >
-                      Learn more about posting.
+                  {i18n.language === "en" ?  "Learn more about posting." : "Tìm hiểu thêm về đăng bài."}
                     </a>
                   </span>
                 </p>
@@ -419,21 +411,19 @@ const HRLandingPage = () => {
                   <div className="FYwKg d7v3r _3BZ6E_4">
                     <div className="FYwKg _3gJU3_4">
                       <h2 className="FYwKg C6ZIU_4 _3nVJR_4 _1H36Y_4 _2DNlq_4 _1NXQv_4">
-                        Hiring for the first time?
+                  {i18n.language === "en" ?  "Hiring for the first time?" : "Lần đầu tiên tuyển dụng?"}
                       </h2>
                     </div>
                     <div className="FYwKg _3gJU3_4">
                       <span className="FYwKg _2Bz3E C6ZIU_4 _8QVx6_4 _3KSG8_4 _29m7__4 _3srVf_4">
-                        Finding the right person doesn’t have to be the hardest
-                        part of your job. SEEK's Hiring Advice helps make it
-                        easy.
+                  {i18n.language === "en" ?  "Finding the right person doesn’t have to be the hardest part of your job. FASTJOB's Hiring Advice helps make it easy." : "Tìm đúng người không phải là phần khó nhất trong công việc của bạn. Tư vấn tuyển dụng của FASTJOB giúp việc này trở nên dễ dàng."}
                       </span>
                     </div>
                     <div className="FYwKg _3gJU3_4">
                       <div className="FYwKg d7v3r _3QaJd_4">
                         <div className="FYwKg _2Bz3E _2II51_4 _1lyEa IC4bo_4 _1q9J3 _3Aa4F_4">
                           <div className="FYwKg _1uk_1 _3RtnC_4 _37N5v_4 _2Bz3E rNAgI">
-                            <button className="_btn111">Create a job ad</button>
+                            <button className="_btn111"> {i18n.language === "en" ?  "Create a job ad" : "Tạo một quảng cáo việc làm"}</button>
                           </div>
                           <div className="FYwKg _1uk_1 _3RtnC_4 _37N5v_4 _2Bz3E rNAgI">
                             <div className="FYwKg _2Cp5K">
@@ -441,7 +431,7 @@ const HRLandingPage = () => {
                                 className="_link111"
                                 style={{ border: "none" }}
                               >
-                                Get started
+                                 {i18n.language === "en" ?  "Get started" : "Bắt đầu"}
                               </a>
                               <div className="FYwKg _20Cd9_4 S6rFp_4 _2ZhMR_4 _3ra6Y _1gtjJ _20ezv _2d6vb _1HFUg _31bXc _37GT- _3GMzN"></div>
                             </div>
@@ -515,8 +505,8 @@ const HRLandingPage = () => {
                       aria-labelledby="bannerText"
                     >
                       <title id="prefix__bannerText">
-                        {
-                          "Get helpful advice and resources to support your business through COVID-19"
+                        { i18n.language === "en" ? 
+                          "Get helpful advice and resources to support your business through COVID-19" : "Nhận lời khuyên hữu ích và tài nguyên để hỗ trợ doanh nghiệp của bạn thông qua COVID-19"
                         }
                       </title>
                       <style />
@@ -553,7 +543,7 @@ const HRLandingPage = () => {
                               }}
                               href="https://www.seek.com.au/employer/hiring-advice/"
                             >
-                              Explore Hiring Advice
+                                  { i18n.language === "en" ?  "Explore Hiring Advice" : "Khám phá lời khuyên về việc tuyển dụng" }
                             </a>
                           </div>
                         </div>

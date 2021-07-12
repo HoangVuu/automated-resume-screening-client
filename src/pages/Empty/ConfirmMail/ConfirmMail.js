@@ -37,14 +37,13 @@ const ConfirmMail = (props) => {
       <div className="blank-pages"></div>
       <div className="clearfix"></div>
       <div className="confirm__page">
-        <div className="text-center">
+      
+        <div className="m-t-40 card-box">
+        <div className="text-center" style={{marginBottom: '40px'}}>
           <Link to="/" className="confirm__page__logo">
-            <h3>
-              Automated&nbsp;<span>Screening</span>
-            </h3>
+           <img src="/assets/img/main-logo.jpg" />
           </Link>
         </div>
-        <div className="m-t-40 card-box">
           <div className="text-center">
             <h4 className="text-uppercase font-bold m-b-0 confirm__title">
               Xác thực tài khoản
