@@ -65,12 +65,12 @@ function RecruiterNavBar() {
           />
         ) : (
           <NavItem
-            {...{
-              title: "Đăng nhập",
-              url: "/recruiter/sign-in",
-              button: true
-            }}
-          />
+          {...{
+            title: t("header.logIn"),
+            url: "/recruiter/sign-in",
+            button: true
+          }}
+        />
         )}
         {/* <span className="nav-separator nav-separator--grey"></span> */}
         <span className="nav-separator nav-separator--grey"></span>
@@ -92,7 +92,10 @@ const NavItem = ({
   btnClick,
   linkClick,
   isActive
-}) => (
+}) => {
+
+  const { t } = useTranslation();
+return (
   <li className="nav-item header__nav-item">
     {link && (
       <Link
@@ -104,7 +107,7 @@ const NavItem = ({
         }
         onClick={linkClick}
       >
-        {title}
+        {t(`header.${title}`)}
       </Link>
     )}
     {button && (
@@ -113,4 +116,4 @@ const NavItem = ({
       </Link>
     )}
   </li>
-);
+)};

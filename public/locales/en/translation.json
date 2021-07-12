@@ -8,7 +8,9 @@
         "logOut": "Logout",
         "logIn": "Login",
         "employer": "Employer",
-        "employee": "Employee"
+        "employee": "Employee",
+        "find": "Find candidates",
+        "post": "Job Posts"
     },
     "candidateSignIn": {
         "areYou": "Are you an employer?",

@@ -8,7 +8,9 @@
         "logOut": "Đăng xuất",
         "logIn": "Đăng nhập",
         "employer": "Nhà tuyển dụng",
-        "employee": "Ứng viên"
+        "employee": "Ứng viên",
+        "find": "Tìm ứng viên",
+        "post": "Tin tuyển dụng"
     },
     "candidateSignIn": {
         "areYou": "Bạn là nhà tuyển dụng?",

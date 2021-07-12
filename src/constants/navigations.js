@@ -27,8 +27,8 @@ export const CANDIDATE_NAV_EXTEND = [
 ];
 
 export const RECRUITER_NAV = [
-  { title: "Tìm ứng viên", url: "/recruiter/find-candidates", link: true },
-  { title: "Tin tuyển dụng", url: "/recruiter/jobs", link: true }
+  { title: "find", url: "/recruiter/find-candidates", link: true },
+  { title: "post", url: "/recruiter/jobs", link: true }
 ];
 
 export const JOBS_MENU = [
