@@ -54,7 +54,7 @@ function NavBar() {
 
   const getTheLastWord = () => {
     if (!isEmpty(profile.fullName)) {
-      let n = profile.fullName.lastIndexOf(" ");
+      let n = profile.fullName.trim().lastIndexOf(" ");
       var res = profile.fullName.substring(n);
     }
     return res;

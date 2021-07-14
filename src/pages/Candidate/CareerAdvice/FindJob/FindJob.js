@@ -65,7 +65,7 @@ const FindJob = ({ history, hasResume }) => {
   };
 
   const getTheLastName = () => {
-    let n = profile.fullName.lastIndexOf(" ");
+    let n = profile.fullName.trim().lastIndexOf(" ");
     var res = profile.fullName.substring(n);
 
     return res;

@@ -91,7 +91,12 @@ const CandidateJobDetail = ({ history }) => {
 
       await saveJob(id, status, token)
         .then((res) => {
-          console.log(res);
+          toast({
+            message:
+              i18n.language === "en"
+                ? "Save job successful"
+                : "Lưu việc làm thành công"
+          });
         })
         .catch((err) => toastErr(err))
         .finally(() => setLoadingSave(false));
