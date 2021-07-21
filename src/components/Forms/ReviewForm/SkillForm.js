@@ -9,6 +9,7 @@ import Loading from "components/Loading/Loading";
 import AddSkillSuggest from "components/AddSkillSuggest/AddSkillSuggest";
 import AddSoftSkillSuggest from "components/AddSoftSkillSuggest/AddSoftSkillSuggest";
 import { useTranslation } from "react-i18next";
+import { toast } from "utils/index";
 
 function SkillForm({ curStep, handleChangeStep }) {
   const { t, i18n } = useTranslation();
@@ -91,9 +92,17 @@ function SkillForm({ curStep, handleChangeStep }) {
     const values = skills?.length && skills.map((ele) => ele.value);
     const softValues = softSkills?.length && softSkills.map((ele) => ele.value);
 
-    dispatch(updateCVAction({ values, softValues })).catch(() => {
-      setLoading(false);
-    });
+    dispatch(updateCVAction({ values, softValues }))
+      .catch(() => {
+        setLoading(false);
+        toast({
+          type: "success",
+          message:
+            i18n.language === "vi"
+              ? "Cập nhập hồ sơ thành công"
+              : "Update profile successful"
+        })
+      });
     // dispatch({ type: UPDATE_CV_VALUES, key: "skill", value: values });
     // handleChangeStep(curStep + 1);
   };
@@ -139,7 +148,8 @@ function SkillForm({ curStep, handleChangeStep }) {
                         {t("explore.addSkill")}
                       </label>
                       <p className="TextInput-helpText">
-                      {i18n.language === "en" ? "ex" : "Ví dụ"}: Javascript, Kotlin,...
+                        {i18n.language === "en" ? "ex" : "Ví dụ"}: Javascript,
+                        Kotlin,...
                       </p>
                     </div>
                     <div className="TextInput-wrapper">
@@ -214,7 +224,8 @@ function SkillForm({ curStep, handleChangeStep }) {
                         {t("profile.addSSkill")}
                       </label>
                       <p className="TextInput-helpText">
-                        {i18n.language === "en" ? "ex" : "Ví dụ"}: Communication, Presentation...
+                        {i18n.language === "en" ? "ex" : "Ví dụ"}:
+                        Communication, Presentation...
                       </p>
                     </div>
                     <div className="TextInput-wrapper">

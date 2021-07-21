@@ -2,7 +2,8 @@ import { takeEvery, call, select, put } from "redux-saga/effects";
 import {
   uploadCVAction,
   updateCVAction,
-  updateCVProfileAction
+  updateCVProfileAction,
+  uploadCVDocAction
 } from "state/actions/index";
 import history from "state/history";
 import { toast, toastErr,getMessage } from "utils/index";
@@ -10,7 +11,7 @@ import {
   rejectPromiseAction,
   resolvePromiseAction
 } from "@adobe/redux-saga-promise";
-import { updateCV, uploadFile } from "services/uploadServices";
+import { updateCV, uploadFile, uploadDoc } from "services/uploadServices";
 import { UPLOAD_CV_SUCCESS } from "state/reducers/cvReducer";
 import i18n from "i18next";
 
@@ -18,13 +19,33 @@ export function* uploadCVSaga(action) {
   try {
     const formData = action.payload;
 
+    console.log('formData cv', action.payload)
     const { token } = yield select((state) => state.auth.candidate);
 
     const result = yield call(uploadFile, formData, token);
+    console.log('result cv', result)
 
     yield put({ type: UPLOAD_CV_SUCCESS, response: result.data.data });
 
     yield history.push("/profile/review");
+    yield call(resolvePromiseAction, action);
+  } catch (err) {
+    yield toastErr(err);
+    yield call(rejectPromiseAction, action);
+  }
+}
+
+export function* uploadDocSaga(action) {
+  try {
+    const formData = action.payload;
+
+    const { token } = yield select((state) => state.auth.candidate);
+
+    const result = yield call(uploadDoc, formData, token);
+
+    console.log('result', result)
+    // yield put({ type: UPLOAD_CV_SUCCESS, response: result.data.data });
+
     yield call(resolvePromiseAction, action);
   } catch (err) {
     yield toastErr(err);
@@ -53,7 +74,7 @@ export function* updateResumeSaga(action) {
     const result = yield call(updateCV, data, token);
     const { message } = result.data;
 
-    yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") })
+    // yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") })
 
     yield history.push("/profile");
 
@@ -89,7 +110,7 @@ export function* updateCVProfileSaga(action) {
     const result = yield call(updateCV, data, token);
     const { message } = result.data;
 
-    yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") })
+    // yield toast({ message: i18n.language === "vi" ? getMessage(message, "vi") : getMessage(message, "en") })
 
     yield call(resolvePromiseAction, action);
   } catch (err) {
@@ -100,6 +121,7 @@ export function* updateCVProfileSaga(action) {
 
 export default function* cvSaga() {
   yield takeEvery(uploadCVAction, uploadCVSaga);
+  yield takeEvery(uploadCVDocAction, uploadDocSaga);
   yield takeEvery(updateCVAction, updateResumeSaga);
   yield takeEvery(updateCVProfileAction, updateCVProfileSaga);
 }

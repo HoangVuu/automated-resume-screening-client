@@ -197,6 +197,8 @@
         "update": "Update your preferences"
     },
     "profile": {
+        "addCe": "Add",
+        "document": "Certificates",
         "editBtn": "Edit personal details",
         "edit": "Edit personal details",
         "email": "Email address",

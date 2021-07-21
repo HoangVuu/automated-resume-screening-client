@@ -251,6 +251,10 @@
           font-size: 20px;
           margin-left: 15px;
         }
+
+        div {
+          width: 100%;
+        }
       }
 
       &__days {
@@ -285,6 +289,7 @@
         margin-top: 20px;
         padding: 25px;
         background-color: #fff;
+        margin-bottom: 30px;
 
         &__edit {
           display: flex;
@@ -410,8 +415,8 @@
 
   .edit-mode-container {
     border-left: 2px solid #2765cf;
-    box-shadow: 0 5px 12px 0 rgba(28, 28, 28, 0.2), 0 2px 2px -2px rgba(28, 28, 28, 0.1),
-      0 4px 4px -4px rgba(28, 28, 28, 0.2);
+    box-shadow: 0 5px 12px 0 rgba(28, 28, 28, 0.2),
+      0 2px 2px -2px rgba(28, 28, 28, 0.1), 0 4px 4px -4px rgba(28, 28, 28, 0.2);
   }
 
   .edit-mode {
@@ -474,5 +479,46 @@
         color: #085ff7;
       }
     }
+  }
+}
+
+.document {
+  &__top {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    align-items: center;
+
+    &:first-child {
+      border-top: 1px solid #0069d9;
+    }
+
+    &__left {
+      div {
+        color: #007bff;
+      }
+    }
+
+    &__right {
+      display: flex;
+      align-items: center;
+
+      &__button {
+        box-shadow: inset 0 0 0 2px #2765cf;
+        border-radius: 2px;
+        color: #2865d0;
+        background-color: $c-white;
+        padding: 5px 10px;
+        margin-right: 10px;
+
+        &:hover {
+          background-color: #f0f4fc;
+        }
+      }
+    }
+  }
+
+  &__bottom {
   }
 }

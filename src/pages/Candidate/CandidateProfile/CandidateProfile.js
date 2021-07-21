@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import "./CandidateProfile.scss";
 import FormData from "form-data";
 import { useDispatch, useSelector } from "react-redux";
-import { uploadCVAction } from "state/actions/index";
+import { uploadCVAction, uploadCVDocAction } from "state/actions/index";
 import Loading from "components/Loading/Loading";
 import {
   Button,
@@ -38,8 +38,7 @@ import {
   toast,
   formatProvince,
   formatProvinceName,
-  formatProvinceEn,
-  formatProvinceNameEn
+  getMessage
 } from "utils/index";
 import ContentEditable from "react-contenteditable";
 
@@ -60,6 +59,8 @@ import { updateCVProfileAction } from "state/actions/index";
 import { Link } from "react-router-dom";
 import { deleteResume } from "services/uploadServices";
 import { useTitle } from "utils/index";
+import DocumentItem from "./DocumentItem";
+import { Upload, Modal } from "antd";
 
 const ACCEPTS = [
   "application/msword",
@@ -67,14 +68,23 @@ const ACCEPTS = [
   "application/pdf"
 ];
 
+const DOCACCEPTS = ["image/png", "image/gif", "image/jpeg"];
+
 function MyProfile() {
   const { t, i18n } = useTranslation();
-  useTitle(i18n.language === "en" ? "FASTJOB | My Profile" : "FASTJOB | Thông tin cá nhân của tôi")
+  useTitle(
+    i18n.language === "en"
+      ? "FASTJOB | My Profile"
+      : "FASTJOB | Thông tin cá nhân của tôi"
+  );
 
   const dispatch = useDispatch();
 
   const validateMessages = {
-    required: i18n.language === "en" ?  "Please enter ${label}!" : "Vui lòng nhập ${label}!",
+    required:
+      i18n.language === "en"
+        ? "Please enter ${label}!"
+        : "Vui lòng nhập ${label}!",
     types: {
       // fullName: "Email không hợp lệ",
       // password: "Mật khẩu"
@@ -86,13 +96,17 @@ function MyProfile() {
       {
         type: "object",
         required: true,
-        message:  i18n.language === "en" ? "Please choose your date of birth!" : "Vui lòng chọn ngày sinh của bạn!"
+        message:
+          i18n.language === "en"
+            ? "Please choose your date of birth!"
+            : "Vui lòng chọn ngày sinh của bạn!"
       }
     ]
   };
 
   // ref
   const inputRef = useRef();
+  const inputDocRef = useRef();
 
   const eduFormRef = useRef();
   const exFormRef = useRef();
@@ -175,6 +189,12 @@ function MyProfile() {
         dispatch(candidateProfileAction(token));
         setLoading(false);
         setProfileForm(false);
+        toast({
+          message:
+            i18n.language === "vi"
+              ? "Cập nhập hồ sơ thành công"
+              : "Update profile successful"
+        });
       })
       .catch(() => {
         setLoading(false);
@@ -284,7 +304,11 @@ function MyProfile() {
 
   // Hanlde upload file
   const handleSelectFile = () => {
-    inputRef.current.click();
+    inputRef?.current?.click();
+  };
+
+  const handleAddDoc = () => {
+    inputDocRef?.current?.click();
   };
 
   const handleInputChange = async (e) => {
@@ -305,6 +329,54 @@ function MyProfile() {
       formData.append("file", file);
 
       dispatch(uploadCVAction(formData));
+    }
+  };
+
+  const handleInputDoc = async (e) => {
+    const file = e.target.files[0];
+    console.log(e.target.files[0]);
+
+    // console.log("file", e.target.file);
+    // console.log("e.value", e.target.value);
+
+    if (!DOCACCEPTS.includes(file?.type)) {
+      toast({
+        type: "error",
+        message:
+          i18n.language === "vi"
+            ? "Định dạng tệp không hợp lệ"
+            : "Invalid file format"
+      });
+    } else {
+      // setLoading(true);
+
+      const formData = new FormData();
+      formData.append("file", file);
+      console.log("file", file);
+
+      setLoading(true);
+
+      dispatch(uploadCVDocAction(formData))
+        .then(() => {
+          setLoading(false);
+          toast({
+            type: "success",
+            message:
+              i18n.language === "en"
+                ? "Upload certificate images successful"
+                : "Cập nhập hình ảnh thành công"
+          });
+        })
+        .catch(() => {
+          setLoading(false);
+          toast({
+            type: "error",
+            message:
+              i18n.language === "en"
+                ? "Upload certificate images unsuccessful"
+                : "Cập nhập hình ảnh thất bại"
+          });
+        });
     }
   };
 
@@ -331,6 +403,13 @@ function MyProfile() {
       })
     )
       .then(() => {
+        toast({
+          type: "success",
+          message:
+            i18n.language === "vi"
+              ? "Cập nhập hồ sơ thành công"
+              : "Update profile successful"
+        });
         setLoading(false);
         resume.educations !== resumeDefault.educations && setEduForm(false);
         (resume.experiences !== resumeDefault.experiences ||
@@ -399,8 +478,14 @@ function MyProfile() {
 
   const onDeleteSubcribe = () => {
     swal({
-      title:  i18n.language === "en" ? "Are you sure to delete jobs alert?" : "Bạn có chắc chắn muốn xóa thông báo công việc này?",
-      text: i18n.language === "en" ? "You'll not receive email from us in the future!" : "Bạn sẽ không nhận được email thông báo từ chúng tôi sau này",
+      title:
+        i18n.language === "en"
+          ? "Are you sure to delete jobs alert?"
+          : "Bạn có chắc chắn muốn xóa thông báo công việc này?",
+      text:
+        i18n.language === "en"
+          ? "You'll not receive email from us in the future!"
+          : "Bạn sẽ không nhận được email thông báo từ chúng tôi sau này",
       icon: "warning",
       buttons: [t("profile.cancel"), t("profile.delete")],
       dangerMode: true
@@ -412,7 +497,10 @@ function MyProfile() {
               setSubcribe(null);
               toast({
                 type: "success",
-                message: i18n.language === "en" ? "Delete your jobs alert successful" : "Xóa thông báo công việc thành công "
+                message:
+                  i18n.language === "en"
+                    ? "Delete your jobs alert successful"
+                    : "Xóa thông báo công việc thành công "
               });
             })
             .catch((err) => {
@@ -427,10 +515,16 @@ function MyProfile() {
 
   const onDeleteProfile = () => {
     swal({
-      title:  i18n.language === "en" ? "Are you sure to delete this resume?": "Bạn có chắc chắn muốn xóa sơ yếu lý lịch này?",
-      text: i18n.language === "en" ? "Employer maybe cannot find you!" : "Nhà tuyển dụng có lẽ sẽ không tìm thấy bạn",
+      title:
+        i18n.language === "en"
+          ? "Are you sure to delete this resume?"
+          : "Bạn có chắc chắn muốn xóa sơ yếu lý lịch này?",
+      text:
+        i18n.language === "en"
+          ? "Employer maybe cannot find you!"
+          : "Nhà tuyển dụng có lẽ sẽ không tìm thấy bạn",
       icon: "warning",
-      buttons:  [t("profile.cancel"), t("profile.delete")],
+      buttons: [t("profile.cancel"), t("profile.delete")],
       dangerMode: true
     })
       .then(async (willDelete) => {
@@ -440,7 +534,10 @@ function MyProfile() {
               setResume(null);
               toast({
                 type: "success",
-                message: i18n.language === "en" ? "Delete your resume successful" : "Xóa sơ yếu lý lịch thành công"
+                message:
+                  i18n.language === "en"
+                    ? "Delete your resume successful"
+                    : "Xóa sơ yếu lý lịch thành công"
               });
             })
             .catch((err) => {
@@ -1016,41 +1113,74 @@ function MyProfile() {
                     </div>
                   </div>
 
-                  {resumeForm && (
-                    <>
-                      <div className="row cv-item__info__bottom ">
-                        <button
-                          type="button"
-                          className="cv-item__info__bottom__btn btn btn-outline-secondary"
-                          onClick={() =>
-                            window.open(resume.store_url, "_blank")
-                          }
-                        >
-                          <EyeOutlined className="cv-item__info__bottom__btn__icon" />
-                          {t("profile.watch")}
-                        </button>
+                  {/* {resumeForm && ( */}
+                  <>
+                    <div className="row cv-item__info__bottom ">
+                      <button
+                        type="button"
+                        className="cv-item__info__bottom__btn btn btn-outline-secondary"
+                        onClick={() => window.open(resume.store_url, "_blank")}
+                      >
+                        <EyeOutlined className="cv-item__info__bottom__btn__icon" />
+                        {t("profile.watch")}
+                      </button>
 
-                        <a
-                          href={resume.download_url}
-                          className="cv-item__info__bottom__btn btn btn-sm btn-outline-secondary "
-                        >
-                          <DownloadOutlined className="cv-item__info__bottom__btn__icon" />
-                          {t("profile.download")}
-                        </a>
+                      <a
+                        href={resume.download_url}
+                        className="cv-item__info__bottom__btn btn btn-sm btn-outline-secondary "
+                      >
+                        <DownloadOutlined className="cv-item__info__bottom__btn__icon" />
+                        {i18n.language === "vi" ? "Tải xuống" : "Download"}
+                      </a>
 
-                        <button
-                          type="button"
-                          className="cv-item__info__bottom__btn btn btn-sm  btn-outline-secondary"
-                          onClick={onDeleteProfile}
-                        >
-                          <DeleteOutlined className="cv-item__info__bottom__btn__icon" />
-                          {t("profile.delete")}
-                        </button>
-                      </div>
+                      <button
+                        type="button"
+                        className="cv-item__info__bottom__btn btn btn-sm  btn-outline-secondary"
+                        onClick={onDeleteProfile}
+                      >
+                        <DeleteOutlined className="cv-item__info__bottom__btn__icon" />
+                        {t("profile.delete")}
+                      </button>
+                    </div>
 
-                      {/* Handle upload resume  */}
-                    </>
-                  )}
+                    {/* Handle upload resume  */}
+                  </>
+                  <div>
+                    {/* <h4 style={{ fontSize: "23px" }}>
+                      <strong style={{ fontSize: "23px" }}>
+                        {t("profile.document")}
+                      </strong>
+                    </h4> */}
+
+                    {/* {!isEmpty(profile) &&
+                      profile?.document.map((item, index) => (
+                        <DocumentItem
+                          key={index}
+                          name={item?.name}
+                          url={item?.url}
+                          docId={item?.id}
+                        />
+                      ))}
+                   
+                    <button
+                      className="profile-button"
+                      style={{ marginTop: "40px" }}
+                      onClick={handleAddDoc}
+                      // onClick={
+                      //   !softSkillForm ? toggleSoftSkillForm : handleSubmit
+                      // }
+                    >
+                      <input
+                        type="file"
+                        name="myImage"
+                        className="d-none"
+                        accept="image/*"
+                        onChange={handleInputDoc}
+                        ref={inputDocRef}
+                      />
+                      {t("profile.addCe")}
+                    </button> */}
+                  </div>
                 </>
               ) : (
                 <div className="my-profile__resume__upload-file">
@@ -1071,7 +1201,6 @@ function MyProfile() {
                       {t("profile.addRe")}
                     </span>
                     <Button
-                      // onClick={handleSelectFile}
                       icon={<UploadOutlined />}
                       className="my-profile__resume__upload-file__box__btn"
                     >
@@ -1089,7 +1218,7 @@ function MyProfile() {
                 </div>
               )}
 
-              {!isEmpty(resume) && (
+              {/* {!isEmpty(resume) && (
                 <div className="profile-button-gr">
                   {!resumeForm ? (
                     <button
@@ -1107,7 +1236,7 @@ function MyProfile() {
                     </button>
                   )}
                 </div>
-              )}
+              )} */}
               {/* <button
                     className="profile-button"
                     style={{ marginTop: "32px" }}
@@ -1116,7 +1245,61 @@ function MyProfile() {
                     View online
                   </button> */}
             </div>
+            {/* <div className="profile-section">
+              <h4 style={{ fontSize: "23px" }}>
+                <strong style={{ fontSize: "23px" }}>
+                  {t("profile.document")}
+                </strong>
+              </h4> */}
+
+              {/* {!isEmpty(profile) &&
+                profile?.document.map((item, index) => (
+                 <DocumentItem key={index} name={item.name} url={item.url} docId={item?.id}/>
+                ))}
+
+              <button
+                className="profile-button"
+                style={{ marginTop: "40px" }}
+                onClick={handleAddDoc}
+                // onClick={
+                //   !softSkillForm ? toggleSoftSkillForm : handleSubmit
+                // }
+              >
+                <input
+                  type="file"
+                  name="myImage"
+                  className="d-none"
+                  accept="image/*"
+                  onChange={handleInputDoc}
+                  ref={inputDocRef}
+                />
+                {t("profile.addCe")}
+              </button> */}
+
+              {/* <Upload
+                action={handleInputDoc} 
+                listType="picture-card"
+                fileList={fileList}
+                onPreview={handlePreview}
+                onChange={handleChange}
+              >
+                {UploadButton}
+              </Upload>
+              <Modal
+                visible={previewVisible}
+                title={previewTitle}
+                footer={null}
+                onCancel={handleCancel}
+              >
+                <img
+                  alt="example"
+                  style={{ width: "100%" }}
+                  src={previewImage}
+                />
+              </Modal> */}
+            {/* </div> */}
           </div>
+
           <div className="col-sm-4">
             <div className="my-profile__resume__right-info">
               <div className="my-profile__resume__right-info__top">
@@ -1297,6 +1480,13 @@ function MyProfile() {
 }
 
 export default MyProfile;
+
+const UploadButton = (
+  <div>
+    <PlusOutlined />
+    <div style={{ marginTop: 8 }}>Upload</div>
+  </div>
+);
 
 const Skill = ({ id, skill, onDelete, isAction }) => {
   return (

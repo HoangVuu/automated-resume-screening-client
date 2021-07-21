@@ -32,6 +32,7 @@ export const GET_JOB_SUGGEST_SUCCESS = "GET_JOB_SUGGEST_SUCCESS";
 export const uploadCVAction = createPromiseAction("UPLOAD_CV");
 export const updateCVAction = createPromiseAction("UPDATE_CV");
 export const updateCVProfileAction = createPromiseAction("UPDATE_CV_PROFILE");
+export const uploadCVDocAction = createPromiseAction("UPDATE_DOC_PROFILE");
 
 export const updateHRCompanyAction = createPromiseAction("UPDATE_HR_COMPANY");
 export const addCompanyAction = createPromiseAction("ADD_COMPANY");

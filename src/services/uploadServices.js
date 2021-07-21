@@ -10,7 +10,26 @@ export const updateCV = async (data, token) =>
     headers: { Authorization: `Bearer ${token}` }
   });
 
-export const deleteResume = async ( token) =>
+export const deleteResume = async (token) =>
   await API.delete("/resume/delete", {
     headers: { Authorization: `Bearer ${token}` }
   });
+
+export const uploadDoc = async (formData, token) =>
+  await API.post("/user/candidates/document", formData, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+
+export const editNameDoc = async (document_id, name, token) =>
+  await API.put(
+    "/user/candidates/document",
+    {
+      params: {
+        document_id,
+      name
+      }
+    },
+    {
+      headers: { Authorization: `Bearer ${token}` }
+    }
+  );

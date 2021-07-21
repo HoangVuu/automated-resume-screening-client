@@ -197,6 +197,8 @@
         "update": "Cập nhật tùy chọn của bạn"
     },
     "profile": {
+        "addCe": "Thêm",
+        "document": "Chứng chỉ liên quan",
         "editBtn": "Chỉnh sửa thông tin cá nhân",
         "edit": "Chỉnh sửa chi tiết thông tin cá nhân",
         "email": "Địa chỉ email",
